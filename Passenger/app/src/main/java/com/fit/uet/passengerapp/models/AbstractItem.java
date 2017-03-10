@@ -9,6 +9,7 @@ public abstract class AbstractItem {
     public static final int TYPE_CENTER = 0;
     public static final int TYPE_EDGE = 1;
     public static final int TYPE_EMPTY = 2;
+    public static final int TYPE_ORDERED = 3;
 
     private String label;
 

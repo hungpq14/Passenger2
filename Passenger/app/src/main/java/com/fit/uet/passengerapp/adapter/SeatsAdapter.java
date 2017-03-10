@@ -42,6 +42,9 @@ public class SeatsAdapter extends SelectableAdapter<RecyclerView.ViewHolder> {
         } else if (viewType == AbstractItem.TYPE_EDGE) {
             View itemView = mLayoutInflater.inflate(R.layout.item_seat, parent, false);
             return new EdgeViewHolder(itemView);
+        } else if (viewType == AbstractItem.TYPE_ORDERED) {
+            View itemView = mLayoutInflater.inflate(R.layout.item_seat_ordered, parent, false);
+            return new EdgeViewHolder(itemView);
         } else {
             View itemView = new View(context);
             return new EmptyViewHolder(itemView);
@@ -117,8 +120,6 @@ public class SeatsAdapter extends SelectableAdapter<RecyclerView.ViewHolder> {
             super(itemView);
             imgSeat = (ImageView) itemView.findViewById(R.id.img_seat);
             imgSeatSelected = (ImageView) itemView.findViewById(R.id.img_seat_selected);
-
-
         }
 
     }

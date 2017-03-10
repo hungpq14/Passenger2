@@ -6,15 +6,7 @@
     android:padding="12dp">
 
     <ImageView
-        android:id="@+id/img_seat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/seat_empty"/>
-
-    <ImageView
-        android:id="@+id/img_seat_selected"
-        android:src="@drawable/seat_selected"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"/>
+        android:src="@drawable/seat_ordered"/>
 </RelativeLayout>
