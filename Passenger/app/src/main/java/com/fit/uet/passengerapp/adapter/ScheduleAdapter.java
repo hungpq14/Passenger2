@@ -1,4 +1,4 @@
-﻿package com.fit.uet.passengerapp.adapter;
+package com.fit.uet.passengerapp.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -141,8 +141,8 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
             mDepatureTimeView.setText(departureTime);
             mSeatCountView.setText(mContext.getString(R.string.format_seat_description, schedule.seatAvailable));
             if (coach != null) {
-                mPriceView.setText(mContext.getString(R.string.format_ticket_price, coach.costPerTicket));
-                mRouteView.setText(mContext.getString(R.string.routeFormat, coach.arriveFrom, coach.arriveTo));
+//                mPriceView.setText(mContext.getString(R.string.format_ticket_price, coach.costPerTicket));
+//                mRouteView.setText(mContext.getString(R.string.routeFormat, coach.arriveFrom, coach.arriveTo));
                 mCoachNameView.setText(coach.kind + " chỗ");
             }
 

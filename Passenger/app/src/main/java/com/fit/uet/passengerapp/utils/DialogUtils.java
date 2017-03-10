@@ -19,10 +19,11 @@ public class DialogUtils {
 
     }
 
-    public static void showConfirmDialog(Context c, String title, DialogInterface.OnClickListener positiveListener) {
+    public static void showConfirmDialog(Context c, String title, String message, DialogInterface.OnClickListener positiveListener) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(c);
         alertDialogBuilder.setTitle(title);
-        alertDialogBuilder.setPositiveButton("OK", positiveListener);
+        alertDialogBuilder.setMessage(message);
+        alertDialogBuilder.setPositiveButton("BUY", positiveListener);
         alertDialogBuilder.setNegativeButton("CANCEL", null);
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
