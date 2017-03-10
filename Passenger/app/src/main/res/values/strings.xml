@@ -125,4 +125,5 @@
     <string name="action_share">Chia sẻ</string>
     <string name="website">Website</string>
     <string name="review_label">Đánh giá</string>
+    <string name="format_arrrive_count">%d lượt đi</string>
 </resources>
