@@ -1,25 +1,21 @@
 package com.fit.uet.passengerapp.Activity.fragments;
 
 import android.app.DatePickerDialog;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.fit.uet.passengerapp.Activity.BaseActivity.BaseToolBarActivity;
 import com.fit.uet.passengerapp.Activity.activities.ActivityScheduleList;
 import com.fit.uet.passengerapp.Activity.activities.ListCityActivity;
 import com.fit.uet.passengerapp.R;
@@ -28,9 +24,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Created by Bien-kun on 05/03/2017.
@@ -42,6 +41,9 @@ public class FilterFragment extends android.support.v4.app.Fragment implements D
     public static final String TAG = "FilterFragment";
     public static final int INTENT_GET_TO = 0;
     public static final int INTENT_GET_FROM = 1;
+    public static final String DATE = "date";
+    public static final String SERVICE = "service";
+    public static final String HAS_SHUTTLE = "shuttle";
 
     private int city_id_from, city_id_to;
     private DatePickerDialog mPicker;
@@ -52,12 +54,29 @@ public class FilterFragment extends android.support.v4.app.Fragment implements D
     private TextView txtFrom, txtTo;
     FloatingActionButton btnFilter;
     View mDateContainer;
+    CheckBox shuttleCheckBox;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_filter, container, false);
         initDraw();
+        (new AsyncTask<Void,Void,Void>(){
+            @Override
+            protected Void doInBackground(Void... voids) {
+                OkHttpClient client = new OkHttpClient();
+                Request request = new Request.Builder()
+                        .url("https://us-central1-passenger-dcca9.cloudfunctions.net/addCity?text=Bac%20Lieu")
+                        .build();
+                try {
+                    Response response = client.newCall(request).execute();
+                    Log.d("OkHttp",response.body().string());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        }).execute();
 
         return view;
     }
@@ -74,6 +93,7 @@ public class FilterFragment extends android.support.v4.app.Fragment implements D
         inputLayoutTo = (LinearLayout) view.findViewById(R.id.layout_txt_to);
         txtFrom = (TextView) view.findViewById(R.id.txt_from);
         txtTo = (TextView) view.findViewById(R.id.txt_to);
+        shuttleCheckBox = (CheckBox)view.findViewById(R.id.shuttle);
 
         inputLayoutFrom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,9 +120,15 @@ public class FilterFragment extends android.support.v4.app.Fragment implements D
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle serviceBundle = new Bundle();
+                serviceBundle.putBoolean(HAS_SHUTTLE,shuttleCheckBox.isChecked());
+
                 Intent intent = new Intent(getContext(), ActivityScheduleList.class);
-//                intent.putExtra(LOCATION_FROM, edtFrom.getText().toString());
-//                intent.putExtra(LOCATION_TO, edtTo.getText().toString());
+                intent.putExtra(LOCATION_FROM, txtFrom.getText());
+                intent.putExtra(LOCATION_TO, txtTo.getText());
+                intent.putExtra(DATE,mCalendar.getTime().getTime());
+                intent.putExtra(SERVICE,serviceBundle);
+
                 startActivity(intent);
             }
         });

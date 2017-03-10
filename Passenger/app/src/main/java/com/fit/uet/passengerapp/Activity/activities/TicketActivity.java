@@ -3,16 +3,15 @@ package com.fit.uet.passengerapp.Activity.activities;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fit.uet.passengerapp.R;
-import com.fit.uet.passengerapp.models.Coach;
+import com.fit.uet.passengerapp.database.DB;
+import com.fit.uet.passengerapp.models.CoachSchedule;
 import com.fit.uet.passengerapp.models.Ticket;
 import com.fit.uet.passengerapp.utils.BarcodeUtils;
-import com.fit.uet.passengerapp.utils.DateTimeUtils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,13 +20,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -72,17 +64,17 @@ public class TicketActivity extends AppCompatActivity {
                 for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
                     Ticket ticket = singleSnapshot.getValue(Ticket.class);
                     setBarcode(singleSnapshot.getKey());
-                    databaseReference.child(Coach.CHILD_COACH).child(ticket.coach_schedule_id).addValueEventListener(new ValueEventListener() {
+                    databaseReference.child(DB.SCHEDULE).child(ticket.coach_schedule_id).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            Coach coach = dataSnapshot.getValue(Coach.class);
+                            CoachSchedule coach = dataSnapshot.getValue(CoachSchedule.class);
                             tv_arrive_from.setText(coach.arriveFrom);
                             tv_arrive_to.setText(coach.arriveTo);
                             tv_price.setText(coach.costPerTicket + "$");
-
-                            long ms = DateTimeUtils.getMillisFromString(coach.timeStart);
-                            tv_date.setText(DateTimeUtils.dateStringFormat(ms));
-                            tv_time.setText(DateTimeUtils.getTimeFromMs(ms));
+                            //FIXME: wth??
+                            //long ms = DateTimeUtils.getMillisFromString(coach.timeStart);
+                           // tv_date.setText(DateTimeUtils.dateStringFormat(ms));
+                           // tv_time.setText(DateTimeUtils.getTimeFromMs(ms));
                         }
 
                         @Override

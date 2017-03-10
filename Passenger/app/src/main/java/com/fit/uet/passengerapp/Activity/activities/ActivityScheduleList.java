@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.fit.uet.passengerapp.Activity.BaseActivity.BaseToolBarActivity;
+import com.fit.uet.passengerapp.Activity.fragments.FilterFragment;
 import com.fit.uet.passengerapp.R;
 import com.fit.uet.passengerapp.adapter.ScheduleAdapter;
 import com.fit.uet.passengerapp.database.DB;
@@ -32,6 +33,11 @@ public class ActivityScheduleList extends BaseToolBarActivity {
     private ScheduleAdapter mAdapter;
     private DatabaseReference mRef;
 
+    private String mFrom, mTo;
+    private long mTime;
+    private Bundle serviceBundle;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +45,11 @@ public class ActivityScheduleList extends BaseToolBarActivity {
         mRef = FirebaseDatabase.getInstance().getReference();
         initCalendar();
         initViews();
+
+        mFrom = getIntent().getStringExtra(FilterFragment.LOCATION_FROM);
+        mTo = getIntent().getStringExtra(FilterFragment.LOCATION_TO);
+        mTime = getIntent().getLongExtra(FilterFragment.DATE, 0);
+        serviceBundle = getIntent().getBundleExtra(FilterFragment.SERVICE);
     }
 
     private void initCalendar() {
@@ -54,15 +65,18 @@ public class ActivityScheduleList extends BaseToolBarActivity {
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
             @Override
             public void onDateSelected(Date date, int position) {
-                Log.d("ActivitySchedule","Date changed: " + date.getTime());
+                Log.d("ActivitySchedule", "Date changed: " + date.getTime());
                 mAdapter.requery(getQuery(date));
             }
         });
     }
 
     private Query getQuery(Date date) {
+
         String dateFormat = (new SimpleDateFormat("yyy/MM/dd")).format(date.getTime());
-        Query query = mRef.child(DB.SCHEDULE).orderByChild("departureTime").startAt(dateFormat);
+        Query query = mRef.child(DB.SCHEDULE).orderByChild("departureTime").startAt(dateFormat)
+                .orderByChild("arriveFrom").equalTo(mFrom)
+                .orderByChild("arriveTo").equalTo(mTo);
         return query;
     }
 
