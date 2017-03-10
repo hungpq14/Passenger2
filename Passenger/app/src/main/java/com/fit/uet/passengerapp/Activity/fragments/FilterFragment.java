@@ -100,10 +100,10 @@ public class FilterFragment extends android.support.v4.app.Fragment implements D
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getContext(), ActivityScheduleList.class);
+                Intent intent = new Intent(getContext(), ActivityScheduleList.class);
 //                intent.putExtra(LOCATION_FROM, edtFrom.getText().toString());
 //                intent.putExtra(LOCATION_TO, edtTo.getText().toString());
-//                startActivity(intent);
+                startActivity(intent);
             }
         });
     }

@@ -136,14 +136,14 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         }
 
 
-        public void bind(CoachSchedule schedule, Coach coach, CoachHost coachHost, final OnItemClickListener listener) {
+        public void bind(final CoachSchedule schedule, Coach coach, CoachHost coachHost, final OnItemClickListener listener) {
             String departureTime = DateTimeUtils.getTime(schedule.departureTime, false);
             mDepatureTimeView.setText(departureTime);
             mSeatCountView.setText(mContext.getString(R.string.format_seat_description, schedule.seatAvailable));
             if (coach != null) {
                 mPriceView.setText(mContext.getString(R.string.format_ticket_price, coach.costPerTicket));
                 mRouteView.setText(mContext.getString(R.string.routeFormat, coach.arriveFrom, coach.arriveTo));
-                mCoachNameView.setText(coach.kind + "");
+                mCoachNameView.setText(coach.kind + " chỗ");
             }
 
             if (coachHost != null) {
@@ -155,7 +155,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
                 @Override
                 public void onClick(View view) {
                     if (listener != null) {
-                        listener.onItemClick();
+                        listener.onItemClick(schedule);
                     }
                 }
             });
@@ -163,7 +163,8 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
 
     }
 
+
     public interface OnItemClickListener {
-        void onItemClick();
+        void onItemClick(CoachSchedule coachSchedule);
     }
 }
