@@ -41,7 +41,8 @@
         <activity android:name=".Activity.activities.SeatBookingActivity" />
         <activity
             android:name=".Activity.activities.ListCityActivity"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".Activity.activities.CoachManagerActivity"></activity>
     </application>
 
 </manifest>

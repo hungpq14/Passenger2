@@ -17,7 +17,7 @@ public class Coach {
     public boolean hasShuttleBus;
     public boolean hasWater;
     public boolean hasWifi;
-    public String kind;
+    public long kind;
     public String timeStart;
 
 
