@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.fit.uet.passengerapp.Activity.BaseActivity.BaseToolBarActivity;
@@ -36,7 +37,7 @@ public class FilterFragment extends android.support.v4.app.Fragment implements D
     private Calendar mCalendar;
     private TextView mDateView;
     private View view;
-    private TextInputLayout inputLayoutFrom, inputLayoutTo;
+    private LinearLayout inputLayoutFrom, inputLayoutTo;
     FloatingActionButton btnFilter;
     EditText edtFrom, edtTo;
 
@@ -57,8 +58,8 @@ public class FilterFragment extends android.support.v4.app.Fragment implements D
         mPicker.getDatePicker().setMinDate(mCalendar.getTimeInMillis());
         mDateView.setText(DateUtils.formatDateTime(getActivity(), mCalendar.getTimeInMillis(), DateUtils.FORMAT_SHOW_DATE));
 
-        inputLayoutFrom = (TextInputLayout) view.findViewById(R.id.layout_text_from);
-        inputLayoutTo = (TextInputLayout) view.findViewById(R.id.layout_text_to);
+        inputLayoutFrom = (LinearLayout) view.findViewById(R.id.layout_txt_from);
+        inputLayoutTo = (LinearLayout) view.findViewById(R.id.layout_txt_to);
 
         inputLayoutFrom.setOnClickListener(new View.OnClickListener() {
             @Override
