@@ -26,12 +26,11 @@
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Futa Bus"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
                 android:textColor="@color/text_primary_default_dark" />
 
             <RatingBar
-                android:id="@+id/rating"
+                android:id="@+id/rating_bar"
                 style="@style/Widget.AppCompat.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -45,7 +44,6 @@
                 style="@style/PrimaryText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="105 hành khách"
                 android:textColor="@color/text_primary_default_dark" />
         </LinearLayout>
 
@@ -75,7 +73,7 @@
                 style="@style/LargeImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableTop="@drawable/ic_share_black_24dp"
+                android:drawableTop="@drawable/ic_grade_black_24dp"
                 android:text="@string/action_share" />
 
             <Space
@@ -99,7 +97,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/divider" />
+            android:background="@color/divider"
+            android:alpha="0.6"/>
 
         <TextView
             android:id="@+id/description"
@@ -108,7 +107,6 @@
             android:layout_margin="16dp"
             android:ellipsize="end"
             android:maxLines="3"
-            android:text="Lipsum sit ame asdcsz cdf sdf sdf vxcvx vs fdx vx vxcvx cvxc vxfdf xdv"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/text_primary_default_light"
 
@@ -117,7 +115,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/divider" />
+            android:background="@color/divider"
+            android:alpha="0.6"/>
 
         <TextView
             style="@style/Title"

@@ -20,9 +20,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent intent = new Intent(this,CoachHostActivity.class);
-        intent.putExtra(CoachHostActivity.KEY_HOST_ID,"h1");
-        startActivity(intent);
+
 
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             startActivity(new Intent(this, SignInActivity.class));
@@ -52,5 +50,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void startConversation(View view) {
         startActivity(new Intent(this, ConversationActivity.class));
+    }
+    public void startCoachHostActivity(View view){
+        Intent intent = new Intent(this,CoachHostActivity.class);
+        intent.putExtra(CoachHostActivity.KEY_HOST_ID,"h1");
+        startActivity(intent);
     }
 }

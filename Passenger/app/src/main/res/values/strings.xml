@@ -122,7 +122,7 @@
     </string>
     <string name="action_settings">Settings</string>
     <string name="action_call">Gọi</string>
-    <string name="action_share">Chia sẻ</string>
+    <string name="action_share">Lưu</string>
     <string name="website">Website</string>
     <string name="review_label">Đánh giá</string>
     <string name="format_arrrive_count">%d lượt đi</string>

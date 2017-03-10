@@ -16,6 +16,7 @@ public class DB {
     public static final String CHAT = "chat";
     public static final String USER = "users";
     public static final String MESSAGES = "messages";
+    public static final String COMMENTS = "comments";
 
     public static Query getLastMessageForUserRef(DatabaseReference mRef,String self,String destination) {
         return mRef.child(DB.CHAT).child(self).child(destination).child(MESSAGES).limitToLast(1);

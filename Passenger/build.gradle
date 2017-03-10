@@ -16,7 +16,11 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven {
+            url 'http://dl.bintray.com/amulyakhare/maven'
+        }
     }
+
 }
 
 task clean(type: Delete) {

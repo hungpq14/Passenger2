@@ -1,13 +1,10 @@
 package com.fit.uet.passengerapp.Activity.fragments;
 
 import android.app.DatePickerDialog;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,7 +15,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.fit.uet.passengerapp.Activity.BaseActivity.BaseToolBarActivity;
 import com.fit.uet.passengerapp.Activity.activities.ActivityScheduleList;
 import com.fit.uet.passengerapp.R;
 
@@ -40,6 +36,7 @@ public class FilterFragment extends android.support.v4.app.Fragment implements D
     private LinearLayout inputLayoutFrom, inputLayoutTo;
     FloatingActionButton btnFilter;
     EditText edtFrom, edtTo;
+    View mDateContainer;
 
     @Nullable
     @Override
@@ -69,6 +66,13 @@ public class FilterFragment extends android.support.v4.app.Fragment implements D
         });
 
         btnFilter = (FloatingActionButton) view.findViewById(R.id.btn_filter);
+        mDateContainer = view.findViewById(R.id.date_container);
+        mDateContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPickerDialog();
+            }
+        });
 
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +85,7 @@ public class FilterFragment extends android.support.v4.app.Fragment implements D
         });
     }
 
-    public void showPickerDialog(View view) {
+    private void showPickerDialog() {
         mPicker.show();
     }
 
