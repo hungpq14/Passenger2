@@ -1,0 +1,73 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="SelectableChip">
+        <item name="android:button">@null</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">@drawable/bg_rounded_state_drawable</item>
+        <item name="android:textColor">@color/chip</item>
+    </style>
+
+    <style name="Title" parent="@style/TextAppearance.AppCompat.Title">
+        <item name="android:layout_marginBottom">12dp</item>
+    </style>
+
+    <style name="PrimaryText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_primary_default_light</item>
+    </style>
+
+    <style name="SecondaryText">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/text_secondary_default_light</item>
+    </style>
+
+    <style name="FlatCard">
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="cardCornerRadius">0dp</item>
+        <item name="cardElevation">1dp</item>
+        <item name="cardPreventCornerOverlap">true</item>
+    </style>
+
+    <style name="CardContentContainer">
+        <item name="android:paddingTop">24dp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+    </style>
+
+    <style name="LargeImageButton">
+        <item name="android:background">?selectableItemBackgroundBorderless</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:drawableTint">@color/colorPrimary</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="TertiaryText">
+        <item name="android:textColor">@color/text_secondary_default_light</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:drawablePadding">6dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+</resources>

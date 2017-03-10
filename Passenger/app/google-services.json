@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "773383309646",
+    "firebase_url": "https://passenger-dcca9.firebaseio.com",
+    "project_id": "passenger-dcca9",
+    "storage_bucket": "passenger-dcca9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:773383309646:android:f298333e9b0b5ddc",
+        "android_client_info": {
+          "package_name": "com.fit.uet.passengerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "773383309646-s5k4noc6os8pgpn3i2kin8sn6kudg79i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fit.uet.passengerapp",
+            "certificate_hash": "4d1602490830fd0fcbd37be9c11f03580beb3079"
+          }
+        },
+        {
+          "client_id": "773383309646-0oevqh46lt62me4gn2563oclp6tbqi05.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsupP8qR1e-6QTmlD1Y7dSRgzVZaH6-eI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "773383309646-0oevqh46lt62me4gn2563oclp6tbqi05.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

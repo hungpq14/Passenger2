@@ -1,0 +1,24 @@
+package com.fit.uet.passengerapp.Activity.activities;
+
+import android.os.Bundle;
+
+import com.fit.uet.passengerapp.Activity.BaseActivity.BaseToolBarActivity;
+import com.fit.uet.passengerapp.R;
+
+public class SeatBookingActivity extends BaseToolBarActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_seat_booking;
+    }
+
+    @Override
+    protected String getToolbarText() {
+        return "Booking";
+    }
+}
