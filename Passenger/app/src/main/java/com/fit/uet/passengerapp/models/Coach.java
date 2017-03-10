@@ -15,7 +15,7 @@ public class Coach {
 
     public boolean hasWater;
     public boolean hasWifi;
-    public int kind;
+    public long kind;
     public String timeStart;
 
 
