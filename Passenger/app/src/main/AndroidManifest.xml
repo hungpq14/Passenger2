@@ -28,18 +28,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.activities.ConversationActivity"></activity>
-        <activity android:name=".Activity.activities.MessageListActivity"></activity>
+        <activity android:name=".Activity.activities.ConversationActivity" />
+        <activity android:name=".Activity.activities.MessageListActivity" />
         <activity android:name=".Activity.activities.ForceInputPhoneNumActivity" />
         <activity
             android:name=".Activity.activities.MainUIActivity"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Activity.activities.CoachHostActivity"
             android:label="@string/title_activity_coach_host"
-            android:theme="@style/AppTheme"></activity>
-        <activity android:name=".Activity.activities.SeatBookingActivity"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Activity.activities.SeatBookingActivity" />
+        <activity
+            android:name=".Activity.activities.ListCityActivity"
+            android:windowSoftInputMode="stateHidden"></activity>
     </application>
 
 </manifest>

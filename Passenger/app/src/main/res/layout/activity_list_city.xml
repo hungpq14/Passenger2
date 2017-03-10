@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.fit.uet.passengerapp.Activity.activities.ListCityActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/view_tool_bar" />
+
+    <EditText
+        android:id="@+id/edt_search_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewCity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/edt_search_city"
+        android:scrollbars="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+</RelativeLayout>

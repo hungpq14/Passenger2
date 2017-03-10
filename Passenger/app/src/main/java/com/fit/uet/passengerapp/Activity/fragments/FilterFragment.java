@@ -1,10 +1,14 @@
 package com.fit.uet.passengerapp.Activity.fragments;
 
 import android.app.DatePickerDialog;
+import android.app.Fragment;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,10 +19,18 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.fit.uet.passengerapp.Activity.BaseActivity.BaseToolBarActivity;
 import com.fit.uet.passengerapp.Activity.activities.ActivityScheduleList;
+import com.fit.uet.passengerapp.Activity.activities.ListCityActivity;
 import com.fit.uet.passengerapp.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Bien-kun on 05/03/2017.
@@ -28,14 +40,17 @@ public class FilterFragment extends android.support.v4.app.Fragment implements D
     public static final String LOCATION_FROM = "LOCATION_FROM";
     public static final String LOCATION_TO = "LOCATION_TO";
     public static final String TAG = "FilterFragment";
+    public static final int INTENT_GET_TO = 0;
+    public static final int INTENT_GET_FROM = 1;
 
+    private int city_id_from, city_id_to;
     private DatePickerDialog mPicker;
     private Calendar mCalendar;
     private TextView mDateView;
     private View view;
     private LinearLayout inputLayoutFrom, inputLayoutTo;
+    private TextView txtFrom, txtTo;
     FloatingActionButton btnFilter;
-    EditText edtFrom, edtTo;
     View mDateContainer;
 
     @Nullable
@@ -57,11 +72,19 @@ public class FilterFragment extends android.support.v4.app.Fragment implements D
 
         inputLayoutFrom = (LinearLayout) view.findViewById(R.id.layout_txt_from);
         inputLayoutTo = (LinearLayout) view.findViewById(R.id.layout_txt_to);
+        txtFrom = (TextView) view.findViewById(R.id.txt_from);
+        txtTo = (TextView) view.findViewById(R.id.txt_to);
 
         inputLayoutFrom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "Click from");
+                startActivityForResult(new Intent(getContext(), ListCityActivity.class), INTENT_GET_FROM);
+            }
+        });
+        inputLayoutTo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(new Intent(getContext(), ListCityActivity.class), INTENT_GET_TO);
             }
         });
 
@@ -77,12 +100,36 @@ public class FilterFragment extends android.support.v4.app.Fragment implements D
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ActivityScheduleList.class);
-                intent.putExtra(LOCATION_FROM, edtFrom.getText().toString());
-                intent.putExtra(LOCATION_TO, edtTo.getText().toString());
-                startActivity(intent);
+//                Intent intent = new Intent(getContext(), ActivityScheduleList.class);
+//                intent.putExtra(LOCATION_FROM, edtFrom.getText().toString());
+//                intent.putExtra(LOCATION_TO, edtTo.getText().toString());
+//                startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(final int requestCode, int resultCode, Intent data) {
+        Log.d(TAG, requestCode + " " + resultCode);
+        final int pos = data.getIntExtra("pos", 0);
+        FirebaseDatabase.getInstance().getReference().child("city").child(pos + "").child("name").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (requestCode == INTENT_GET_FROM) {
+                    city_id_from = pos;
+                    txtFrom.setText(dataSnapshot.getValue(String.class));
+                } else if (requestCode == INTENT_GET_TO) {
+                    city_id_to = pos;
+                    txtTo.setText(dataSnapshot.getValue(String.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+
     }
 
     private void showPickerDialog() {

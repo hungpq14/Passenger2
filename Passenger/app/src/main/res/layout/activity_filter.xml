@@ -37,7 +37,7 @@
                     <LinearLayout
                         android:id="@+id/layout_txt_from"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
+                        android:layout_height="45dp"
                         android:background="?attr/selectableItemBackground">
 
                         <TextView
@@ -52,7 +52,7 @@
                     <LinearLayout
                         android:id="@+id/layout_txt_to"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
+                        android:layout_height="45dp"
                         android:background="?attr/selectableItemBackground">
 
                         <TextView
