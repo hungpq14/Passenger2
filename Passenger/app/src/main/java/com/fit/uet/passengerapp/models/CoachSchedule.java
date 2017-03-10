@@ -16,4 +16,6 @@ public class CoachSchedule {
     public int seatAvailable;
     public String seatState;
 
+    public String arriveFrom, arriveTo, pickFrom, pickTo;
+
 }
