@@ -46,10 +46,7 @@
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Activity.activities.CoachManagerActivity" />
         <activity android:name=".Activity.activities.ShuttleBusSuggestionActivity" />
-
-        <activity android:name=".Activity.activities.CoachHostFavoriteActivity">
-
-        </activity>
+        <activity android:name=".Activity.activities.CoachHostFavoriteActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -58,8 +55,9 @@
         <activity android:name=".Activity.activities.PayTicketActivity" />
         <activity
             android:name=".Activity.activities.PaypalActivity"
-            android:windowSoftInputMode="stateHidden"></activity>
-        <activity android:name=".Activity.activities.CartActivity"></activity>
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".Activity.activities.CartActivity" />
+        <activity android:name=".Activity.activities.CoachRequestActivity"></activity>
     </application>
 
 </manifest>

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.fit.uet.passengerapp.Activity.activities.CartActivity;
 import com.fit.uet.passengerapp.Activity.activities.CoachHostFavoriteActivity;
 import com.fit.uet.passengerapp.Activity.activities.CoachManagerActivity;
+import com.fit.uet.passengerapp.Activity.activities.ForceInputPhoneNumActivity;
 import com.fit.uet.passengerapp.Activity.activities.SignInActivity;
 import com.fit.uet.passengerapp.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class NavigationFragment extends Fragment {
     private View view;
-    private RelativeLayout layoutSignOut, layoutCoachManager, layoutTickerMan, layoutCoachLove;
+    private RelativeLayout layoutSignOut, layoutCoachManager, layoutTickerMan, layoutCoachLove, layoutChangePhoneNum;
     private TextView txtUserName;
     private TextView txtTrustPoint;
 
@@ -43,10 +44,12 @@ public class NavigationFragment extends Fragment {
         layoutCoachManager = (RelativeLayout) view.findViewById(R.id.layout_coach_manager);
         layoutTickerMan = (RelativeLayout) view.findViewById(R.id.layout_ticket_man);
         layoutCoachLove = (RelativeLayout) view.findViewById(R.id.layout_coach_love);
+        layoutChangePhoneNum = (RelativeLayout) view.findViewById(R.id.layout_change_phone_num);
         layoutSignOut.setOnClickListener(navClickItem);
         layoutCoachManager.setOnClickListener(navClickItem);
         layoutTickerMan.setOnClickListener(navClickItem);
         layoutCoachLove.setOnClickListener(navClickItem);
+        layoutChangePhoneNum.setOnClickListener(navClickItem);
 
         checkIfHasCoachMan();
         checkTrustPoint();
@@ -100,6 +103,11 @@ public class NavigationFragment extends Fragment {
                 startActivity(new Intent(getContext(), CartActivity.class));
             } else if (v.equals(layoutCoachLove)) {
                 startActivity(new Intent(getContext(), CoachHostFavoriteActivity.class));
+            } else if (v.equals(layoutChangePhoneNum)) {
+                Intent intent = new Intent(getContext(), ForceInputPhoneNumActivity.class);
+                intent.putExtra("type", ForceInputPhoneNumActivity.TYPE_CHANGE_PHONE_NUM);
+                startActivity(intent);
+                getActivity().finish();
             }
         }
     };

@@ -65,10 +65,11 @@ public class PayTicketActivity extends BaseToolBarActivity {
                 int type = getRadioState();
 
                 if (type == 0) {
-                    if (ticket != null && seatState != null) {
+                    if (ticket != null && seatState != null && getIntent().getStringExtra(Intent.EXTRA_TEXT) != null) {
                         ticketDatabaseReference.push().setValue(ticket);
                         scheduleDatabaseReference.child(getIntent().getStringExtra(Intent.EXTRA_TEXT)).child("seatState").setValue(seatState);
                     }
+
                     Intent intent = new Intent(PayTicketActivity.this, PaypalActivity.class);
                     intent.putExtra("ticket_id", ticket.uid);
                 } else {
@@ -76,6 +77,8 @@ public class PayTicketActivity extends BaseToolBarActivity {
                     intent.putExtra("type", type);
                     if (ticket != null) intent.putExtra("ticket", ticket);
                     if (seatState != null) intent.putExtra("seatState", seatState);
+                    if (getIntent().getStringExtra(Intent.EXTRA_TEXT) != null)
+                        intent.putExtra(Intent.EXTRA_TEXT, getIntent().getStringExtra(Intent.EXTRA_TEXT));
                     startActivity(intent);
                 }
             }

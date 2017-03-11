@@ -181,6 +181,31 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/layout_change_phone_num"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground">
+
+        <ImageView
+            android:id="@+id/img_change_phone_num"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:src="@drawable/ic_vector_logout" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@+id/img_change_phone_num"
+            android:text="Thay đổi số điện thoại"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/layout_sign_out"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -200,7 +225,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@+id/img_sign_out"
-            android:text="Sign out"
+            android:text="Đăng suất"
             android:textSize="16sp" />
 
     </RelativeLayout>

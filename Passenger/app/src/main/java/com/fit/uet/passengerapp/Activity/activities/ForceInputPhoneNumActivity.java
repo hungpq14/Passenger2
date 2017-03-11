@@ -19,6 +19,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class ForceInputPhoneNumActivity extends AppCompatActivity {
+    public static int TYPE_CREATE_USER = 0;
+    public static int TYPE_CHANGE_PHONE_NUM = 1;
+
     public static final String TAG = "ForceInputPhoneNum";
     private EditText edtPhoneNum;
     private Button btnOk;
@@ -26,10 +29,14 @@ public class ForceInputPhoneNumActivity extends AppCompatActivity {
     User currentUser;
     FirebaseUser firebaseUser;
 
+    int type;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_force_input_mobiphone);
+
+        type = getIntent().getIntExtra("type", TYPE_CREATE_USER);
 
         initDraw();
     }
@@ -72,8 +79,12 @@ public class ForceInputPhoneNumActivity extends AppCompatActivity {
                             if (!dataSnapshot.exists()) {
                                 addUserToDB();
                             } else {
-                                if (!dataSnapshot.child("phoneNum").exists()) {
-                                    Log.d(TAG, "set value phone num in ref");
+                                if (type == 0) {
+                                    if (!dataSnapshot.child("phoneNum").exists()) {
+                                        Log.d(TAG, "set value phone num in ref");
+                                        dataSnapshot.child("phoneNum").getRef().setValue(phoneNum);
+                                    }
+                                } else {
                                     dataSnapshot.child("phoneNum").getRef().setValue(phoneNum);
                                 }
                             }
