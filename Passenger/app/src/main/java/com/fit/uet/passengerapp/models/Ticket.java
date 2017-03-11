@@ -2,6 +2,7 @@ package com.fit.uet.passengerapp.models;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  */
 
 @IgnoreExtraProperties
-public class Ticket {
+public class Ticket implements Serializable {
     public static final String CHILD_TICKET = "ticket";
 
     public String coach_schedule_id;

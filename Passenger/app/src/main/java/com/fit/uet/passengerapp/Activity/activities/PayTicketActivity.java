@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.fit.uet.passengerapp.Activity.BaseActivity.BaseToolBarActivity;
 import com.fit.uet.passengerapp.R;
+import com.fit.uet.passengerapp.models.CoachSchedule;
+import com.fit.uet.passengerapp.models.Ticket;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,6 +29,13 @@ public class PayTicketActivity extends BaseToolBarActivity {
     RadioGroup radioGroup;
     TextView txtTrustPoint;
 
+    String seatState;
+    Ticket ticket;
+    private DatabaseReference databaseReference;
+    private DatabaseReference scheduleDatabaseReference;
+    private DatabaseReference ticketDatabaseReference;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +43,10 @@ public class PayTicketActivity extends BaseToolBarActivity {
     }
 
     private void initDraw() {
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        scheduleDatabaseReference = databaseReference.child(CoachSchedule.CHILD_COACH_SCHEDULE);
+        ticketDatabaseReference = databaseReference.child(Ticket.CHILD_TICKET);
+
         radioPay1 = (RadioButton) findViewById(R.id.radio_pay_option_0);
         radioPay2 = (RadioButton) findViewById(R.id.radio_pay_option_1);
         radioPay3 = (RadioButton) findViewById(R.id.radio_pay_option_2);
@@ -41,15 +54,30 @@ public class PayTicketActivity extends BaseToolBarActivity {
         btnPay = (Button) findViewById(R.id.btn_pay);
         txtTrustPoint = (TextView) findViewById(R.id.txt_trust_point);
 
+        seatState = getIntent().getStringExtra("seatState");
+        ticket = (Ticket) getIntent().getSerializableExtra("ticket");
+
         checkTrustPoint();
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("Ticket", "radio state: " + getRadioState());
                 int type = getRadioState();
-                Intent intent = new Intent(PayTicketActivity.this, PaypalActivity.class);
-                intent.putExtra("type", type);
-                startActivity(intent);
+
+                if (type == 0) {
+                    if (ticket != null && seatState != null) {
+                        ticketDatabaseReference.push().setValue(ticket);
+                        scheduleDatabaseReference.child(getIntent().getStringExtra(Intent.EXTRA_TEXT)).child("seatState").setValue(seatState);
+                    }
+                    Intent intent = new Intent(PayTicketActivity.this, PaypalActivity.class);
+                    intent.putExtra("ticket_id", ticket.uid);
+                } else {
+                    Intent intent = new Intent(PayTicketActivity.this, PaypalActivity.class);
+                    intent.putExtra("type", type);
+                    if (ticket != null) intent.putExtra("ticket", ticket);
+                    if (seatState != null) intent.putExtra("seatState", seatState);
+                    startActivity(intent);
+                }
             }
         });
     }

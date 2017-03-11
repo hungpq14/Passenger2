@@ -1,5 +1,6 @@
 package com.fit.uet.passengerapp.Activity.activities;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,8 @@ import android.widget.Button;
 import com.fit.uet.passengerapp.Activity.BaseActivity.BaseToolBarActivity;
 import com.fit.uet.passengerapp.R;
 import com.fit.uet.passengerapp.adapter.PlaceAutoCompleteAdapter;
+import com.fit.uet.passengerapp.models.CoachSchedule;
+import com.fit.uet.passengerapp.models.Ticket;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -24,6 +27,9 @@ import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class PaypalActivity extends BaseToolBarActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     public String TAG = "PaypalActivity";
@@ -38,6 +44,13 @@ public class PaypalActivity extends BaseToolBarActivity implements GoogleApiClie
     private static final LatLngBounds BOUNDS_HANOI = new LatLngBounds(new LatLng(21, 105),
             new LatLng(31, 100));
 
+    private Ticket ticket;
+    private String seatState;
+    private DatabaseReference databaseReference;
+    private DatabaseReference scheduleDatabaseReference;
+    private DatabaseReference ticketDatabaseReference;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +59,11 @@ public class PaypalActivity extends BaseToolBarActivity implements GoogleApiClie
     }
 
     private void initDraw() {
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        scheduleDatabaseReference = databaseReference.child(CoachSchedule.CHILD_COACH_SCHEDULE);
+        ticketDatabaseReference = databaseReference.child(Ticket.CHILD_TICKET);
+
+
         cardPaypal = (CardView) findViewById(R.id.layout_paypal);
         cardShip = (CardView) findViewById(R.id.layout_pay_with_ship);
         btnPay = (Button) findViewById(R.id.btn_pay_finish);
@@ -60,6 +78,22 @@ public class PaypalActivity extends BaseToolBarActivity implements GoogleApiClie
             cardPaypal.setVisibility(View.VISIBLE);
             cardShip.setVisibility(View.GONE);
         }
+
+        btnPay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ticket = (Ticket) getIntent().getSerializableExtra("ticket");
+                seatState = getIntent().getStringExtra("seatState");
+
+                if (ticket != null && seatState != null) {
+                    ticketDatabaseReference.push().setValue(ticket);
+                    scheduleDatabaseReference.child(getIntent().getStringExtra(Intent.EXTRA_TEXT)).child("seatState").setValue(seatState);
+                }
+
+                Intent intent = new Intent(PaypalActivity.this, PaypalActivity.class);
+                intent.putExtra("ticket_id", ticket.uid);
+            }
+        });
 
     }
 
