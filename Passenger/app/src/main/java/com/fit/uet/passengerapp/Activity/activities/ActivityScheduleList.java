@@ -17,6 +17,7 @@ import com.fit.uet.passengerapp.Activity.fragments.FilterFragment;
 import com.fit.uet.passengerapp.R;
 import com.fit.uet.passengerapp.adapter.ScheduleAdapter;
 import com.fit.uet.passengerapp.database.DB;
+import com.fit.uet.passengerapp.models.CoachHost;
 import com.fit.uet.passengerapp.models.CoachSchedule;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -40,6 +41,7 @@ public class ActivityScheduleList extends BaseToolBarActivity {
 
     private String mFrom, mTo;
     private long mTime;
+    private Boolean hasShuttle;
     private Bundle serviceBundle;
     private ImageView imgScanning;
 
@@ -49,13 +51,17 @@ public class ActivityScheduleList extends BaseToolBarActivity {
         super.onCreate(savedInstanceState);
         mList = (RecyclerView) findViewById(R.id.recycler);
         mRef = FirebaseDatabase.getInstance().getReference();
-        initCalendar();
-        initViews();
-
         mFrom = getIntent().getStringExtra(FilterFragment.LOCATION_FROM);
         mTo = getIntent().getStringExtra(FilterFragment.LOCATION_TO);
         mTime = getIntent().getLongExtra(FilterFragment.DATE, 0);
         serviceBundle = getIntent().getBundleExtra(FilterFragment.SERVICE);
+        if (serviceBundle != null) {
+            hasShuttle = serviceBundle.getBoolean(FilterFragment.HAS_SHUTTLE);
+        }
+        initCalendar();
+        initViews();
+
+
     }
 
     private void initCalendar() {
@@ -87,6 +93,7 @@ public class ActivityScheduleList extends BaseToolBarActivity {
     }
 
     private void initViews() {
+        mAdapter = new ScheduleAdapter(mRef, getQuery(new Date()), mFrom, mTo,hasShuttle );
         imgScanning = (ImageView) findViewById(R.id.img_scan);
         final RotateAnimation rotateAnimation = new RotateAnimation(0, 360f,
                 Animation.RELATIVE_TO_SELF, 0.5f,
@@ -97,7 +104,6 @@ public class ActivityScheduleList extends BaseToolBarActivity {
         rotateAnimation.setRepeatCount(Animation.INFINITE);
         imgScanning.startAnimation(rotateAnimation);
 
-        mAdapter = new ScheduleAdapter(mRef, getQuery(new Date()));
         mList.setLayoutManager(new LinearLayoutManager(this));
         mList.setAdapter(mAdapter);
 
@@ -108,9 +114,16 @@ public class ActivityScheduleList extends BaseToolBarActivity {
 
         mAdapter.setOnCLickListener(new ScheduleAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(CoachSchedule coachSchedule) {
+            public void onCoachClick(CoachSchedule coachSchedule) {
                 Intent intent = new Intent(ActivityScheduleList.this, SeatBookingActivity.class);
                 intent.putExtra(Intent.EXTRA_TEXT, coachSchedule.uid);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onCoachHostClick(CoachHost coachHost) {
+                Intent intent = new Intent(ActivityScheduleList.this, CoachHostActivity.class);
+                intent.putExtra(CoachHostActivity.KEY_HOST_ID, coachHost.uid);
                 startActivity(intent);
             }
         });

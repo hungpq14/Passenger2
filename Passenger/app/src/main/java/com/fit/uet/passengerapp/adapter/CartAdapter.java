@@ -64,7 +64,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final Ticket ticket = tickets.get(position);
 
-        holder.tv_seats.setText(ticket.seats.toString());
+        if (ticket.checkout) {
+            holder.tv_seats.setText("Checked");
+        } else {
+            holder.tv_seats.setText("Uncheck");
+        }
 
         databaseReference.child(DB.SCHEDULE).child(ticket.coach_schedule_id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

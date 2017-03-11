@@ -8,13 +8,7 @@ import android.view.View;
 
 import com.fit.uet.passengerapp.Activity.fragments.FilterFragment;
 import com.fit.uet.passengerapp.R;
-import com.fit.uet.passengerapp.models.City;
-import com.fit.uet.passengerapp.models.PickLocation;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
 
 /**
  * Created by Bien-kun on 05/03/2017.
@@ -80,8 +74,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, ConversationActivity.class));
     }
     public void startCoachHostActivity(View view){
-        Intent intent = new Intent(this,CoachHostActivity.class);
-        intent.putExtra(CoachHostActivity.KEY_HOST_ID,"h1");
+        Intent intent = new Intent(this,CoachHostFavoriteActivity.class);
         startActivity(intent);
     }
 }

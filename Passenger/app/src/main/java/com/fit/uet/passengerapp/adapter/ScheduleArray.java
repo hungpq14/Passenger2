@@ -20,24 +20,31 @@ import java.util.List;
  * Created by Bien-kun on 08/03/2017.
  */
 
- class ScheduleArray implements ChildEventListener, ValueEventListener {
+class ScheduleArray implements ChildEventListener, ValueEventListener {
     private DatabaseReference mRef;
     private Query mQuery;
     private ChangeEventListener mListener;
     List<CoachSchedule> mSnapshots = new ArrayList<>();
     HashMap<String, Coach> mCoachMap;
     HashMap<String, CoachHost> mCoachHostMap;
+    private String mFrom, mTo;
+    private Boolean hasShuttleBus;
 
-    public ScheduleArray(DatabaseReference ref, Query query) {
+    public ScheduleArray(DatabaseReference ref, Query query,String from, String to, Boolean hasShuttleBus) {
         mRef = ref;
         mQuery = query;
         mQuery.addChildEventListener(this);
         mQuery.addValueEventListener(this);
         mCoachMap = new HashMap<>();
         mCoachHostMap = new HashMap<>();
+        mFrom = from;
+        mTo = to;
+        this.hasShuttleBus = hasShuttleBus;
     }
 
-    public void requery(Query query){
+
+
+    public void requery(Query query) {
         mQuery = query;
         mQuery.addChildEventListener(this);
         mQuery.addValueEventListener(this);
@@ -83,12 +90,19 @@ import java.util.List;
 
     @Override
     public void onChildAdded(DataSnapshot snapshot, String previousChildKey) {
+        final CoachSchedule coachSchedule = snapshot.getValue(CoachSchedule.class);
+        if (!coachSchedule.arriveFrom.equals(mFrom)
+                || !coachSchedule.arriveTo.equals(mTo)
+                ) {
+            return;
+        }
+
         int index = 0;
         if (previousChildKey != null) {
             index = getIndexForKey(previousChildKey) + 1;
         }
+
         final int position = index;
-        final CoachSchedule coachSchedule = snapshot.getValue(CoachSchedule.class);
         mSnapshots.add(index, coachSchedule);
         if (!mCoachMap.containsKey(coachSchedule.coachUid)) {
             mRef.child(DB.COACH).child(coachSchedule.coachUid).addValueEventListener(mCoachListener);
@@ -98,10 +112,10 @@ import java.util.List;
 
     @Override
     public void onChildChanged(DataSnapshot snapshot, String previousChildKey) {
-        int index = getIndexForKey(snapshot.getKey());
-        //TODO store or query again to get coach data
-        mSnapshots.set(index, snapshot.getValue(CoachSchedule.class));
-        notifyChangedListeners(ChangeEventListener.EventType.CHANGED, index);
+//        int index = getIndexForKey(snapshot.getKey());
+//        //TODO store or query again to get coach data
+//        mSnapshots.set(index, snapshot.getValue(CoachSchedule.class));
+//        notifyChangedListeners(ChangeEventListener.EventType.CHANGED, index);
     }
 
     @Override
@@ -115,7 +129,7 @@ import java.util.List;
     public void onChildMoved(DataSnapshot snapshot, String previousChildKey) {
         //TODO store or query again to get coach data
         int oldIndex = getIndexForKey(snapshot.getKey());
-        CoachSchedule  coachSchedule= mSnapshots.remove(oldIndex);
+        CoachSchedule coachSchedule = mSnapshots.remove(oldIndex);
         int newIndex = previousChildKey == null ? 0 : (getIndexForKey(previousChildKey) + 1);
         mSnapshots.add(newIndex, coachSchedule);
         notifyChangedListeners(ChangeEventListener.EventType.MOVED, newIndex, oldIndex);

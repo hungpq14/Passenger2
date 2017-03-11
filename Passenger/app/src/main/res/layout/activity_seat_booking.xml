@@ -92,7 +92,7 @@
                     android:background="@android:color/holo_red_light"
                     android:gravity="center"
                     android:padding="8dp"
-                    android:text="NEXT"
+                    android:text="BUY"
                     android:textColor="@android:color/white"
                     android:textSize="18sp" />
             </LinearLayout>

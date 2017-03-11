@@ -47,6 +47,10 @@
         <activity android:name=".Activity.activities.CoachManagerActivity" />
         <activity android:name=".Activity.activities.ShuttleBusSuggestionActivity" />
 
+        <activity android:name=".Activity.activities.CoachHostFavoriteActivity">
+            
+        </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC734KK9GMfM1zUFFslw6pVjMunGUnr52g" />

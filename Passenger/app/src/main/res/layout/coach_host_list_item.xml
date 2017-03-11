@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp">
+
+    <TextView
+        android:id="@+id/company_name"
+        style="@style/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:textSize="15sp"
+        tools:text="Nha xe Yen Nghia" />
+
+    <RatingBar
+        android:id="@+id/rating"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/company_name"
+        tools:rating="3.5" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="@dimen/company_logo_size"
+        android:layout_height="@dimen/company_logo_size"
+        android:layout_alignParentRight="true"
+        android:scaleType="fitCenter"
+        tools:src="@drawable/uber" />
+
+</RelativeLayout>

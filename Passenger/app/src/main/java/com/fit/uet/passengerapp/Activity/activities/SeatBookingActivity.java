@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,8 +14,6 @@ import com.fit.uet.passengerapp.adapter.SeatsAdapter;
 import com.fit.uet.passengerapp.models.AbstractItem;
 import com.fit.uet.passengerapp.models.CenterItem;
 import com.fit.uet.passengerapp.models.CoachSchedule;
-import com.fit.uet.passengerapp.models.EdgeItem;
-import com.fit.uet.passengerapp.models.EmptyItem;
 import com.fit.uet.passengerapp.models.OrderedItem;
 import com.fit.uet.passengerapp.models.Ticket;
 import com.fit.uet.passengerapp.utils.DialogUtils;
@@ -108,7 +105,8 @@ public class SeatBookingActivity extends BaseToolBarActivity {
             @Override
             public void onClick(View view) {
                 if (adapter.getSelectedItems().size() != 0) {
-                    DialogUtils.showConfirmDialog(SeatBookingActivity.this, "Confirm Your In App Purchase", "Do you want to buy tickets?", new DialogInterface.OnClickListener() {
+                    int count = adapter.getSelectedItemCount();
+                    DialogUtils.showConfirmDialog(SeatBookingActivity.this, "Confirm Your In App Purchase", "Do you want to buy " + count + " tickets for $" + count * schedule.costPerTicket + "?", new DialogInterface.OnClickListener() {
 
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
