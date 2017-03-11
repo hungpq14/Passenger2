@@ -21,6 +21,13 @@
             app:textColorSelected="@color/text_primary_default_dark" />
     </android.support.design.widget.AppBarLayout>
 
+    <ImageView
+        android:id="@+id/img_scan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_scan" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
@@ -29,5 +36,6 @@
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginTop="8dp"
         android:scrollbarStyle="outsideOverlay"
+        android:visibility="invisible"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 </android.support.design.widget.CoordinatorLayout>

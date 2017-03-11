@@ -6,8 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.fit.uet.passengerapp.ListenerEvent.CoachScheduleClickEvent;
 import com.fit.uet.passengerapp.R;
 import com.fit.uet.passengerapp.models.CoachSchedule;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 
@@ -31,7 +34,7 @@ public class CoachManagerAdapter extends RecyclerView.Adapter<CoachManagerAdapte
     @Override
     public void onBindViewHolder(CoachManagerViewHolder holder, int position) {
         CoachSchedule schedule = coachSchedules.get(position);
-        holder.bind(schedule);
+        holder.bind(schedule, position);
     }
 
     @Override
@@ -56,13 +59,20 @@ public class CoachManagerAdapter extends RecyclerView.Adapter<CoachManagerAdapte
             txtDepartureTime = (TextView) itemView.findViewById(R.id.txt_departure_time);
         }
 
-        public void bind(CoachSchedule schedule) {
+        public void bind(CoachSchedule schedule, final int pos) {
             txtCoachTo.setText(schedule.arriveTo);
             txtPickTo.setText(schedule.pickTo);
             txtCoachFrom.setText(schedule.arriveFrom);
             txtPickFrom.setText(schedule.pickFrom);
             txtDepartureTime.setText("Khởi hành: " + schedule.departureTime);
             txtSeatAvail.setText("Số ghế đã đặt: " + schedule.seatAvailable);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    EventBus.getDefault().post(new CoachScheduleClickEvent(pos));
+                }
+            });
         }
     }
 }

@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nested_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -100,6 +101,7 @@
                         android:background="@color/divider" />
 
                     <ImageButton
+                        android:id="@+id/img_swap"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="?selectableItemBackgroundBorderless"
@@ -116,12 +118,12 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
-                style="@style/FlatCard"
+                android:id="@+id/date_container"
 
+                style="@style/FlatCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                android:id="@+id/date_container"
 
                 android:foreground="?selectableItemBackground">
 
@@ -248,7 +250,7 @@
                         android:id="@+id/shuttle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Xe chung chuyen"
+                        android:text="Xe trung chuyển"
                         android:textAppearance="@style/PrimaryText" />
 
                 </LinearLayout>
@@ -258,7 +260,6 @@
     </android.support.v4.widget.NestedScrollView>
 
 
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btn_filter"
         android:layout_width="wrap_content"
@@ -266,4 +267,5 @@
         android:layout_gravity="center_horizontal|bottom"
         android:layout_marginBottom="16dp"
         android:src="@drawable/ic_chevron_right_light_24dp" />
+
 </android.support.design.widget.CoordinatorLayout>

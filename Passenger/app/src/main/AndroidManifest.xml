@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -42,7 +44,12 @@
         <activity
             android:name=".Activity.activities.ListCityActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".Activity.activities.CoachManagerActivity"></activity>
+        <activity android:name=".Activity.activities.CoachManagerActivity" />
+        <activity android:name=".Activity.activities.ShuttleBusSuggestionActivity"></activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyC734KK9GMfM1zUFFslw6pVjMunGUnr52g" />
     </application>
 
 </manifest>
