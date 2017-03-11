@@ -1,7 +1,6 @@
 package com.fit.uet.passengerapp.Activity.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,22 +12,20 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 
 import com.fit.uet.passengerapp.Activity.BaseActivity.BaseToolBarActivity;
-import com.fit.uet.passengerapp.ListenerEvent.CoachScheduleClickEvent;
 import com.fit.uet.passengerapp.R;
 import com.fit.uet.passengerapp.adapter.CoachManagerAdapter;
 import com.fit.uet.passengerapp.database.DB;
 import com.fit.uet.passengerapp.models.CoachSchedule;
+import com.fit.uet.passengerapp.models.User;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import java.util.ArrayList;
+import java.util.List;
 
 public class CoachManagerActivity extends BaseToolBarActivity {
     private String TAG = "CoachManagerActivity";
@@ -36,10 +33,12 @@ public class CoachManagerActivity extends BaseToolBarActivity {
     private ArrayList<CoachSchedule> coachSchedules;
     private ImageView imgScanning;
 
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseReference;
+
     @Override
     protected void onStart() {
         super.onStart();
-        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -55,6 +54,9 @@ public class CoachManagerActivity extends BaseToolBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        firebaseAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
         initDraw();
     }
 
@@ -73,38 +75,53 @@ public class CoachManagerActivity extends BaseToolBarActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        coachSchedules = new ArrayList<>();
-        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-        reference.child(DB.SCHEDULE).child("cs0").addValueEventListener(new ValueEventListener() {
+        databaseReference.child(DB.USER).child(firebaseAuth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                CoachSchedule coachSchedule = dataSnapshot.getValue(CoachSchedule.class);
-                coachSchedules.add(coachSchedule);
-                CoachManagerAdapter adapter = new CoachManagerAdapter(coachSchedules);
-                recyclerView.setAdapter(adapter);
-                imgScanning.clearAnimation();
-                imgScanning.setVisibility(View.GONE);
-                recyclerView.setVisibility(View.VISIBLE);
+                User user = dataSnapshot.getValue(User.class);
+
+                databaseReference.child(DB.SCHEDULE).orderByChild("coachUid").equalTo(user.getCoachUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        List<CoachSchedule> coachSchedules = new ArrayList<>();
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            coachSchedules.add(snapshot.getValue(CoachSchedule.class));
+                        }
+
+                        CoachManagerAdapter adapter = new CoachManagerAdapter(coachSchedules);
+                        recyclerView.setAdapter(adapter);
+                        imgScanning.clearAnimation();
+                        imgScanning.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
+
+                        adapter.setOnItemClickListener(new CoachManagerAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(int position) {
+                                Intent intent = new Intent(CoachManagerActivity.this, TicketBoxActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+                Log.e("Cancel", databaseError.getMessage());
             }
         });
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onClickCoachScheduleEvent(CoachScheduleClickEvent event) {
-        //todo new event here
-        Log.d(TAG, "Clicked item");
-        Intent intent = new Intent(CoachManagerActivity.this, ShuttleBusSuggestionActivity.class);
-        startActivity(intent);
-    }
-
-    @Override
-    protected void onStop() {
-        EventBus.getDefault().unregister(this);
-        super.onStop();
-    }
-
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void onClickCoachScheduleEvent(CoachScheduleClickEvent event) {
+//        //todo new event here
+//        Log.d(TAG, "Clicked item");
+//        Intent intent = new Intent(CoachManagerActivity.this, ShuttleBusSuggestionActivity.class);
+//        startActivity(intent);
+//    }
 }

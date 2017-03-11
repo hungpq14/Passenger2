@@ -1,105 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground"
-    android:orientation="vertical">
-
-    <LinearLayout
-        android:id="@+id/layout_destination_man"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="4dp"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/txt_pick_from"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="BX.GIÁP BÁT"
-                android:textColor="#292929"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/txt_arrive_from"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Hà Nội"
-                android:textColor="@android:color/darker_gray" />
-
-        </LinearLayout>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:src="@drawable/ic_forward_black" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/txt_pick_to"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="BX.HƯNG YÊN"
-                android:textColor="#292929"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/txt_arrive_to"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Hưng Yên"
-                android:textColor="@android:color/darker_gray" />
-
-        </LinearLayout>
-
-    </LinearLayout>
+    app:cardUseCompatPadding="true">
 
     <RelativeLayout
-        android:id="@+id/txt_man_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_destination_man"
-        android:layout_marginTop="4dp">
-
-        <TextView
-            android:id="@+id/txt_departure_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="16dp"
-            android:text="Khởi hành: 19:00 20/03/2017" />
-
-        <TextView
-            android:id="@+id/txt_seat_avail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="16dp"
-            android:text="Số ghế: 16/29" />
-
-    </RelativeLayout>
-
-    <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/txt_man_content"
-        android:layout_marginTop="2dp"
-        android:background="#292929" />
+        android:layout_height="wrap_content"
+        android:padding="8dp">
 
-</RelativeLayout>
+        <LinearLayout
+            android:id="@+id/layout_destination_man"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_pick_from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="BX.GIÁP BÁT"
+                    android:textColor="#292929"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/txt_arrive_from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Hà Nội"
+                    android:textColor="@android:color/darker_gray" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/ic_forward_black" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_pick_to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="BX.HƯNG YÊN"
+                    android:textColor="#292929"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/txt_arrive_to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Hưng Yên"
+                    android:textColor="@android:color/darker_gray" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/txt_man_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_destination_man"
+            android:layout_marginTop="4dp">
+
+            <TextView
+                android:id="@+id/txt_departure_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="16dp"
+                android:text="Khởi hành: 19:00 20/03/2017" />
+
+            <TextView
+                android:id="@+id/txt_seat_avail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="16dp"
+                android:text="Số ghế: 16/29" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

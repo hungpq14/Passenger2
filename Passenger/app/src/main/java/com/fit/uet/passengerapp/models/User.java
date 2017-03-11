@@ -11,6 +11,7 @@ public class User implements Parcelable {
     private String uid;
     private String name;
     private String phoneNum;
+    private String coachUid;
 
     public User() {}
 
@@ -42,6 +43,14 @@ public class User implements Parcelable {
 
     public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
+    }
+
+    public String getCoachUid() {
+        return coachUid;
+    }
+
+    public void setCoachUid(String coachUid) {
+        this.coachUid = coachUid;
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {

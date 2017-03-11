@@ -6,23 +6,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.fit.uet.passengerapp.ListenerEvent.CoachScheduleClickEvent;
 import com.fit.uet.passengerapp.R;
 import com.fit.uet.passengerapp.models.CoachSchedule;
 
-import org.greenrobot.eventbus.EventBus;
-
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by phamh_000 on 11/03/2017.
  */
 
 public class CoachManagerAdapter extends RecyclerView.Adapter<CoachManagerAdapter.CoachManagerViewHolder> {
-    private ArrayList<CoachSchedule> coachSchedules;
+    private List<CoachSchedule> coachSchedules;
 
-    public CoachManagerAdapter(ArrayList<CoachSchedule> coachSchedules) {
+    public CoachManagerAdapter(List<CoachSchedule> coachSchedules) {
         this.coachSchedules = coachSchedules;
+    }
+
+    // Define listener member variable
+    private OnItemClickListener listener;
+    // Define the listener interface
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+    // Define the method that allows the parent activity or fragment to define the listener
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     @Override
@@ -65,12 +73,14 @@ public class CoachManagerAdapter extends RecyclerView.Adapter<CoachManagerAdapte
             txtCoachFrom.setText(schedule.arriveFrom);
             txtPickFrom.setText(schedule.pickFrom);
             txtDepartureTime.setText("Khởi hành: " + schedule.departureTime);
-            txtSeatAvail.setText("Số ghế đã đặt: " + schedule.seatAvailable);
+            txtSeatAvail.setText("Số ghế trống: " + schedule.seatAvailable);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    EventBus.getDefault().post(new CoachScheduleClickEvent(pos));
+                    if (listener != null) {
+                        listener.onItemClick(getLayoutPosition());
+                    }
                 }
             });
         }
