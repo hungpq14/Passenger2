@@ -1,5 +1,6 @@
 package com.fit.uet.passengerapp.Activity.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -75,7 +76,10 @@ public class CoachManagerActivity extends BaseToolBarActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onClickCoachScheduleEvent(CoachScheduleClickEvent event) {
-        Log.d(TAG, "event clicked");
+        //todo new event here
+        Log.d(TAG, "Clicked item");
+        Intent intent = new Intent(CoachManagerActivity.this, ShuttleBusSuggestionActivity.class);
+        startActivity(intent);
     }
 
     @Override

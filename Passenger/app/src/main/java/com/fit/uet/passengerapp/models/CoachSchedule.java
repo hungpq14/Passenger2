@@ -14,6 +14,7 @@ public class CoachSchedule {
     public String coachUid;
     public String departureTime;
     public int seatAvailable;
+
     public boolean hasShuttleBus;
     public String seatState;
 
