@@ -148,7 +148,7 @@ public class TicketActivity extends BaseToolBarActivity {
 
     @Override
     protected String getToolbarText() {
-        return "Ticket";
+        return "Vé";
     }
 
     private void setBarcode(String code) {
@@ -156,7 +156,7 @@ public class TicketActivity extends BaseToolBarActivity {
 
         Bitmap barcodeBitmap;
         try {
-            barcodeBitmap = BarcodeUtils.encodeAsBitmap(code, BarcodeFormat.CODE_128, 400, 100);
+            barcodeBitmap = BarcodeUtils.encodeAsBitmap(code, BarcodeFormat.QR_CODE, 350, 350);
             img_barcode.setImageBitmap(barcodeBitmap);
         } catch (WriterException e) {
             e.printStackTrace();
