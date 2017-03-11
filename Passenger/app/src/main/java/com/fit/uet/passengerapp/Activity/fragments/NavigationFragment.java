@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fit.uet.passengerapp.Activity.activities.CartActivity;
+import com.fit.uet.passengerapp.Activity.activities.CoachHostFavoriteActivity;
 import com.fit.uet.passengerapp.Activity.activities.CoachManagerActivity;
 import com.fit.uet.passengerapp.Activity.activities.SignInActivity;
 import com.fit.uet.passengerapp.R;
@@ -25,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class NavigationFragment extends Fragment {
     private View view;
-    private RelativeLayout layoutSignOut, layoutCoachManager, layoutTickerMan;
+    private RelativeLayout layoutSignOut, layoutCoachManager, layoutTickerMan, layoutCoachLove;
     private TextView txtUserName;
     private TextView txtTrustPoint;
 
@@ -42,9 +43,11 @@ public class NavigationFragment extends Fragment {
         layoutSignOut = (RelativeLayout) view.findViewById(R.id.layout_sign_out);
         layoutCoachManager = (RelativeLayout) view.findViewById(R.id.layout_coach_manager);
         layoutTickerMan = (RelativeLayout) view.findViewById(R.id.layout_ticket_man);
+        layoutCoachLove = (RelativeLayout) view.findViewById(R.id.layout_coach_love);
         layoutSignOut.setOnClickListener(navClickItem);
         layoutCoachManager.setOnClickListener(navClickItem);
         layoutTickerMan.setOnClickListener(navClickItem);
+        layoutCoachLove.setOnClickListener(navClickItem);
 
         checkIfHasCoachMan();
 
@@ -80,6 +83,8 @@ public class NavigationFragment extends Fragment {
                 startActivity(new Intent(getContext(), CoachManagerActivity.class));
             } else if (v.equals(layoutTickerMan)) {
                 startActivity(new Intent(getContext(), CartActivity.class));
+            } else if (v.equals(layoutCoachLove)) {
+                startActivity(new Intent(getContext(), CoachHostFavoriteActivity.class));
             }
         }
     };

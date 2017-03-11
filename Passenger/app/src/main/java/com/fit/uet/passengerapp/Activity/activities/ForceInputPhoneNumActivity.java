@@ -62,7 +62,7 @@ public class ForceInputPhoneNumActivity extends AppCompatActivity {
 
                 if (!phoneNum.trim().equals("")) {
                     firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-                    currentUser = new User(firebaseUser.getUid(), firebaseUser.getDisplayName(), phoneNum);
+                    currentUser = new User(firebaseUser.getUid(), firebaseUser.getDisplayName(), phoneNum, 0);
 
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     myRef = database.getReference();

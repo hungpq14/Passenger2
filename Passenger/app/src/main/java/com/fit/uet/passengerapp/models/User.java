@@ -11,13 +11,16 @@ public class User implements Parcelable {
     private String uid;
     private String name;
     private String phoneNum;
+    private int point;
 
-    public User() {}
+    public User() {
+    }
 
-    public User(String uid, String name, String phoneNum) {
+    public User(String uid, String name, String phoneNum, int point) {
         this.uid = uid;
         this.name = name;
         this.phoneNum = phoneNum;
+        this.point = point;
     }
 
     public String getUid() {
@@ -42,6 +45,14 @@ public class User implements Parcelable {
 
     public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
+    }
+
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
