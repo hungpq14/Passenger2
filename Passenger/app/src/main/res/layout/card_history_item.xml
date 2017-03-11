@@ -71,10 +71,10 @@
                 android:src="@drawable/ic_car_black_24dp" />
 
             <TextView
+                android:id="@+id/tv_seats"
                 style="@style/PrimaryText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/coach"
                 tools:text="Optimus Prime" />
         </LinearLayout>
 
@@ -102,8 +102,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                tools:text="Nha xe Yen Nghia"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                tools:text="Nha xe Yen Nghia" />
 
             <RatingBar
                 android:id="@+id/rating"
@@ -114,11 +114,11 @@
                 tools:rating="3.5" />
 
             <Button
-                android:layout_alignParentRight="true"
                 style="@style/ColoredButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/action_review"/>
+                android:layout_alignParentRight="true"
+                android:text="@string/action_review" />
 
         </RelativeLayout>
 

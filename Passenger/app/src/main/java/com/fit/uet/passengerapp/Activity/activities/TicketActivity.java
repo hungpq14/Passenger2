@@ -95,39 +95,7 @@ public class TicketActivity extends BaseToolBarActivity {
 
 
         ticketDatabaseReference = databaseReference.child(Ticket.CHILD_TICKET);
-//        Query ticketQuery = ticketDatabaseReference.orderByChild("user_id").equalTo("d7iKFdtKZAZflYr9y1hDJ566UXq2");
-//        ticketQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
-//                    Ticket ticket = singleSnapshot.getValue(Ticket.class);
-//                    setBarcode(singleSnapshot.getKey());
-//                    databaseReference.child(DB.SCHEDULE).child(ticket.coach_schedule_id).addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(DataSnapshot dataSnapshot) {
-//                            CoachSchedule coach = dataSnapshot.getValue(CoachSchedule.class);
-//                            tv_arrive_from.setText(coach.arriveFrom);
-//                            tv_arrive_to.setText(coach.arriveTo);
-//                            tv_price.setText(coach.costPerTicket + "$");
-//                            //FIXME: wth??
-//                            //long ms = DateTimeUtils.getMillisFromString(coach.timeStart);
-//                           // tv_date.setText(DateTimeUtils.dateStringFormat(ms));
-//                           // tv_time.setText(DateTimeUtils.getTimeFromMs(ms));
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(DatabaseError databaseError) {
-//
-//                        }
-//                    });
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                Log.e("Error", databaseError.getDetails());
-//            }
-//        });
+
         ticketDatabaseReference.child("-KeuceuMB75_a5p3ve43").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
