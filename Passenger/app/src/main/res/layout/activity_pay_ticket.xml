@@ -11,69 +11,84 @@
         android:id="@+id/toolbar"
         layout="@layout/view_tool_bar" />
 
-    <RadioGroup
-        android:id="@+id/payGroup"
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_radio_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical">
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="26dp">
 
-        <RadioButton
-            android:id="@+id/radio_pay_option_0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
-            android:enabled="false"
-            android:text="Bạn không đủ điểm tích lũy để mua vé không cần trả trước" />
-
-        <LinearLayout
+        <RadioGroup
+            android:id="@+id/payGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="46dp"
-            android:layout_marginRight="16dp"
+            android:layout_below="@+id/toolbar"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <TextView
+            <RadioButton
+                android:id="@+id/radio_pay_option_0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Điểm tích lũy hiện tại: " />
+                android:layout_marginRight="16dp"
+                android:enabled="false"
+                android:text="Bạn không đủ điểm tích lũy để mua vé không cần trả trước"
+                app:buttonTint="?colorPrimary" />
 
-            <TextView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="46dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Điểm tích lũy hiện tại: " />
+
+                <TextView
+                    android:id="@+id/txt_trust_point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="8" />
+
+            </LinearLayout>
+
+            <RadioButton
+                android:id="@+id/radio_pay_option_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=": 8" />
+                android:text="Vận chuyển vé trực tiếp"
+                android:textColor="#757575"
+                app:buttonTint="?colorPrimary" />
 
-        </LinearLayout>
+            <RadioButton
+                android:id="@+id/radio_pay_option_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Mua vé qua thẻ ngân hàng"
+                android:textColor="#757575"
+                app:buttonTint="?colorPrimary" />
 
-        <RadioButton
-            android:id="@+id/radio_pay_option_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Vận chuyển vé trực tiếp"
-            android:textColor="#757575" />
+        </RadioGroup>
 
-        <RadioButton
-            android:id="@+id/radio_pay_option_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="#000"
-            android:checked="true"
-            android:text="Mua vé qua thẻ ngân hàng"
-            android:textColor="#757575" />
-
-    </RadioGroup>
+    </android.support.v7.widget.CardView>
 
     <View
         android:id="@+id/layout_sepreate"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/payGroup"
+        android:layout_below="@+id/card_radio_group"
         android:layout_marginTop="4dp"
-        android:background="#292929" />
+        android:background="@android:color/darker_gray" />
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -81,7 +96,7 @@
         android:layout_below="@+id/layout_sepreate"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="26dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -183,6 +198,8 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/selector_pay_bg"
         android:text="Thanh Toán"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:textColor="#FFF"
+        android:textSize="17sp" />
 
 </RelativeLayout>

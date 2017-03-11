@@ -103,39 +103,46 @@ public class SeatBookingActivity extends BaseToolBarActivity {
 
         tv_next.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                if (adapter.getSelectedItems().size() != 0) {
-                    int count = adapter.getSelectedItemCount();
-                    DialogUtils.showConfirmDialog(SeatBookingActivity.this, "Confirm Your In App Purchase", "Do you want to buy " + count + " tickets for $" + count * schedule.costPerTicket + "?", new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            List<Integer> selectedItems = adapter.getSelectedItems();
-
-                            Ticket ticket = new Ticket();
-                            ticket.checkout = false;
-                            ticket.coach_schedule_id = schedule.uid;
-                            ticket.seats = selectedItems;
-                            ticket.user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                            ticketDatabaseReference.push().setValue(ticket);
-
-                            for (Integer seat : selectedItems) {
-                                StringBuilder sb = new StringBuilder(schedule.seatState);
-                                sb.setCharAt(seat, '3');
-                                schedule.seatState = sb.toString();
-                            }
-
-                            scheduleDatabaseReference.child(getIntent().getStringExtra(Intent.EXTRA_TEXT)).child("seatState").setValue(schedule.seatState);
-
-                            Intent intent = new Intent(SeatBookingActivity.this, MainActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
-                            finish();
-                        }
-                    });
-                }
+            public void onClick(View v) {
+                startActivity(new Intent(SeatBookingActivity.this, PayTicketActivity.class));
             }
         });
+
+//        tv_next.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (adapter.getSelectedItems().size() != 0) {
+//                    int count = adapter.getSelectedItemCount();
+//                    DialogUtils.showConfirmDialog(SeatBookingActivity.this, "Confirm Your In App Purchase", "Do you want to buy " + count + " tickets for $" + count * schedule.costPerTicket + "?", new DialogInterface.OnClickListener() {
+//
+//                        @Override
+//                        public void onClick(DialogInterface dialogInterface, int i) {
+//                            List<Integer> selectedItems = adapter.getSelectedItems();
+//
+//                            Ticket ticket = new Ticket();
+//                            ticket.checkout = false;
+//                            ticket.coach_schedule_id = schedule.uid;
+//                            ticket.seats = selectedItems;
+//                            ticket.user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//                            ticketDatabaseReference.push().setValue(ticket);
+//
+//                            for (Integer seat : selectedItems) {
+//                                StringBuilder sb = new StringBuilder(schedule.seatState);
+//                                sb.setCharAt(seat, '3');
+//                                schedule.seatState = sb.toString();
+//                            }
+//
+//                            scheduleDatabaseReference.child(getIntent().getStringExtra(Intent.EXTRA_TEXT)).child("seatState").setValue(schedule.seatState);
+//
+//                            Intent intent = new Intent(SeatBookingActivity.this, MainActivity.class);
+//                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                            startActivity(intent);
+//                            finish();
+//                        }
+//                    });
+//                }
+//            }
+//        });
     }
 
     @Override

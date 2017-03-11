@@ -50,11 +50,27 @@ public class NavigationFragment extends Fragment {
         layoutCoachLove.setOnClickListener(navClickItem);
 
         checkIfHasCoachMan();
+        checkTrustPoint();
 
         txtUserName = (TextView) view.findViewById(R.id.txt_user_name);
         txtTrustPoint = (TextView) view.findViewById(R.id.txt_trust_point);
 
         txtUserName.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+    }
+
+    private void checkTrustPoint() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        reference.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("point").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int point = dataSnapshot.getValue(Integer.class);
+                txtTrustPoint.setText(point + "");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
 
     private void checkIfHasCoachMan() {

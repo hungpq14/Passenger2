@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.fit.uet.passengerapp.Activity.BaseActivity.BaseToolBarActivity;
 import com.fit.uet.passengerapp.R;
@@ -23,6 +25,7 @@ public class PayTicketActivity extends BaseToolBarActivity {
     RadioButton radioPay1, radioPay2, radioPay3;
     Button btnPay;
     RadioGroup radioGroup;
+    TextView txtTrustPoint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +39,13 @@ public class PayTicketActivity extends BaseToolBarActivity {
         radioPay3 = (RadioButton) findViewById(R.id.radio_pay_option_2);
         radioGroup = (RadioGroup) findViewById(R.id.payGroup);
         btnPay = (Button) findViewById(R.id.btn_pay);
+        txtTrustPoint = (TextView) findViewById(R.id.txt_trust_point);
 
         checkTrustPoint();
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("Ticket", "radio state: " + getRadioState());
                 int type = getRadioState();
                 Intent intent = new Intent(PayTicketActivity.this, PaypalActivity.class);
                 intent.putExtra("type", type);
@@ -55,6 +60,7 @@ public class PayTicketActivity extends BaseToolBarActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int point = dataSnapshot.getValue(Integer.class);
+                txtTrustPoint.setText(point + "");
                 if (point < 8) {
                     radioPay1.setEnabled(false);
                 } else radioPay1.setEnabled(true);
