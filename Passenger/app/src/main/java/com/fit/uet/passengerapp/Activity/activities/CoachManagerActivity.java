@@ -83,7 +83,7 @@ public class CoachManagerActivity extends BaseToolBarActivity {
                 databaseReference.child(DB.SCHEDULE).orderByChild("coachUid").equalTo(user.getCoachUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        List<CoachSchedule> coachSchedules = new ArrayList<>();
+                        final List<CoachSchedule> coachSchedules = new ArrayList<>();
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             coachSchedules.add(snapshot.getValue(CoachSchedule.class));
                         }
@@ -98,6 +98,7 @@ public class CoachManagerActivity extends BaseToolBarActivity {
                             @Override
                             public void onItemClick(int position) {
                                 Intent intent = new Intent(CoachManagerActivity.this, TicketBoxActivity.class);
+                                intent.putExtra(Intent.EXTRA_TEXT, coachSchedules.get(position).uid);
                                 startActivity(intent);
                             }
                         });

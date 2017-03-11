@@ -15,6 +15,7 @@
         android:orientation="vertical">
 
         <ProgressBar
+            android:visibility="gone"
             android:id="@+id/progressBar"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
@@ -22,7 +23,7 @@
 
         <LinearLayout
             android:id="@+id/layout_info"
-            android:visibility="invisible"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -50,7 +51,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:textColor="@android:color/white"
-                            android:textSize="22sp"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -95,7 +96,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="2"
+                android:layout_weight="4"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -109,7 +110,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Name:" />
+                        android:text="Tên:" />
 
                     <TextView
                         android:id="@+id/tv_name"
@@ -117,8 +118,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="right"
-                        android:textColor="@android:color/black"
-                        android:textSize="22sp" />
+                        android:textColor="@android:color/black" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -132,7 +132,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Phone:" />
+                        android:text="Điện thoại:" />
 
                     <TextView
                         android:id="@+id/tv_phone"
@@ -140,8 +140,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="right"
-                        android:textColor="@android:color/black"
-                        android:textSize="22sp" />
+                        android:textColor="@android:color/black" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -155,7 +154,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Price:" />
+                        android:text="Giá:" />
 
                     <TextView
                         android:id="@+id/tv_price"
@@ -163,8 +162,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="right"
-                        android:textColor="@android:color/black"
-                        android:textSize="22sp" />
+                        android:textColor="@android:color/black"/>
                 </LinearLayout>
 
                 <FrameLayout
@@ -182,7 +180,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Boarding" />
+                        android:text="Thời gian" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -194,16 +192,14 @@
                             android:id="@+id/tv_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@android:color/black"
-                            android:textSize="22sp" />
+                            android:textColor="@android:color/black" />
 
                         <TextView
                             android:id="@+id/tv_time"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="right"
-                            android:textColor="@android:color/black"
-                            android:textSize="22sp" />
+                            android:textColor="@android:color/black"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -225,34 +221,13 @@
                             android:id="@+id/textView2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="License Plate" />
+                            android:text="Biển số" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="30A-2287"
-                            android:textColor="@android:color/black"
-                            android:textSize="22sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Terminal-Gate" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="A-01"
-                            android:textColor="@android:color/black"
-                            android:textSize="22sp" />
+                            android:textColor="@android:color/black" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -266,15 +241,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Seat" />
+                            android:text="Ghế" />
 
                         <TextView
                             android:id="@+id/tv_seats"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:textColor="@android:color/black"
-                            android:textSize="22sp" />
+                            android:textColor="@android:color/black"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -287,13 +261,13 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_weight="4">
 
                 <ImageView
                     android:id="@+id/img_barcode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true" />
+                    android:layout_centerHorizontal="true" />
 
                 <TextView
                     android:id="@+id/tv_code"
