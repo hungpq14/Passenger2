@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/layout_destination_man"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -15,6 +19,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/txt_pick_from"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -23,12 +28,13 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/tv_arrive_from"
+                android:id="@+id/txt_arrive_from"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Hà Nội"
                 android:textColor="@android:color/darker_gray" />
+
         </LinearLayout>
 
         <ImageView
@@ -44,6 +50,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/txt_pick_to"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -52,7 +59,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/tv_arrive_to"
+                android:id="@+id/txt_arrive_to"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -63,6 +70,36 @@
 
     </LinearLayout>
 
+    <RelativeLayout
+        android:id="@+id/txt_man_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_destination_man"
+        android:layout_marginTop="4dp">
 
+        <TextView
+            android:id="@+id/txt_departure_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="16dp"
+            android:text="Khởi hành: 19:00 20/03/2017" />
+
+        <TextView
+            android:id="@+id/txt_seat_avail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:text="Số ghế: 16/29" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/txt_man_content"
+        android:layout_marginTop="2dp"
+        android:background="#292929" />
 
 </RelativeLayout>

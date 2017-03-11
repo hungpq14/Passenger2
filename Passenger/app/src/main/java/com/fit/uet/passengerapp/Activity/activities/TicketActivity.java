@@ -7,11 +7,16 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.fit.uet.passengerapp.Activity.BaseActivity.BaseToolBarActivity;
 import com.fit.uet.passengerapp.R;
 import com.fit.uet.passengerapp.database.DB;
 import com.fit.uet.passengerapp.models.CoachSchedule;
 import com.fit.uet.passengerapp.models.Ticket;
+import com.fit.uet.passengerapp.models.User;
 import com.fit.uet.passengerapp.utils.BarcodeUtils;
+import com.fit.uet.passengerapp.utils.DateTimeUtils;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,7 +29,7 @@ import com.google.zxing.WriterException;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TicketActivity extends AppCompatActivity {
+public class TicketActivity extends BaseToolBarActivity {
     @BindView(R.id.tv_arrive_from)
     TextView tv_arrive_from;
 
@@ -37,6 +42,9 @@ public class TicketActivity extends AppCompatActivity {
     @BindView(R.id.tv_code)
     TextView tv_code;
 
+    @BindView(R.id.tv_name)
+    TextView tv_name;
+
     @BindView(R.id.tv_price)
     TextView tv_price;
 
@@ -46,51 +54,125 @@ public class TicketActivity extends AppCompatActivity {
     @BindView(R.id.tv_time)
     TextView tv_time;
 
+    @BindView(R.id.tv_phone)
+    TextView tv_phone;
+
+    @BindView(R.id.tv_pick_from)
+    TextView tv_pick_from;
+
+    @BindView(R.id.tv_pick_to)
+    TextView tv_pick_to;
+
+    @BindView(R.id.tv_seats)
+    TextView tv_seats;
+
     private DatabaseReference databaseReference;
     private DatabaseReference ticketDatabaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ticket);
         ButterKnife.bind(this);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        ticketDatabaseReference = databaseReference.child(Ticket.CHILD_TICKET);
-        Query ticketQuery = ticketDatabaseReference.orderByChild("user_id").equalTo("d7iKFdtKZAZflYr9y1hDJ566UXq2");
-        ticketQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        tv_name.setText(currentUser.getDisplayName());
+
+        databaseReference.child(DB.USER).child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
-                    Ticket ticket = singleSnapshot.getValue(Ticket.class);
-                    setBarcode(singleSnapshot.getKey());
-                    databaseReference.child(DB.SCHEDULE).child(ticket.coach_schedule_id).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            CoachSchedule coach = dataSnapshot.getValue(CoachSchedule.class);
-                            tv_arrive_from.setText(coach.arriveFrom);
-                            tv_arrive_to.setText(coach.arriveTo);
-                            tv_price.setText(coach.costPerTicket + "$");
-                            //FIXME: wth??
-                            //long ms = DateTimeUtils.getMillisFromString(coach.timeStart);
-                           // tv_date.setText(DateTimeUtils.dateStringFormat(ms));
-                           // tv_time.setText(DateTimeUtils.getTimeFromMs(ms));
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-                }
+                User user = dataSnapshot.getValue(User.class);
+                tv_phone.setText(user.getPhone());
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.e("Error", databaseError.getDetails());
+
             }
         });
 
+
+        ticketDatabaseReference = databaseReference.child(Ticket.CHILD_TICKET);
+//        Query ticketQuery = ticketDatabaseReference.orderByChild("user_id").equalTo("d7iKFdtKZAZflYr9y1hDJ566UXq2");
+//        ticketQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
+//                    Ticket ticket = singleSnapshot.getValue(Ticket.class);
+//                    setBarcode(singleSnapshot.getKey());
+//                    databaseReference.child(DB.SCHEDULE).child(ticket.coach_schedule_id).addValueEventListener(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(DataSnapshot dataSnapshot) {
+//                            CoachSchedule coach = dataSnapshot.getValue(CoachSchedule.class);
+//                            tv_arrive_from.setText(coach.arriveFrom);
+//                            tv_arrive_to.setText(coach.arriveTo);
+//                            tv_price.setText(coach.costPerTicket + "$");
+//                            //FIXME: wth??
+//                            //long ms = DateTimeUtils.getMillisFromString(coach.timeStart);
+//                           // tv_date.setText(DateTimeUtils.dateStringFormat(ms));
+//                           // tv_time.setText(DateTimeUtils.getTimeFromMs(ms));
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(DatabaseError databaseError) {
+//
+//                        }
+//                    });
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                Log.e("Error", databaseError.getDetails());
+//            }
+//        });
+        ticketDatabaseReference.child("-KeuceuMB75_a5p3ve43").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                final Ticket ticket = dataSnapshot.getValue(Ticket.class);
+                tv_seats.setText(ticket.seats.toString());
+                setBarcode(dataSnapshot.getKey());
+
+                DatabaseReference schedule = databaseReference.child(DB.SCHEDULE).child(ticket.coach_schedule_id);
+                schedule.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        CoachSchedule schedule = dataSnapshot.getValue(CoachSchedule.class);
+                        tv_price.setText(schedule.costPerTicket * ticket.seats.size() + "$");
+                        tv_pick_from.setText(schedule.pickFrom);
+                        tv_pick_to.setText(schedule.pickTo);
+                        tv_arrive_from.setText(schedule.arriveFrom);
+                        tv_arrive_to.setText(schedule.arriveTo);
+
+                        long ms = DateTimeUtils.getMillisFromString(schedule.departureTime);
+                         tv_date.setText(DateTimeUtils.dateStringFormat(ms));
+                         tv_time.setText(DateTimeUtils.getTimeFromMs(ms));
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_ticket;
+    }
+
+    @Override
+    protected String getToolbarText() {
+        return "Ticket";
     }
 
     private void setBarcode(String code) {

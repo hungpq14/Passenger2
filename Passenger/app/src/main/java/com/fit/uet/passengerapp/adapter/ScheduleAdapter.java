@@ -22,7 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by Bien-kun on 11/03/2017.
+ * Created by Bien-kun on 07/03/2017.
  */
 
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ScheduleHolder> implements ChangeEventListener {

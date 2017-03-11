@@ -14,10 +14,10 @@ public class CoachSchedule {
     public String coachUid;
     public String departureTime;
     public int seatAvailable;
-    public String arriveFrom;
-    public String arriveTo;
-    public int costPerTicket;
     public boolean hasShuttleBus;
-    public Long seatState;
+    public String seatState;
+
+    public String arriveFrom, arriveTo, pickFrom, pickTo;
+    public long costPerTicket;
 
 }

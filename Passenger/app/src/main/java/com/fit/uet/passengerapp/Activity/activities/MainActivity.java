@@ -8,7 +8,13 @@ import android.view.View;
 
 import com.fit.uet.passengerapp.Activity.fragments.FilterFragment;
 import com.fit.uet.passengerapp.R;
+import com.fit.uet.passengerapp.models.City;
+import com.fit.uet.passengerapp.models.PickLocation;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
 
 /**
  * Created by Bien-kun on 05/03/2017.
@@ -21,6 +27,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        ArrayList<PickLocation> cities = new ArrayList<>();
+//        cities.add(new PickLocation("0", "BX Giáp Bát", "Hanoi"));
+//        cities.add(new PickLocation("1", "BX Mỹ Đình", "Hanoi"));
+//        cities.add(new PickLocation("2", "BX Yên Nghĩa", "Hanoi"));
+//        cities.add(new PickLocation("3", "BX Cầu Rào", "Hải Phòng"));
+//        cities.add(new PickLocation("4", "VP 265 Trần Nguyên Hãn", "Hải Phòng"));
+//        cities.add(new PickLocation("5", "BX Lào Cai", "Lào Cai"));
+//        cities.add(new PickLocation("6", "BX Nam Định", "Nam Định"));
+//        cities.add(new PickLocation("7", "Big C Nam Định", "Nam Định"));
+//        cities.add(new PickLocation("8", "BX phía nam Nha Trang", "Nha Trang"));
+//        cities.add(new PickLocation("9", "BX Đà Lạt", "Đà Lạt"));
+//        cities.add(new PickLocation("10", "BX Thanh Hóa", "Thanh Hóa"));
+//        cities.add(new PickLocation("11", "BX Hải Dương", "Hải Dương"));
+//        cities.add(new PickLocation("12", "BX Bắc Giang", "Bắc Giang"));
+//        cities.add(new PickLocation("13", "BX Hưng Yên", "Hưng Yên"));
+//        cities.add(new PickLocation("14", "BX Đà Nẵng", "Đà Nẵng"));
+//        cities.add(new PickLocation("15", "BX Lào Cai", "Lào Cai"));
+//
+//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+//        for (PickLocation city : cities) {
+//            reference.child("pick-location").child(city.getUid()).setValue(city);
+//        }
 
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             startActivity(new Intent(this, SignInActivity.class));

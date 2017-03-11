@@ -14,7 +14,9 @@ public class Ticket {
 
     public String coach_schedule_id;
 
-    public List<InternalError> seats;
+    public List<Integer> seats;
 
     public String user_id;
+
+    public boolean checkout;
 }

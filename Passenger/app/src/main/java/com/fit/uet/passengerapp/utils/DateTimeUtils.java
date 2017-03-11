@@ -56,7 +56,7 @@ public class DateTimeUtils {
     }
 
     public static long getMillisFromString(String time) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH/mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd/HH/mm");
         try {
             Date date = sdf.parse(time);
             return date.getTime();
