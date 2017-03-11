@@ -97,7 +97,7 @@ public class SeatBookingActivity extends BaseToolBarActivity {
                 } else {
                     tv_seats.setText("");
                 }
-                tv_price.setText(count * schedule.costPerTicket + "$");
+                tv_price.setText(count * schedule.costPerTicket + " đồng");
             }
         });
 
@@ -180,6 +180,6 @@ public class SeatBookingActivity extends BaseToolBarActivity {
 
     @Override
     protected String getToolbarText() {
-        return "Booking";
+        return "Đặt vé";
     }
 }

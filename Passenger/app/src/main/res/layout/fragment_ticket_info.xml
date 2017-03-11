@@ -273,7 +273,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/border"
-                    android:text="ĐỒNG Ý"
+                    android:text="XÁC NHẬN"
                     android:textColor="@android:color/white"
                     android:textStyle="bold" />
             </RelativeLayout>

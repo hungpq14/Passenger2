@@ -99,7 +99,7 @@ public class CartActivity extends BaseToolBarActivity implements MaterialDialog.
 
     @Override
     protected String getToolbarText() {
-        return "Cart";
+        return "Vé đã mua";
     }
 
     private void initView(final DatabaseReference databaseReference, final List<Ticket> tickets) {

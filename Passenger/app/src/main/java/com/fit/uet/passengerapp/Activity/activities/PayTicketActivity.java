@@ -70,7 +70,7 @@ public class PayTicketActivity extends BaseToolBarActivity {
                         scheduleDatabaseReference.child(getIntent().getStringExtra(Intent.EXTRA_TEXT)).child("seatState").setValue(seatState);
                     }
 
-                    Intent intent = new Intent(PayTicketActivity.this, PaypalActivity.class);
+                    Intent intent = new Intent(PayTicketActivity.this, TicketActivity.class);
                     intent.putExtra("ticket_id", ticket.uid);
                 } else {
                     Intent intent = new Intent(PayTicketActivity.this, PaypalActivity.class);

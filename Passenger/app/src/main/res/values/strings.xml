@@ -20,7 +20,7 @@
     <string name="activity_trip_list_title">Danh sách chuyến</string>
     <string name="routeFormat">Từ %1$s đi %2$s</string>
     <string name="format_seat_description">%d chỗ trống</string>
-    <string name="format_ticket_price">%d $/người</string>
+    <string name="format_ticket_price">%d đồng/người</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
