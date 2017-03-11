@@ -127,7 +127,9 @@ public class SeatBookingActivity extends BaseToolBarActivity {
 
                             scheduleDatabaseReference.child(getIntent().getStringExtra(Intent.EXTRA_TEXT)).child("seatState").setValue(schedule.seatState);
 
-                            startActivity(new Intent(SeatBookingActivity.this, MainActivity.class));
+                            Intent intent = new Intent(SeatBookingActivity.this, MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
                             finish();
                         }
                     });

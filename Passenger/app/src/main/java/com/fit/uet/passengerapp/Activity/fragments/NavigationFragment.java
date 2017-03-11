@@ -59,7 +59,7 @@ public class NavigationFragment extends Fragment {
 
     private void checkIfHasCoachMan() {
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-        reference.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("coach_schedule_id").addValueEventListener(new ValueEventListener() {
+        reference.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("coachUid").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.exists()) {

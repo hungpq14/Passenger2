@@ -12,9 +12,9 @@ public class User implements Parcelable {
     private String name;
     private String phoneNum;
     private int point;
+    private String coachUid;
 
-    public User() {
-    }
+    public User() {}
 
     public User(String uid, String name, String phoneNum, int point) {
         this.uid = uid;
@@ -45,6 +45,14 @@ public class User implements Parcelable {
 
     public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
+    }
+
+    public String getCoachUid() {
+        return coachUid;
+    }
+
+    public void setCoachUid(String coachUid) {
+        this.coachUid = coachUid;
     }
 
     public int getPoint() {
