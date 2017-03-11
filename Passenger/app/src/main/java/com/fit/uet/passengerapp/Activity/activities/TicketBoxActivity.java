@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.fit.uet.passengerapp.Activity.BaseActivity.BaseToolBarActivity;
 import com.fit.uet.passengerapp.Activity.fragments.ScannerFragment;
@@ -39,7 +40,17 @@ public class TicketBoxActivity extends BaseToolBarActivity implements View.OnCli
     @BindView(R.id.rv_seats)
     RecyclerView rv_seats;
 
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
+
+    @BindView(R.id.layout_main)
+    View layout_main;
+
     private DatabaseReference databaseReference;
+
+    public DatabaseReference getDatabaseReference() {
+        return databaseReference;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +115,7 @@ public class TicketBoxActivity extends BaseToolBarActivity implements View.OnCli
     }
 
     private void initSeatView(final CoachSchedule schedule) {
+        hide();
         GridLayoutManager manager = new GridLayoutManager(this, COLUMNS);
         rv_seats.setLayoutManager(manager);
 
@@ -130,6 +142,7 @@ public class TicketBoxActivity extends BaseToolBarActivity implements View.OnCli
 
                 final SeatsAdapter adapter = new SeatsAdapter(TicketBoxActivity.this, items);
                 rv_seats.setAdapter(adapter);
+                show();
             }
 
             @Override
@@ -139,4 +152,29 @@ public class TicketBoxActivity extends BaseToolBarActivity implements View.OnCli
         });
     }
 
+    public void update() {
+        databaseReference.child(DB.SCHEDULE).child(getIntent().getStringExtra(Intent.EXTRA_TEXT)).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                CoachSchedule coachSchedule = dataSnapshot.getValue(CoachSchedule.class);
+
+                initSeatView(coachSchedule);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void show() {
+        layout_main.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    private void hide() {
+        layout_main.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
+    }
 }

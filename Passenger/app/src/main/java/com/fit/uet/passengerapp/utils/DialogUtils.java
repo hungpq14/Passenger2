@@ -9,9 +9,10 @@ import android.content.DialogInterface;
  */
 
 public class DialogUtils {
-    public static void showAlertDialog(Context c, String message, DialogInterface.OnClickListener listener) {
+    public static void showAlertDialog(Context c, String title, String message, DialogInterface.OnClickListener listener) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(c);
-        alertDialogBuilder.setTitle(message);
+        alertDialogBuilder.setTitle(title);
+        alertDialogBuilder.setMessage(message);
         alertDialogBuilder.setPositiveButton("OK", listener);
 
         AlertDialog alertDialog = alertDialogBuilder.create();
