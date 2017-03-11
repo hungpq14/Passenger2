@@ -6,6 +6,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
 
 import com.fit.uet.passengerapp.Activity.BaseActivity.BaseToolBarActivity;
 import com.fit.uet.passengerapp.Activity.fragments.FilterFragment;
@@ -36,6 +41,7 @@ public class ActivityScheduleList extends BaseToolBarActivity {
     private String mFrom, mTo;
     private long mTime;
     private Bundle serviceBundle;
+    private ImageView imgScanning;
 
 
     @Override
@@ -81,9 +87,24 @@ public class ActivityScheduleList extends BaseToolBarActivity {
     }
 
     private void initViews() {
+        imgScanning = (ImageView) findViewById(R.id.img_scan);
+        final RotateAnimation rotateAnimation = new RotateAnimation(0, 360f,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f);
+
+        rotateAnimation.setInterpolator(new LinearInterpolator());
+        rotateAnimation.setDuration(300);
+        rotateAnimation.setRepeatCount(Animation.INFINITE);
+        imgScanning.startAnimation(rotateAnimation);
+
         mAdapter = new ScheduleAdapter(mRef, getQuery(new Date()));
         mList.setLayoutManager(new LinearLayoutManager(this));
         mList.setAdapter(mAdapter);
+
+        imgScanning.clearAnimation();
+        imgScanning.setVisibility(View.GONE);
+        mList.setVisibility(View.VISIBLE);
+
 
         mAdapter.setOnCLickListener(new ScheduleAdapter.OnItemClickListener() {
             @Override

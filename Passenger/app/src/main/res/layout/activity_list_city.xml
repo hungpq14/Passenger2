@@ -18,12 +18,20 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp" />
 
+    <ImageView
+        android:id="@+id/img_scan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_scan" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewCity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/edt_search_city"
         android:scrollbars="vertical"
+        android:visibility="invisible"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </RelativeLayout>

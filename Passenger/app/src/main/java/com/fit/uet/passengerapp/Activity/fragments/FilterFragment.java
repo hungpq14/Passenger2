@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.NestedScrollView;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -55,6 +57,8 @@ public class FilterFragment extends android.support.v4.app.Fragment implements D
     FloatingActionButton btnFilter;
     View mDateContainer;
     CheckBox shuttleCheckBox;
+    private NestedScrollView scrollView;
+    private ImageView imgSwap;
 
     @Nullable
     @Override
@@ -77,7 +81,30 @@ public class FilterFragment extends android.support.v4.app.Fragment implements D
         inputLayoutTo = (LinearLayout) view.findViewById(R.id.layout_txt_to);
         txtFrom = (TextView) view.findViewById(R.id.txt_from);
         txtTo = (TextView) view.findViewById(R.id.txt_to);
-        shuttleCheckBox = (CheckBox)view.findViewById(R.id.shuttle);
+        shuttleCheckBox = (CheckBox) view.findViewById(R.id.shuttle);
+        imgSwap = (ImageView) view.findViewById(R.id.img_swap);
+
+        imgSwap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String strFrom = txtFrom.getText().toString();
+                String strTo = txtTo.getText().toString();
+                txtFrom.setText(strTo);
+                txtTo.setText(strFrom);
+            }
+        });
+
+        scrollView = (NestedScrollView) view.findViewById(R.id.nested_scroll_view);
+        scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (scrollY > 0) {
+                    btnFilter.hide();
+                } else {
+                    btnFilter.show();
+                }
+            }
+        });
 
         inputLayoutFrom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,13 +132,13 @@ public class FilterFragment extends android.support.v4.app.Fragment implements D
             @Override
             public void onClick(View v) {
                 Bundle serviceBundle = new Bundle();
-                serviceBundle.putBoolean(HAS_SHUTTLE,shuttleCheckBox.isChecked());
+                serviceBundle.putBoolean(HAS_SHUTTLE, shuttleCheckBox.isChecked());
 
                 Intent intent = new Intent(getContext(), ActivityScheduleList.class);
                 intent.putExtra(LOCATION_FROM, txtFrom.getText());
                 intent.putExtra(LOCATION_TO, txtTo.getText());
-                intent.putExtra(DATE,mCalendar.getTime().getTime());
-                intent.putExtra(SERVICE,serviceBundle);
+                intent.putExtra(DATE, mCalendar.getTime().getTime());
+                intent.putExtra(SERVICE, serviceBundle);
 
                 startActivity(intent);
             }

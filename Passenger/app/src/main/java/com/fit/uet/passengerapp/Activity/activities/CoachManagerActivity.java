@@ -6,6 +6,11 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
 
 import com.fit.uet.passengerapp.Activity.BaseActivity.BaseToolBarActivity;
 import com.fit.uet.passengerapp.ListenerEvent.CoachScheduleClickEvent;
@@ -29,6 +34,7 @@ public class CoachManagerActivity extends BaseToolBarActivity {
     private String TAG = "CoachManagerActivity";
     private RecyclerView recyclerView;
     private ArrayList<CoachSchedule> coachSchedules;
+    private ImageView imgScanning;
 
     @Override
     protected void onStart() {
@@ -53,6 +59,16 @@ public class CoachManagerActivity extends BaseToolBarActivity {
     }
 
     private void initDraw() {
+        imgScanning = (ImageView) findViewById(R.id.img_scan);
+        final RotateAnimation rotateAnimation = new RotateAnimation(0, 360f,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f);
+
+        rotateAnimation.setInterpolator(new LinearInterpolator());
+        rotateAnimation.setDuration(300);
+        rotateAnimation.setRepeatCount(Animation.INFINITE);
+        imgScanning.startAnimation(rotateAnimation);
+
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -66,6 +82,9 @@ public class CoachManagerActivity extends BaseToolBarActivity {
                 coachSchedules.add(coachSchedule);
                 CoachManagerAdapter adapter = new CoachManagerAdapter(coachSchedules);
                 recyclerView.setAdapter(adapter);
+                imgScanning.clearAnimation();
+                imgScanning.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
             }
 
             @Override

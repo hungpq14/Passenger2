@@ -321,7 +321,6 @@ public class ShuttleBusSuggestionActivity extends AppCompatActivity implements R
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-
                 if (end != null) {
                     end = null;
                 }
