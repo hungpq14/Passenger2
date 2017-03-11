@@ -40,6 +40,7 @@ public class ActivityScheduleList extends BaseToolBarActivity {
 
     private String mFrom, mTo;
     private long mTime;
+    private Boolean hasShuttle;
     private Bundle serviceBundle;
     private ImageView imgScanning;
 
@@ -102,7 +103,6 @@ public class ActivityScheduleList extends BaseToolBarActivity {
         rotateAnimation.setRepeatCount(Animation.INFINITE);
         imgScanning.startAnimation(rotateAnimation);
 
-        mAdapter = new ScheduleAdapter(mRef, getQuery(new Date()));
         mList.setLayoutManager(new LinearLayoutManager(this));
         mList.setAdapter(mAdapter);
 
