@@ -81,7 +81,6 @@ exports.handleTicketExpired = functions.database.ref('/ticket/{id}').onWrite(eve
     //     console.log('data exists');
 	// 	return;
 	// }
-
 	const ticket = data.val();
 	const scheduleId = ticket.coach_schedule_id;
 	const userId = ticket.user_id;
@@ -91,17 +90,17 @@ exports.handleTicketExpired = functions.database.ref('/ticket/{id}').onWrite(eve
         console.log(departureTime);
 		var dateArray = departureTime.split('/');
 		date = new Date(dateArray[0],dateArray[1] - 1,dateArray[2],dateArray[3],dateArray[4],0);
-		console.log('Job scheduled for ' + userId + ' after ' + date.getTime() - Date.now() + 'ms form now');
-        // var userRef = admin.database().ref('/users');
-		// schedule.scheduleJob(date, function{
-		// 	console.log('Ticket expired: ' + userId);
-		// 	userRef.once('value').then(function(snapshot){
-		// 		var curPoint = snapshot.val().point;
-		// 		curPoint -= 3;
-		// 		curPoint = curPoint < 0 ? 0 : curPoint;
-		// 		return userRef.update({point: curPoint});
-		// 	});
-		// });
+		console.log('Job scheduled for ' + userId + ' after ' + date.getTime() + 'now');
+        var userRef = admin.database().ref('/users').child(userId);
+		schedule.scheduleJob(date, function(){
+			console.log('Ticket expired: ' + userId);
+			userRef.once('value').then(function(snapshot){
+				var curPoint = snapshot.val().point;
+				curPoint -= 3;
+				curPoint = curPoint < 0 ? 0 : curPoint;
+				return userRef.update({point: curPoint});
+			});
+		});
 
 	});
 });

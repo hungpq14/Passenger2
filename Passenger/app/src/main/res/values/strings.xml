@@ -40,4 +40,7 @@
     <string name="action_review">Đánh giá</string>
     <string name="fav_coach_host">Nhà xe ưa thích</string>
     <string name="schedule_empty_label">Không có chuyến xe nào</string>
+    <string name="dialog_review_action_positive">Đăng</string>
+    <string name="dialog_review_action_negative">Cancel</string>
+    <string name="dialog_review_title">Viết đánh giá</string>
 </resources>

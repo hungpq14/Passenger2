@@ -27,18 +27,21 @@ import java.util.List;
  * Created by phamtruong on 3/11/17.
  */
 
-public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
+public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     private Context context;
     private List<Ticket> tickets;
     private DatabaseReference databaseReference;
 
     // Define listener member variable
     private OnItemClickListener listener;
+
     // Define the listener interface
     public interface OnItemClickListener {
         void onItemClick(int position);
-        void onReviewClick(int position);
+
+        void onReviewClick(String coachHostUid);
     }
+
     // Define the method that allows the parent activity or fragment to define the listener
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
@@ -97,6 +100,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
                                 CoachHost coachHost = dataSnapshot.getValue(CoachHost.class);
 
                                 holder.company_name.setText(coachHost.name);
+                                holder.company_name.setTag(coachHost.uid);
                             }
 
                             @Override
@@ -140,8 +144,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
             price = (TextView) itemView.findViewById(R.id.price);
             route = (TextView) itemView.findViewById(R.id.route);
             tv_seats = (TextView) itemView.findViewById(R.id.tv_seats);
-
-            preview = (Button)itemView.findViewById(R.id.review) ;
+            company_name = (TextView) itemView.findViewById(R.id.company_name);
+            preview = (Button) itemView.findViewById(R.id.review);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -153,7 +157,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
             preview.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (listener != null) listener.onReviewClick(getLayoutPosition());
+                    if (listener != null) listener.onReviewClick((String) company_name.getTag());
                 }
             });
         }
