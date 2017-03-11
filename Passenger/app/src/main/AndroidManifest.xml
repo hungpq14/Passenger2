@@ -48,7 +48,7 @@
         <activity android:name=".Activity.activities.ShuttleBusSuggestionActivity" />
 
         <activity android:name=".Activity.activities.CoachHostFavoriteActivity">
-            
+
         </activity>
 
         <meta-data
@@ -56,7 +56,9 @@
             android:value="AIzaSyC734KK9GMfM1zUFFslw6pVjMunGUnr52g" />
 
         <activity android:name=".Activity.activities.PayTicketActivity" />
-        <activity android:name=".Activity.activities.PaypalActivity"></activity>
+        <activity
+            android:name=".Activity.activities.PaypalActivity"
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity android:name=".Activity.activities.CartActivity"></activity>
     </application>
 

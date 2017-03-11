@@ -85,10 +85,10 @@ public class PaypalActivity extends BaseToolBarActivity implements GoogleApiClie
                 final String placeId = String.valueOf(item.placeId);
                 Log.i(TAG, "Autocomplete item selected: " + item.description);
 
-            /*
-             Issue a request to the Places Geo Data API to retrieve a Place object with additional
-              details about the place.
-              */
+                /*
+                Issue a request to the Places Geo Data API to retrieve a Place object with additional
+                details about the place.
+                */
                 PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
                         .getPlaceById(mGoogleApiClient, placeId);
                 placeResult.setResultCallback(new ResultCallback<PlaceBuffer>() {
@@ -103,7 +103,6 @@ public class PaypalActivity extends BaseToolBarActivity implements GoogleApiClie
                         // Get the Place object from the buffer.
                         final Place place = places.get(0);
 
-//                        start = place.getLatLng();
                     }
                 });
 
