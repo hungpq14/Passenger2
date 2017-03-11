@@ -9,9 +9,19 @@ var functions = require('firebase-functions');
 var admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
-exports.addCity = functions.https.onRequest((req,res) => {
-	const newCity = req.query.text;
-	admin.database().ref('/city').push({name:newCity}).then(snapshot =>{
-		res.redirect(303,snapshot.ref);
-	});
+
+
+exports.bookSeat = functions.database.ref('coach-schedule/{scheduleId}').onWrite(event=>{
+	if(!event.data.changed('seatState')){
+		return;
+	}
+	var state = event.data.chid('seatState').val();
+	console.log(state);
+	var count = 0;
+	for(var i= 0; i < state.length; i++){
+		if (state.charAt(i) == '0') {
+			count++;
+		}
+	}
+	return event.data.ref.update({seatAvailable: count});
 });

@@ -1,9 +1,11 @@
 package com.fit.uet.passengerapp.Activity.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 
 import com.fit.uet.passengerapp.Activity.BaseActivity.BaseToolBarActivity;
@@ -12,9 +14,10 @@ import com.fit.uet.passengerapp.adapter.SeatsAdapter;
 import com.fit.uet.passengerapp.models.AbstractItem;
 import com.fit.uet.passengerapp.models.CenterItem;
 import com.fit.uet.passengerapp.models.CoachSchedule;
-import com.fit.uet.passengerapp.models.EdgeItem;
-import com.fit.uet.passengerapp.models.EmptyItem;
 import com.fit.uet.passengerapp.models.OrderedItem;
+import com.fit.uet.passengerapp.models.Ticket;
+import com.fit.uet.passengerapp.utils.DialogUtils;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
