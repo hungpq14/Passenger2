@@ -31,34 +31,35 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/layout_coach_arrived"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <!--<RelativeLayout-->
+    <!--android:id="@+id/layout_coach_arrived"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
 
-        <ImageView
-            android:id="@+id/img_coach_arrived"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_centerVertical="true"
-            android:padding="10dp"
-            android:src="@drawable/ic_vector_logout" />
+    <!--<ImageView-->
+    <!--android:id="@+id/img_coach_arrived"-->
+    <!--android:layout_width="48dp"-->
+    <!--android:layout_height="48dp"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:padding="10dp"-->
+    <!--android:src="@drawable/ic_vector_logout" />-->
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:layout_toRightOf="@+id/img_coach_arrived"
-            android:text="Danh sách chuyến đã đi"
-            android:textSize="16sp" />
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:layout_marginLeft="16dp"-->
+    <!--android:layout_toRightOf="@+id/img_coach_arrived"-->
+    <!--android:text="Danh sách chuyến đã đi"-->
+    <!--android:textSize="16sp" />-->
 
-    </RelativeLayout>
+    <!--</RelativeLayout>-->
 
     <RelativeLayout
         android:id="@+id/layout_coach_love"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground">
 
         <ImageView
             android:id="@+id/img_coach_love"
@@ -80,9 +81,10 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/layout_ticket"
+        android:id="@+id/layout_ticket_man"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground">
 
         <ImageView
             android:id="@+id/img_ticket"
@@ -106,7 +108,8 @@
     <RelativeLayout
         android:id="@+id/layout_coach_request"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground">
 
         <ImageView
             android:id="@+id/img_coach_request"
@@ -130,7 +133,8 @@
     <RelativeLayout
         android:id="@+id/layout_coach_request_pending"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground">
 
         <ImageView
             android:id="@+id/img_coach_request_pending"
@@ -154,7 +158,8 @@
     <RelativeLayout
         android:id="@+id/layout_coach_manager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground">
 
         <ImageView
             android:id="@+id/img_coach_manager"
@@ -178,7 +183,8 @@
     <RelativeLayout
         android:id="@+id/layout_sign_out"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground">
 
         <ImageView
             android:id="@+id/img_sign_out"

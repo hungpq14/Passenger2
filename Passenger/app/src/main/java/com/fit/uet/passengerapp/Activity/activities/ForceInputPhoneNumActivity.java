@@ -38,10 +38,27 @@ public class ForceInputPhoneNumActivity extends AppCompatActivity {
         edtPhoneNum = (EditText) findViewById(R.id.edt_input_phone_num);
         btnOk = (Button) findViewById(R.id.btn_ok_phone_num);
 
+//        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        myRef = database.getReference();
+//        myRef.child("users").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                if (dataSnapshot.exists() && dataSnapshot.child("phoneNum").exists()) {
+//                    startActivity(new Intent(ForceInputPhoneNumActivity.this, MainUIActivity.class));
+//                    ForceInputPhoneNumActivity.this.finish();
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//            }
+//        });
+
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phoneNum = edtPhoneNum.getText().toString();
+                final String phoneNum = edtPhoneNum.getText().toString();
 
                 if (!phoneNum.trim().equals("")) {
                     firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -54,6 +71,11 @@ public class ForceInputPhoneNumActivity extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             if (!dataSnapshot.exists()) {
                                 addUserToDB();
+                            } else {
+                                if (!dataSnapshot.child("phoneNum").exists()) {
+                                    Log.d(TAG, "set value phone num in ref");
+                                    dataSnapshot.child("phoneNum").getRef().setValue(phoneNum);
+                                }
                             }
                         }
 
@@ -66,6 +88,7 @@ public class ForceInputPhoneNumActivity extends AppCompatActivity {
 //                    myRef.child("users").child(firebaseUser.getUid()).setValue(currentUser);
 
                     startActivity(new Intent(ForceInputPhoneNumActivity.this, MainUIActivity.class));
+                    ForceInputPhoneNumActivity.this.finish();
                 }
             }
         });

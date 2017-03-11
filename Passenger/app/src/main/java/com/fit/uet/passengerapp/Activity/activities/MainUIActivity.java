@@ -57,7 +57,7 @@ public class MainUIActivity extends BaseFontActivity {
         if (toolbar != null) {
             toolbar.setTitle("");
             setSupportActionBar(toolbar);
-            toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_vector_menu));
+            toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_menu));
         }
 
         //set action cho show up negative layout

@@ -10,14 +10,14 @@ import android.os.Parcelable;
 public class User implements Parcelable {
     private String uid;
     private String name;
-    private String phone;
+    private String phoneNum;
 
     public User() {}
 
-    public User(String uid, String name, String phone) {
+    public User(String uid, String name, String phoneNum) {
         this.uid = uid;
         this.name = name;
-        this.phone = phone;
+        this.phoneNum = phoneNum;
     }
 
     public String getUid() {
@@ -36,12 +36,12 @@ public class User implements Parcelable {
         this.name = name;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhoneNum() {
+        return phoneNum;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {

@@ -8,9 +8,7 @@
     app:elevation="0dp"
     app:layout_collapseMode="pin"
     app:layout_scrollFlags="scroll|enterAlways"
-    app:theme="@style/AppTheme.PopupOverlay"
-
-    >
+    app:theme="@style/AppTheme.PopupOverlay">
 
     <TextView
         android:id="@+id/txt_toolbar"
@@ -18,8 +16,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:scaleType="center"
-        android:textColor="@color/text_primary_default_dark"
         android:text="Passenger"
+        android:textColor="@color/text_primary_default_dark"
         android:textSize="20sp" />
 
 </android.support.v7.widget.Toolbar>
