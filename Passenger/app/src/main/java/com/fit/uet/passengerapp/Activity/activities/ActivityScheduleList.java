@@ -36,6 +36,7 @@ public class ActivityScheduleList extends BaseToolBarActivity {
     private String mFrom, mTo;
     private long mTime;
     private Bundle serviceBundle;
+    private Boolean hasShuttle = null;
 
 
     @Override
@@ -43,13 +44,17 @@ public class ActivityScheduleList extends BaseToolBarActivity {
         super.onCreate(savedInstanceState);
         mList = (RecyclerView) findViewById(R.id.recycler);
         mRef = FirebaseDatabase.getInstance().getReference();
-        initCalendar();
-        initViews();
-
         mFrom = getIntent().getStringExtra(FilterFragment.LOCATION_FROM);
         mTo = getIntent().getStringExtra(FilterFragment.LOCATION_TO);
         mTime = getIntent().getLongExtra(FilterFragment.DATE, 0);
         serviceBundle = getIntent().getBundleExtra(FilterFragment.SERVICE);
+        if (serviceBundle != null) {
+            hasShuttle = serviceBundle.getBoolean(FilterFragment.HAS_SHUTTLE);
+        }
+        initCalendar();
+        initViews();
+
+
     }
 
     private void initCalendar() {
@@ -74,14 +79,12 @@ public class ActivityScheduleList extends BaseToolBarActivity {
     private Query getQuery(Date date) {
 
         String dateFormat = (new SimpleDateFormat("yyy/MM/dd")).format(date.getTime());
-        Query query = mRef.child(DB.SCHEDULE).orderByChild("departureTime").startAt(dateFormat)
-                .orderByChild("arriveFrom").equalTo(mFrom)
-                .orderByChild("arriveTo").equalTo(mTo);
+        Query query = mRef.child(DB.SCHEDULE).orderByChild("departureTime").startAt(dateFormat);
         return query;
     }
 
     private void initViews() {
-        mAdapter = new ScheduleAdapter(mRef, getQuery(new Date()));
+        mAdapter = new ScheduleAdapter(mRef, getQuery(new Date()), mFrom, mTo,hasShuttle );
         mList.setLayoutManager(new LinearLayoutManager(this));
         mList.setAdapter(mAdapter);
 

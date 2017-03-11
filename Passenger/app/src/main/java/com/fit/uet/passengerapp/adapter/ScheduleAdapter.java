@@ -1,4 +1,4 @@
-﻿package com.fit.uet.passengerapp.adapter;
+package com.fit.uet.passengerapp.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -22,7 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by Bien-kun on 07/03/2017.
+ * Created by Bien-kun on 11/03/2017.
  */
 
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ScheduleHolder> implements ChangeEventListener {
@@ -30,8 +30,8 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
     private ScheduleArray mSchedules;
     private OnItemClickListener mListener;
 
-    public ScheduleAdapter(DatabaseReference ref, Query query) {
-        mSchedules = new ScheduleArray(ref, query);
+    public ScheduleAdapter(DatabaseReference ref, Query query, String from, String to, Boolean hasShuttle) {
+        mSchedules = new ScheduleArray(ref, query,from,to,hasShuttle);
         mSchedules.setOnChangedListener(this);
 
     }
@@ -141,8 +141,8 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
             mDepatureTimeView.setText(departureTime);
             mSeatCountView.setText(mContext.getString(R.string.format_seat_description, schedule.seatAvailable));
             if (coach != null) {
-                mPriceView.setText(mContext.getString(R.string.format_ticket_price, coach.costPerTicket));
-                mRouteView.setText(mContext.getString(R.string.routeFormat, coach.arriveFrom, coach.arriveTo));
+                mPriceView.setText(mContext.getString(R.string.format_ticket_price, schedule.costPerTicket));
+                mRouteView.setText(mContext.getString(R.string.routeFormat, schedule.arriveFrom, schedule.arriveTo));
                 mCoachNameView.setText(coach.kind + " chỗ");
             }
 
