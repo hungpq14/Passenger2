@@ -183,6 +183,8 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/selector_pay_bg"
         android:text="Thanh Toán"
+		android:textColor="#FFF"
+        android:textSize="17sp"
         android:textAllCaps="false" />
 
 </RelativeLayout>
