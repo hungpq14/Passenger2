@@ -141,8 +141,8 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
             mDepatureTimeView.setText(departureTime);
             mSeatCountView.setText(mContext.getString(R.string.format_seat_description, schedule.seatAvailable));
             if (coach != null) {
-//                mPriceView.setText(mContext.getString(R.string.format_ticket_price, coach.costPerTicket));
-//                mRouteView.setText(mContext.getString(R.string.routeFormat, coach.arriveFrom, coach.arriveTo));
+                mPriceView.setText(mContext.getString(R.string.format_ticket_price, schedule.costPerTicket));
+                mRouteView.setText(mContext.getString(R.string.routeFormat, schedule.arriveFrom, schedule.arriveTo));
                 mCoachNameView.setText(coach.kind + " chỗ");
             }
 

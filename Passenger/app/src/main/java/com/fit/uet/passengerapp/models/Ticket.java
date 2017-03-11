@@ -19,4 +19,6 @@ public class Ticket {
     public String user_id;
 
     public boolean checkout;
+
+    public String uid;
 }

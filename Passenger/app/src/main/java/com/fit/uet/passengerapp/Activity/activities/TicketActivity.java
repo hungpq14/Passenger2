@@ -1,5 +1,6 @@
 package com.fit.uet.passengerapp.Activity.activities;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -96,7 +97,7 @@ public class TicketActivity extends BaseToolBarActivity {
 
         ticketDatabaseReference = databaseReference.child(Ticket.CHILD_TICKET);
 
-        ticketDatabaseReference.child("-KeuceuMB75_a5p3ve43").addListenerForSingleValueEvent(new ValueEventListener() {
+        ticketDatabaseReference.child(getIntent().getStringExtra(Intent.EXTRA_TEXT)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 final Ticket ticket = dataSnapshot.getValue(Ticket.class);

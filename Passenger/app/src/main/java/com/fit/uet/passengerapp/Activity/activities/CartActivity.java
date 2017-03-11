@@ -77,9 +77,9 @@ public class CartActivity extends BaseToolBarActivity {
         adapter.setOnItemClickListener(new CartAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-//                Intent intent = new Intent(CartActivity.this, TicketActivity.class);
-//                intent.putExtra(Intent.EXTRA_TEXT, tickets.get(position).)
-//                startActivity();
+                Intent intent = new Intent(CartActivity.this, TicketActivity.class);
+                intent.putExtra(Intent.EXTRA_TEXT, tickets.get(position).uid);
+                startActivity(intent);
             }
         });
     }
