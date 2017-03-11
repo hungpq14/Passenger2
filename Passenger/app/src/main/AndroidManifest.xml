@@ -17,44 +17,72 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Activity.activities.SignInActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Activity.activities.ActivityScheduleList"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".Activity.activities.TicketActivity" />
-        <activity android:name=".Activity.activities.TicketBoxActivity" />
-        <activity android:name=".Activity.activities.MainActivity">
+        <activity
+            android:name=".Activity.activities.TicketActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.activities.TicketBoxActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.activities.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.activities.ConversationActivity" />
-        <activity android:name=".Activity.activities.MessageListActivity" />
-        <activity android:name=".Activity.activities.ForceInputPhoneNumActivity" />
+        <activity
+            android:name=".Activity.activities.ConversationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.activities.MessageListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.activities.ForceInputPhoneNumActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.activities.MainUIActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Activity.activities.CoachHostActivity"
             android:label="@string/title_activity_coach_host"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Activity.activities.SeatBookingActivity" />
+        <activity
+            android:name=".Activity.activities.SeatBookingActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.activities.ListCityActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".Activity.activities.CoachManagerActivity" />
-        <activity android:name=".Activity.activities.ShuttleBusSuggestionActivity" />
-        <activity android:name=".Activity.activities.CoachHostFavoriteActivity" />
+        <activity
+            android:name=".Activity.activities.CoachManagerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.activities.ShuttleBusSuggestionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.activities.CoachHostFavoriteActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC734KK9GMfM1zUFFslw6pVjMunGUnr52g" />
 
-        <activity android:name=".Activity.activities.PayTicketActivity" />
+        <activity
+            android:name=".Activity.activities.PayTicketActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.activities.PaypalActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Activity.activities.CartActivity" />
         <activity

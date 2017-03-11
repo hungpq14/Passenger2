@@ -38,13 +38,13 @@ public class SeatsAdapter extends SelectableAdapter<RecyclerView.ViewHolder> {
         LayoutInflater mLayoutInflater = LayoutInflater.from(context);
         if (viewType == AbstractItem.TYPE_CENTER) {
             View itemView = mLayoutInflater.inflate(R.layout.item_seat, parent, false);
-            return new CenterViewHolder(itemView);
+            return new CenterViewHolder(itemView, listener);
         } else if (viewType == AbstractItem.TYPE_EDGE) {
             View itemView = mLayoutInflater.inflate(R.layout.item_seat, parent, false);
-            return new EdgeViewHolder(itemView);
+            return new EdgeViewHolder(itemView, listener);
         } else if (viewType == AbstractItem.TYPE_ORDERED) {
             View itemView = mLayoutInflater.inflate(R.layout.item_seat_ordered, parent, false);
-            return new EdgeViewHolder(itemView);
+            return new EdgeViewHolder(itemView, listener);
         } else {
             View itemView = new View(context);
             return new EmptyViewHolder(itemView);
@@ -58,31 +58,35 @@ public class SeatsAdapter extends SelectableAdapter<RecyclerView.ViewHolder> {
             final CenterItem item = (CenterItem) mItems.get(position);
             CenterViewHolder viewHolderolder = (CenterViewHolder) holder;
 
-            viewHolderolder.imgSeat.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    toggleSelection(position);
-                    if (mOnSeatSelected != null)
-                        mOnSeatSelected.onSeatSelected(getSelectedItemCount());
-                }
-            });
+            if (listener == null) {
+                viewHolderolder.imgSeat.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        toggleSelection(position);
+                        if (mOnSeatSelected != null)
+                            mOnSeatSelected.onSeatSelected(getSelectedItemCount());
+                    }
+                });
 
-            viewHolderolder.imgSeatSelected.setVisibility(isSelected(position) ? View.VISIBLE : View.INVISIBLE);
+                viewHolderolder.imgSeatSelected.setVisibility(isSelected(position) ? View.VISIBLE : View.INVISIBLE);
+            }
 
         } else if (type == AbstractItem.TYPE_EDGE) {
             final EdgeItem item = (EdgeItem) mItems.get(position);
             EdgeViewHolder viewHolder = (EdgeViewHolder) holder;
 
-            viewHolder.imgSeat.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    toggleSelection(position);
-                    if (mOnSeatSelected != null)
-                        mOnSeatSelected.onSeatSelected(getSelectedItemCount());
-                }
-            });
+            if (listener == null) {
+                viewHolder.imgSeat.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        toggleSelection(position);
+                        if (mOnSeatSelected != null)
+                            mOnSeatSelected.onSeatSelected(getSelectedItemCount());
+                    }
+                });
 
-            viewHolder.imgSeatSelected.setVisibility(isSelected(position) ? View.VISIBLE : View.INVISIBLE);
+                viewHolder.imgSeatSelected.setVisibility(isSelected(position) ? View.VISIBLE : View.INVISIBLE);
+            }
         }
     }
 
@@ -103,10 +107,19 @@ public class SeatsAdapter extends SelectableAdapter<RecyclerView.ViewHolder> {
         ImageView imgSeatSelected;
 
 
-        public EdgeViewHolder(View itemView) {
+        public EdgeViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
             imgSeat = (ImageView) itemView.findViewById(R.id.img_seat);
             imgSeatSelected = (ImageView) itemView.findViewById(R.id.img_seat_selected);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (listener != null) {
+                        listener.onItemClick(getLayoutPosition());
+                    }
+                }
+            });
         }
 
     }
@@ -116,10 +129,19 @@ public class SeatsAdapter extends SelectableAdapter<RecyclerView.ViewHolder> {
         ImageView imgSeat;
         private final ImageView imgSeatSelected;
 
-        public CenterViewHolder(View itemView) {
+        public CenterViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
             imgSeat = (ImageView) itemView.findViewById(R.id.img_seat);
             imgSeatSelected = (ImageView) itemView.findViewById(R.id.img_seat_selected);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (listener != null) {
+                        listener.onItemClick(getLayoutPosition());
+                    }
+                }
+            });
         }
 
     }
@@ -134,5 +156,18 @@ public class SeatsAdapter extends SelectableAdapter<RecyclerView.ViewHolder> {
 
     public interface OnSeatSelected {
         void onSeatSelected(int count);
+    }
+
+    // Define listener member variable
+    private OnItemClickListener listener;
+
+    // Define the listener interface
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    // Define the method that allows the parent activity or fragment to define the listener
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 }

@@ -1,8 +1,10 @@
 package com.fit.uet.passengerapp.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 
 /**
  * Created by phamh_000 on 11/03/2017.
@@ -34,4 +36,14 @@ public class Util {
         throw new InstantiationException("This class is not for instantiation");
     }
 
+    public static void call(Context context, String phone) {
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+        context.startActivity(intent);
+    }
+
+    public static void sms(Context context, String phone) {
+        Uri uri = Uri.parse("smsto:" + phone);
+        Intent it = new Intent(Intent.ACTION_SENDTO, uri);
+        context.startActivity(it);
+    }
 }

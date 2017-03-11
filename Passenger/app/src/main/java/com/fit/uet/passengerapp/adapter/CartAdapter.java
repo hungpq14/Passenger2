@@ -70,9 +70,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         final Ticket ticket = tickets.get(position);
 
         if (ticket.checkout) {
-            holder.tv_seats.setText("Checked");
+            holder.tv_seats.setText("Đã xác nhận");
         } else {
-            holder.tv_seats.setText("Uncheck");
+            holder.tv_seats.setText("Chưa xác nhận");
         }
 
         databaseReference.child(DB.SCHEDULE).child(ticket.coach_schedule_id).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -84,9 +84,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                 String dateTime = DateTimeUtils.dateStringFormat(ms) + " - " + DateTimeUtils.getTimeFromMs(ms);
                 holder.departure_time.setText(dateTime);
 
-                holder.price.setText(ticket.seats.size() * schedule.costPerTicket + "$");
+                holder.price.setText(ticket.seats.size() * schedule.costPerTicket + " đồng");
 
-                holder.route.setText("From " + schedule.arriveFrom + " to " + schedule.arriveTo);
+                holder.route.setText("Từ " + schedule.arriveFrom + " tới " + schedule.arriveTo);
 
 
                 databaseReference.child(DB.COACH).child(schedule.coachUid).addListenerForSingleValueEvent(new ValueEventListener() {
