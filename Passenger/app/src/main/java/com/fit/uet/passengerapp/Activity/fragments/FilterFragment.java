@@ -137,6 +137,7 @@ public class FilterFragment extends android.support.v4.app.Fragment implements D
                 Intent intent = new Intent(getContext(), ActivityScheduleList.class);
                 intent.putExtra(LOCATION_FROM, txtFrom.getText());
                 intent.putExtra(LOCATION_TO, txtTo.getText());
+                Log.d(TAG, "txt from: " + txtFrom.getText() + " ,txtto: " + txtTo.getText());
                 intent.putExtra(DATE, mCalendar.getTime().getTime());
                 intent.putExtra(SERVICE, serviceBundle);
 
