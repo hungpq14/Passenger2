@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_ticket).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, TicketActivity.class));
+                startActivity(new Intent(MainActivity.this, CartActivity.class));
             }
         });
     }

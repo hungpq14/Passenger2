@@ -19,6 +19,6 @@ public class CoachSchedule {
     public String seatState;
 
     public String arriveFrom, arriveTo, pickFrom, pickTo;
-    public long costPerTicket;
+    public int costPerTicket;
 
 }
