@@ -4,11 +4,14 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -20,6 +23,7 @@ import com.fit.uet.passengerapp.adapter.CommentAdapter;
 import com.fit.uet.passengerapp.database.DB;
 import com.fit.uet.passengerapp.models.CoachHost;
 import com.fit.uet.passengerapp.models.Comment;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +35,7 @@ import com.google.firebase.storage.StorageReference;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CoachHostActivity extends AppCompatActivity implements ValueEventListener {
+public class CoachHostActivity extends AppCompatActivity implements ValueEventListener, View.OnClickListener {
     @BindView(R.id.name)
     TextView mNameView;
     @BindView(R.id.rating_bar)
@@ -44,7 +48,12 @@ public class CoachHostActivity extends AppCompatActivity implements ValueEventLi
     ImageView mLogoView;
     @BindView(R.id.comments)
     RecyclerView mCommentList;
+    @BindView(R.id.btn_save)
+    Button mSaveView;
+    @BindView(R.id.btn_website)
+    Button mWebsite;
     public static final String KEY_HOST_ID = "host_id";
+
 
     private String coachHostUid;
     private StorageReference mStorage;
@@ -66,6 +75,7 @@ public class CoachHostActivity extends AppCompatActivity implements ValueEventLi
         stars.getDrawable(2).setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
         mRef = FirebaseDatabase.getInstance().getReference();
         mRef.child(DB.COACH_HOST).child(coachHostUid).addValueEventListener(this);
+        mSaveView.setOnClickListener(this);
     }
 
     private void updateUI(CoachHost coachHost) {
@@ -104,5 +114,18 @@ public class CoachHostActivity extends AppCompatActivity implements ValueEventLi
     @Override
     public void onCancelled(DatabaseError databaseError) {
         Log.w("CoachHostActivity", databaseError.getMessage(), databaseError.toException());
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btn_save:
+                String self = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                FirebaseDatabase.getInstance().getReference()
+                        .child(DB.COACH_HOST_FAV).child(self).child(coachHostUid).setValue(true);
+                Snackbar.make(view,"Đã lưu vào danh sách ưa thích",Snackbar.LENGTH_SHORT).show();
+                break;
+
+        }
     }
 }

@@ -17,6 +17,7 @@ import com.fit.uet.passengerapp.Activity.fragments.FilterFragment;
 import com.fit.uet.passengerapp.R;
 import com.fit.uet.passengerapp.adapter.ScheduleAdapter;
 import com.fit.uet.passengerapp.database.DB;
+import com.fit.uet.passengerapp.models.CoachHost;
 import com.fit.uet.passengerapp.models.CoachSchedule;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -113,9 +114,16 @@ public class ActivityScheduleList extends BaseToolBarActivity {
 
         mAdapter.setOnCLickListener(new ScheduleAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(CoachSchedule coachSchedule) {
+            public void onCoachClick(CoachSchedule coachSchedule) {
                 Intent intent = new Intent(ActivityScheduleList.this, SeatBookingActivity.class);
                 intent.putExtra(Intent.EXTRA_TEXT, coachSchedule.uid);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onCoachHostClick(CoachHost coachHost) {
+                Intent intent = new Intent(ActivityScheduleList.this, CoachHostActivity.class);
+                intent.putExtra(CoachHostActivity.KEY_HOST_ID, coachHost.uid);
                 startActivity(intent);
             }
         });
