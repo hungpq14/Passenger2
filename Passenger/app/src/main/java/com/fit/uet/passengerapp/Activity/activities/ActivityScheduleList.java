@@ -74,9 +74,9 @@ public class ActivityScheduleList extends BaseToolBarActivity {
     private Query getQuery(Date date) {
 
         String dateFormat = (new SimpleDateFormat("yyy/MM/dd")).format(date.getTime());
-        Query query = mRef.child(DB.SCHEDULE).orderByChild("departureTime").startAt(dateFormat)
-                .orderByChild("arriveFrom").equalTo(mFrom)
-                .orderByChild("arriveTo").equalTo(mTo);
+        Query query = mRef.child(DB.SCHEDULE).orderByChild("departureTime").startAt(dateFormat);
+//                .orderByChild("arriveFrom").equalTo(mFrom)
+//                .orderByChild("arriveTo").equalTo(mTo);
         return query;
     }
 

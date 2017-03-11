@@ -61,22 +61,6 @@ public class FilterFragment extends android.support.v4.app.Fragment implements D
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_filter, container, false);
         initDraw();
-        (new AsyncTask<Void,Void,Void>(){
-            @Override
-            protected Void doInBackground(Void... voids) {
-                OkHttpClient client = new OkHttpClient();
-                Request request = new Request.Builder()
-                        .url("https://us-central1-passenger-dcca9.cloudfunctions.net/addCity?text=Bac%20Lieu")
-                        .build();
-                try {
-                    Response response = client.newCall(request).execute();
-                    Log.d("OkHttp",response.body().string());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-        }).execute();
 
         return view;
     }

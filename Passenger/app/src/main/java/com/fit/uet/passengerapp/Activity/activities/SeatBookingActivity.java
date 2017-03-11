@@ -116,7 +116,7 @@ public class SeatBookingActivity extends BaseToolBarActivity {
 
                             Ticket ticket = new Ticket();
                             ticket.checkout = false;
-                            ticket.coach_schedule_id = schedule.coachUid;
+                            ticket.coach_schedule_id = schedule.uid;
                             ticket.seats = selectedItems;
                             ticket.user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
                             ticketDatabaseReference.push().setValue(ticket);
