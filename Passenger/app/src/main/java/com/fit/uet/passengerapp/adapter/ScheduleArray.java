@@ -30,7 +30,7 @@ class ScheduleArray implements ChildEventListener, ValueEventListener {
     private String mFrom, mTo;
     private Boolean hasShuttleBus;
 
-    public ScheduleArray(DatabaseReference ref, Query query,String from, String to, Boolean hasShuttleBus) {
+    public ScheduleArray(DatabaseReference ref, Query query, String from, String to, Boolean hasShuttleBus) {
         mRef = ref;
         mQuery = query;
         mQuery.addChildEventListener(this);
@@ -41,7 +41,6 @@ class ScheduleArray implements ChildEventListener, ValueEventListener {
         mTo = to;
         this.hasShuttleBus = hasShuttleBus;
     }
-
 
 
     public void requery(Query query) {
@@ -97,13 +96,13 @@ class ScheduleArray implements ChildEventListener, ValueEventListener {
             return;
         }
 
-        int index = 0;
-        if (previousChildKey != null) {
-            index = getIndexForKey(previousChildKey) + 1;
-        }
+//        int index = 0;
+//        if (previousChildKey != null) {
+//            index = getIndexForKey(previousChildKey) + 1;
+//        }
 
-        final int position = index;
-        mSnapshots.add(index, coachSchedule);
+        final int position = mSnapshots.size() - 1;
+        mSnapshots.add(coachSchedule);
         if (!mCoachMap.containsKey(coachSchedule.coachUid)) {
             mRef.child(DB.COACH).child(coachSchedule.coachUid).addValueEventListener(mCoachListener);
         }
@@ -120,19 +119,19 @@ class ScheduleArray implements ChildEventListener, ValueEventListener {
 
     @Override
     public void onChildRemoved(DataSnapshot snapshot) {
-        int index = getIndexForKey(snapshot.getKey());
-        mSnapshots.remove(index);
-        notifyChangedListeners(ChangeEventListener.EventType.REMOVED, index);
+//        int index = getIndexForKey(snapshot.getKey());
+//        mSnapshots.remove(index);
+//        notifyChangedListeners(ChangeEventListener.EventType.REMOVED, index);
     }
 
     @Override
     public void onChildMoved(DataSnapshot snapshot, String previousChildKey) {
-        //TODO store or query again to get coach data
-        int oldIndex = getIndexForKey(snapshot.getKey());
-        CoachSchedule coachSchedule = mSnapshots.remove(oldIndex);
-        int newIndex = previousChildKey == null ? 0 : (getIndexForKey(previousChildKey) + 1);
-        mSnapshots.add(newIndex, coachSchedule);
-        notifyChangedListeners(ChangeEventListener.EventType.MOVED, newIndex, oldIndex);
+//        //TODO store or query again to get coach data
+//        int oldIndex = getIndexForKey(snapshot.getKey());
+//        CoachSchedule coachSchedule = mSnapshots.remove(oldIndex);
+//        int newIndex = previousChildKey == null ? 0 : (getIndexForKey(previousChildKey) + 1);
+//        mSnapshots.add(newIndex, coachSchedule);
+//        notifyChangedListeners(ChangeEventListener.EventType.MOVED, newIndex, oldIndex);
     }
 
     @Override

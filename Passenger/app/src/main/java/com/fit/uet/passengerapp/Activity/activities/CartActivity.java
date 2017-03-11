@@ -51,7 +51,7 @@ public class CartActivity extends BaseToolBarActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 List<Ticket> tickets = new ArrayList<>();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        tickets.add(snapshot.getValue(Ticket.class));
+                    tickets.add(snapshot.getValue(Ticket.class));
                 }
 
                 initView(databaseReference, tickets);
@@ -85,6 +85,11 @@ public class CartActivity extends BaseToolBarActivity {
                 Intent intent = new Intent(CartActivity.this, TicketActivity.class);
                 intent.putExtra(Intent.EXTRA_TEXT, tickets.get(position).uid);
                 startActivity(intent);
+            }
+
+            @Override
+            public void onReviewClick(int position) {
+                //TODO: tim id nha xe dua vao id cua schedule
             }
         });
 

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.fit.uet.passengerapp.R;
@@ -36,6 +37,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
     // Define the listener interface
     public interface OnItemClickListener {
         void onItemClick(int position);
+        void onReviewClick(int position);
     }
     // Define the method that allows the parent activity or fragment to define the listener
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -129,6 +131,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
         public TextView route;
         public TextView tv_seats;
         public TextView company_name;
+        public Button preview;
 
         public ViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
@@ -137,12 +140,20 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
             price = (TextView) itemView.findViewById(R.id.price);
             route = (TextView) itemView.findViewById(R.id.route);
             tv_seats = (TextView) itemView.findViewById(R.id.tv_seats);
-            company_name = (TextView) itemView.findViewById(R.id.company_name);
+
+            preview = (Button)itemView.findViewById(R.id.review) ;
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (listener != null) listener.onItemClick(getLayoutPosition());
+
+                }
+            });
+            preview.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (listener != null) listener.onReviewClick(getLayoutPosition());
                 }
             });
         }
