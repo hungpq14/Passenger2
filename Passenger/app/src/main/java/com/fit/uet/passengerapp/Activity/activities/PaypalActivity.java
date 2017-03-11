@@ -90,9 +90,10 @@ public class PaypalActivity extends BaseToolBarActivity implements GoogleApiClie
                     scheduleDatabaseReference.child(getIntent().getStringExtra(Intent.EXTRA_TEXT)).child("seatState").setValue(seatState);
                 }
 
-                Intent intent = new Intent(PaypalActivity.this, TicketActivity.class);
-                intent.putExtra("ticket_id", ticket.uid);
+                Intent intent = new Intent(PaypalActivity.this, TicketClientActivity.class);
+                intent.putExtra("ticket", ticket);
                 startActivity(intent);
+                PaypalActivity.this.finish();
             }
         });
 

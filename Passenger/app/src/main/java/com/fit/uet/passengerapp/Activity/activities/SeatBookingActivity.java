@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,9 +123,10 @@ public class SeatBookingActivity extends BaseToolBarActivity {
                         schedule.seatState = sb.toString();
                     }
 
-//                            scheduleDatabaseReference.child(getIntent().getStringExtra(Intent.EXTRA_TEXT)).child("seatState").setValue(schedule.seatState);
+//                  scheduleDatabaseReference.child(getIntent().getStringExtra(Intent.EXTRA_TEXT)).child("seatState").setValue(schedule.seatState);
 
                     Intent intent = new Intent(SeatBookingActivity.this, PayTicketActivity.class);
+
                     intent.putExtra("ticket", ticket);
                     intent.putExtra("seatState", schedule.seatState);
                     intent.putExtra(Intent.EXTRA_TEXT, getIntent().getStringExtra(Intent.EXTRA_TEXT));

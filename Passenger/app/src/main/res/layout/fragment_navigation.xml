@@ -81,6 +81,31 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/layout_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground">
+
+        <ImageView
+            android:id="@+id/img_message"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:src="@drawable/ic_vector_logout" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@+id/img_message"
+            android:text="Tin nhắn"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/layout_ticket_man"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

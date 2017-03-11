@@ -22,4 +22,8 @@ public class Ticket implements Serializable {
     public boolean checkout;
 
     public String uid;
+
+    public Ticket() {
+
+    }
 }
