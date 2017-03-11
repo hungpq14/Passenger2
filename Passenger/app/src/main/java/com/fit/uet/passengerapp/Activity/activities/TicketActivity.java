@@ -5,7 +5,9 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.fit.uet.passengerapp.Activity.BaseActivity.BaseToolBarActivity;
@@ -67,6 +69,12 @@ public class TicketActivity extends BaseToolBarActivity {
     @BindView(R.id.tv_seats)
     TextView tv_seats;
 
+    @BindView(R.id.layout_info)
+    View layout_info;
+
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
+
     private DatabaseReference databaseReference;
     private DatabaseReference ticketDatabaseReference;
 
@@ -118,6 +126,8 @@ public class TicketActivity extends BaseToolBarActivity {
                         long ms = DateTimeUtils.getMillisFromString(schedule.departureTime);
                          tv_date.setText(DateTimeUtils.dateStringFormat(ms));
                          tv_time.setText(DateTimeUtils.getTimeFromMs(ms));
+
+                        show();
                     }
 
                     @Override
@@ -154,5 +164,15 @@ public class TicketActivity extends BaseToolBarActivity {
         } catch (WriterException e) {
             e.printStackTrace();
         }
+    }
+
+    private void show() {
+        progressBar.setVisibility(View.INVISIBLE);
+        layout_info.setVisibility(View.VISIBLE);
+    }
+
+    private void hide() {
+        progressBar.setVisibility(View.VISIBLE);
+        layout_info.setVisibility(View.INVISIBLE);
     }
 }

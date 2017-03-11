@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.fit.uet.passengerapp.Activity.BaseActivity.BaseToolBarActivity;
 import com.fit.uet.passengerapp.R;
@@ -28,6 +30,9 @@ public class CartActivity extends BaseToolBarActivity {
 
     @BindView(R.id.rv_cart)
     RecyclerView rv_cart;
+
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
     private DatabaseReference databaseReference;
 
@@ -82,5 +87,17 @@ public class CartActivity extends BaseToolBarActivity {
                 startActivity(intent);
             }
         });
+
+        show();
+    }
+
+    private void show() {
+        progressBar.setVisibility(View.INVISIBLE);
+        rv_cart.setVisibility(View.VISIBLE);
+    }
+
+    private void hide() {
+        progressBar.setVisibility(View.VISIBLE);
+        rv_cart.setVisibility(View.INVISIBLE);
     }
 }

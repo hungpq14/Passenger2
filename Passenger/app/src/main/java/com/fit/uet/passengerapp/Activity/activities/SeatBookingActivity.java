@@ -105,7 +105,8 @@ public class SeatBookingActivity extends BaseToolBarActivity {
             @Override
             public void onClick(View view) {
                 if (adapter.getSelectedItems().size() != 0) {
-                    DialogUtils.showConfirmDialog(SeatBookingActivity.this, "Confirm Your In App Purchase", "Do you want to buy tickets?", new DialogInterface.OnClickListener() {
+                    int count = adapter.getSelectedItemCount();
+                    DialogUtils.showConfirmDialog(SeatBookingActivity.this, "Confirm Your In App Purchase", "Do you want to buy " + count + " tickets for $" + count * schedule.costPerTicket + "?", new DialogInterface.OnClickListener() {
 
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
