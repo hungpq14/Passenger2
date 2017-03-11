@@ -56,6 +56,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-places:10.0.0'
     compile 'com.github.jd-alexander:library:1.1.0'
     testCompile 'junit:junit:4.12'
+    compile 'com.afollestad.material-dialogs:core:0.9.4.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 }
 apply plugin: 'com.google.gms.google-services'

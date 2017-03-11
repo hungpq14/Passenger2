@@ -1,0 +1,405 @@
+[debug] ----------------------------------------------------------------------
+[debug] Command:      C:\Program Files\nodejs\node.exe C:\Users\Bien-kun\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase deploy --only functions
+[debug] CLI Version:  3.5.0
+[debug] Platform:     win32
+[debug] Node Version: v4.5.0
+[debug] Time:         Sat Mar 11 2017 21:12:26 GMT+0700 (SE Asia Standard Time)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/xrq2p2LVK8gt0IL5T5xzOXjjXNUhjcFuz0D2qabqVcg',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Sat Mar 11 2017 21:12:26 GMT+0700 (SE Asia Standard Time)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/passenger-dcca9  
+ Sat Mar 11 2017 21:12:27 GMT+0700 (SE Asia Standard Time)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/passenger-dcca9/tokens  
+ Sat Mar 11 2017 21:12:28 GMT+0700 (SE Asia Standard Time)
+[debug] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'passenger-dcca9'...
+[info] 
+[info] i  deploying functions
+[debug] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "dependencies": {
+    "firebase-admin": "^4.1.2",
+    "firebase-functions": "^0.5",
+    "node-schedule": "^1.2.0"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[info] i  runtimeconfig: ensuring necessary APIs are enabled...
+[debug] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/passenger-dcca9?view=CONSUMER_VIEW  
+ Sat Mar 11 2017 21:12:31 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/passenger-dcca9?view=CONSUMER_VIEW  
+ Sat Mar 11 2017 21:12:31 GMT+0700 (SE Asia Standard Time)
+[debug] <<< HTTP RESPONSE 200
+[info] +  runtimeconfig: all necessary APIs are enabled
+[debug] <<< HTTP RESPONSE 200
+[info] +  functions: all necessary APIs are enabled
+[debug] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/passenger-dcca9  
+ Sat Mar 11 2017 21:12:33 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://apikeys.googleapis.com/v1/projects/passenger-dcca9/apiKeys  
+ Sat Mar 11 2017 21:12:33 GMT+0700 (SE Asia Standard Time)
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[info] i  functions: preparing functions directory for uploading...
+[debug] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/passenger-dcca9/configs  
+ Sat Mar 11 2017 21:14:17 GMT+0700 (SE Asia Standard Time)
+[debug] <<< HTTP RESPONSE 200
+[debug] > [functions] runtime config materialized as: {
+  "firebase": {
+    "databaseURL": "https://passenger-dcca9.firebaseio.com",
+    "storageBucket": "passenger-dcca9.appspot.com",
+    "apiKey": "AIzaSyAQroNcAxfPeRNHkQyms8GAUcabFqFAUAo",
+    "authDomain": "passenger-dcca9.firebaseapp.com"
+  }
+}
+[debug] > [functions] parsed triggers: [
+  {
+    "eventTrigger": {
+      "resource": "projects/_/instances/passenger-dcca9/refs/coach-schedule/{scheduleId}",
+      "eventType": "providers/google.firebase.database/eventTypes/ref.write"
+    },
+    "name": "bookSeat",
+    "entryPoint": "bookSeat"
+  },
+  {
+    "eventTrigger": {
+      "resource": "projects/_/instances/passenger-dcca9/refs/ticket/{ticketId}",
+      "eventType": "providers/google.firebase.database/eventTypes/ref.write"
+    },
+    "name": "autogenTicketId",
+    "entryPoint": "autogenTicketId"
+  },
+  {
+    "eventTrigger": {
+      "resource": "projects/_/instances/passenger-dcca9/refs/ticket/{ticketId}",
+      "eventType": "providers/google.firebase.database/eventTypes/ref.write"
+    },
+    "name": "handleCheckoutBonus",
+    "entryPoint": "handleCheckoutBonus"
+  },
+  {
+    "eventTrigger": {
+      "resource": "projects/_/instances/passenger-dcca9/refs/comments/{id}",
+      "eventType": "providers/google.firebase.database/eventTypes/ref.write"
+    },
+    "name": "handleCommentBonus",
+    "entryPoint": "handleCommentBonus"
+  },
+  {
+    "eventTrigger": {
+      "resource": "projects/_/instances/passenger-dcca9/refs/ticket/{id}",
+      "eventType": "providers/google.firebase.database/eventTypes/ref.write"
+    },
+    "name": "handleTicketExpired",
+    "entryPoint": "handleTicketExpired"
+  }
+]
+[info] i  functions: packaged functions (1.79 KB) for uploading
+[debug] >>> HTTP REQUEST GET https://www.googleapis.com/storage/v1/b/staging.passenger-dcca9.appspot.com  
+ Sat Mar 11 2017 21:14:26 GMT+0700 (SE Asia Standard Time)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST POST https://www.googleapis.com/upload/storage/v1/b/staging.passenger-dcca9.appspot.com/o?uploadType=media&name=firebase-functions-source ReadStream {
+  _readableState: 
+   ReadableState {
+     objectMode: false,
+     highWaterMark: 65536,
+     buffer: [ <Buffer 50 4b 03 04 14 00 08 00 08 00 c9 71 6b 4a 00 00 00 00 00 00 00 00 00 00 00 00 13 00 00 00 2e 72 75 6e 74 69 6d 65 63 6f 6e 66 69 67 2e 6a 73 6f 6e 6d ... > ],
+     length: 1833,
+     pipes: null,
+     pipesCount: 0,
+     flowing: null,
+     ended: true,
+     endEmitted: false,
+     reading: false,
+     sync: false,
+     needReadable: false,
+     emittedReadable: true,
+     readableListening: false,
+     resumeScheduled: false,
+     defaultEncoding: 'utf8',
+     ranOut: false,
+     awaitDrain: 0,
+     readingMore: false,
+     decoder: null,
+     encoding: null },
+  readable: true,
+  domain: null,
+  _events: { end: [Function] },
+  _eventsCount: 1,
+  _maxListeners: undefined,
+  path: 'C:\\Users\\Bien-kun\\AppData\\Local\\Temp\\firebase-functions-81444lSBNF5OZusz.zip',
+  fd: 5,
+  flags: 'r',
+  mode: 438,
+  start: undefined,
+  end: undefined,
+  autoClose: true,
+  pos: undefined } 
+ Sat Mar 11 2017 21:14:26 GMT+0700 (SE Asia Standard Time)
+[debug] <<< HTTP RESPONSE 200
+[info] +  functions: functions folder uploaded successfully
+[info] i  starting release process (may take several minutes)...
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/projects/passenger-dcca9/locations/us-central1/functions  
+ Sat Mar 11 2017 21:14:27 GMT+0700 (SE Asia Standard Time)
+[debug] <<< HTTP RESPONSE 200
+[info] i  functions: updating function bookSeat...
+[debug] Trigger is: 
+[info] i  functions: updating function autogenTicketId...
+[debug] Trigger is: 
+[info] i  functions: updating function handleCheckoutBonus...
+[debug] Trigger is: 
+[info] i  functions: updating function handleCommentBonus...
+[debug] Trigger is: 
+[info] i  functions: updating function handleTicketExpired...
+[debug] Trigger is: 
+[debug] >>> HTTP REQUEST PUT https://cloudfunctions.googleapis.com/v1beta2/projects/passenger-dcca9/locations/us-central1/functions/bookSeat { sourceArchiveUrl: 'gs://staging.passenger-dcca9.appspot.com/firebase-functions-source',
+  name: 'projects/passenger-dcca9/locations/us-central1/functions/bookSeat',
+  entryPoint: 'bookSeat',
+  eventTrigger: 
+   { resource: 'projects/_/instances/passenger-dcca9/refs/coach-schedule/{scheduleId}',
+     eventType: 'providers/google.firebase.database/eventTypes/ref.write' } } 
+ Sat Mar 11 2017 21:14:28 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST PUT https://cloudfunctions.googleapis.com/v1beta2/projects/passenger-dcca9/locations/us-central1/functions/autogenTicketId { sourceArchiveUrl: 'gs://staging.passenger-dcca9.appspot.com/firebase-functions-source',
+  name: 'projects/passenger-dcca9/locations/us-central1/functions/autogenTicketId',
+  entryPoint: 'autogenTicketId',
+  eventTrigger: 
+   { resource: 'projects/_/instances/passenger-dcca9/refs/ticket/{ticketId}',
+     eventType: 'providers/google.firebase.database/eventTypes/ref.write' } } 
+ Sat Mar 11 2017 21:14:28 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST PUT https://cloudfunctions.googleapis.com/v1beta2/projects/passenger-dcca9/locations/us-central1/functions/handleCheckoutBonus { sourceArchiveUrl: 'gs://staging.passenger-dcca9.appspot.com/firebase-functions-source',
+  name: 'projects/passenger-dcca9/locations/us-central1/functions/handleCheckoutBonus',
+  entryPoint: 'handleCheckoutBonus',
+  eventTrigger: 
+   { resource: 'projects/_/instances/passenger-dcca9/refs/ticket/{ticketId}',
+     eventType: 'providers/google.firebase.database/eventTypes/ref.write' } } 
+ Sat Mar 11 2017 21:14:28 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST PUT https://cloudfunctions.googleapis.com/v1beta2/projects/passenger-dcca9/locations/us-central1/functions/handleCommentBonus { sourceArchiveUrl: 'gs://staging.passenger-dcca9.appspot.com/firebase-functions-source',
+  name: 'projects/passenger-dcca9/locations/us-central1/functions/handleCommentBonus',
+  entryPoint: 'handleCommentBonus',
+  eventTrigger: 
+   { resource: 'projects/_/instances/passenger-dcca9/refs/comments/{id}',
+     eventType: 'providers/google.firebase.database/eventTypes/ref.write' } } 
+ Sat Mar 11 2017 21:14:28 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST PUT https://cloudfunctions.googleapis.com/v1beta2/projects/passenger-dcca9/locations/us-central1/functions/handleTicketExpired { sourceArchiveUrl: 'gs://staging.passenger-dcca9.appspot.com/firebase-functions-source',
+  name: 'projects/passenger-dcca9/locations/us-central1/functions/handleTicketExpired',
+  entryPoint: 'handleTicketExpired',
+  eventTrigger: 
+   { resource: 'projects/_/instances/passenger-dcca9/refs/ticket/{id}',
+     eventType: 'providers/google.firebase.database/eventTypes/ref.write' } } 
+ Sat Mar 11 2017 21:14:28 GMT+0700 (SE Asia Standard Time)
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/projects/passenger-dcca9/locations/us-central1/functions  
+ Sat Mar 11 2017 21:14:29 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2Jvb2tTZWF0L21XQ3VnQVVKTk5j  
+ Sat Mar 11 2017 21:14:29 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2F1dG9nZW5UaWNrZXRJZC9ubUlMWF81bnNUSQ  
+ Sat Mar 11 2017 21:14:29 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZUNoZWNrb3V0Qm9udXMvZWVmc1Y2bk5Ldms  
+ Sat Mar 11 2017 21:14:29 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZUNvbW1lbnRCb251cy9fdDd0ejY2ZVBqaw  
+ Sat Mar 11 2017 21:14:29 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZVRpY2tldEV4cGlyZWQvZUc3QzQ3bWs2X3c  
+ Sat Mar 11 2017 21:14:29 GMT+0700 (SE Asia Standard Time)
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] [functions] operation poll: bookSeat: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2Jvb2tTZWF0L21XQ3VnQVVKTk5j is not done.
+[debug] [functions] operation poll: autogenTicketId: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2F1dG9nZW5UaWNrZXRJZC9ubUlMWF81bnNUSQ is not done.
+[debug] [functions] operation poll: handleCheckoutBonus: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZUNoZWNrb3V0Qm9udXMvZWVmc1Y2bk5Ldms is not done.
+[debug] [functions] operation poll: handleCommentBonus: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZUNvbW1lbnRCb251cy9fdDd0ejY2ZVBqaw is not done.
+[debug] [functions] operation poll: handleTicketExpired: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZVRpY2tldEV4cGlyZWQvZUc3QzQ3bWs2X3c is not done.
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2Jvb2tTZWF0L21XQ3VnQVVKTk5j  
+ Sat Mar 11 2017 21:14:36 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2F1dG9nZW5UaWNrZXRJZC9ubUlMWF81bnNUSQ  
+ Sat Mar 11 2017 21:14:36 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZUNoZWNrb3V0Qm9udXMvZWVmc1Y2bk5Ldms  
+ Sat Mar 11 2017 21:14:36 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZUNvbW1lbnRCb251cy9fdDd0ejY2ZVBqaw  
+ Sat Mar 11 2017 21:14:36 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZVRpY2tldEV4cGlyZWQvZUc3QzQ3bWs2X3c  
+ Sat Mar 11 2017 21:14:36 GMT+0700 (SE Asia Standard Time)
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] [functions] operation poll: bookSeat: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2Jvb2tTZWF0L21XQ3VnQVVKTk5j is not done.
+[debug] [functions] operation poll: autogenTicketId: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2F1dG9nZW5UaWNrZXRJZC9ubUlMWF81bnNUSQ is not done.
+[debug] [functions] operation poll: handleCheckoutBonus: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZUNoZWNrb3V0Qm9udXMvZWVmc1Y2bk5Ldms is not done.
+[debug] [functions] operation poll: handleCommentBonus: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZUNvbW1lbnRCb251cy9fdDd0ejY2ZVBqaw is not done.
+[debug] [functions] operation poll: handleTicketExpired: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZVRpY2tldEV4cGlyZWQvZUc3QzQ3bWs2X3c is not done.
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2Jvb2tTZWF0L21XQ3VnQVVKTk5j  
+ Sat Mar 11 2017 21:14:42 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2F1dG9nZW5UaWNrZXRJZC9ubUlMWF81bnNUSQ  
+ Sat Mar 11 2017 21:14:42 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZUNoZWNrb3V0Qm9udXMvZWVmc1Y2bk5Ldms  
+ Sat Mar 11 2017 21:14:42 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZUNvbW1lbnRCb251cy9fdDd0ejY2ZVBqaw  
+ Sat Mar 11 2017 21:14:42 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZVRpY2tldEV4cGlyZWQvZUc3QzQ3bWs2X3c  
+ Sat Mar 11 2017 21:14:42 GMT+0700 (SE Asia Standard Time)
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] [functions] operation poll: bookSeat: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2Jvb2tTZWF0L21XQ3VnQVVKTk5j is not done.
+[debug] [functions] operation poll: autogenTicketId: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2F1dG9nZW5UaWNrZXRJZC9ubUlMWF81bnNUSQ is not done.
+[debug] [functions] operation poll: handleCheckoutBonus: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZUNoZWNrb3V0Qm9udXMvZWVmc1Y2bk5Ldms is not done.
+[debug] [functions] operation poll: handleCommentBonus: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZUNvbW1lbnRCb251cy9fdDd0ejY2ZVBqaw is not done.
+[debug] [functions] operation poll: handleTicketExpired: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZVRpY2tldEV4cGlyZWQvZUc3QzQ3bWs2X3c is not done.
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2Jvb2tTZWF0L21XQ3VnQVVKTk5j  
+ Sat Mar 11 2017 21:14:48 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2F1dG9nZW5UaWNrZXRJZC9ubUlMWF81bnNUSQ  
+ Sat Mar 11 2017 21:14:48 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZUNoZWNrb3V0Qm9udXMvZWVmc1Y2bk5Ldms  
+ Sat Mar 11 2017 21:14:48 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZUNvbW1lbnRCb251cy9fdDd0ejY2ZVBqaw  
+ Sat Mar 11 2017 21:14:48 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZVRpY2tldEV4cGlyZWQvZUc3QzQ3bWs2X3c  
+ Sat Mar 11 2017 21:14:48 GMT+0700 (SE Asia Standard Time)
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] [functions] operation poll: bookSeat: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2Jvb2tTZWF0L21XQ3VnQVVKTk5j is not done.
+[debug] [functions] operation poll: autogenTicketId: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2F1dG9nZW5UaWNrZXRJZC9ubUlMWF81bnNUSQ is not done.
+[debug] [functions] operation poll: handleCheckoutBonus: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZUNoZWNrb3V0Qm9udXMvZWVmc1Y2bk5Ldms is not done.
+[debug] [functions] operation poll: handleCommentBonus: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZUNvbW1lbnRCb251cy9fdDd0ejY2ZVBqaw is not done.
+[debug] [functions] operation poll: handleTicketExpired: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZVRpY2tldEV4cGlyZWQvZUc3QzQ3bWs2X3c is not done.
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2Jvb2tTZWF0L21XQ3VnQVVKTk5j  
+ Sat Mar 11 2017 21:14:54 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2F1dG9nZW5UaWNrZXRJZC9ubUlMWF81bnNUSQ  
+ Sat Mar 11 2017 21:14:54 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZUNoZWNrb3V0Qm9udXMvZWVmc1Y2bk5Ldms  
+ Sat Mar 11 2017 21:14:54 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZUNvbW1lbnRCb251cy9fdDd0ejY2ZVBqaw  
+ Sat Mar 11 2017 21:14:54 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZVRpY2tldEV4cGlyZWQvZUc3QzQ3bWs2X3c  
+ Sat Mar 11 2017 21:14:54 GMT+0700 (SE Asia Standard Time)
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] [functions] operation poll: bookSeat: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2Jvb2tTZWF0L21XQ3VnQVVKTk5j is not done.
+[debug] [functions] operation poll: autogenTicketId: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2F1dG9nZW5UaWNrZXRJZC9ubUlMWF81bnNUSQ is not done.
+[debug] [functions] operation poll: handleCheckoutBonus: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZUNoZWNrb3V0Qm9udXMvZWVmc1Y2bk5Ldms is not done.
+[debug] [functions] operation poll: handleCommentBonus: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZUNvbW1lbnRCb251cy9fdDd0ejY2ZVBqaw is not done.
+[debug] [functions] operation poll: handleTicketExpired: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZVRpY2tldEV4cGlyZWQvZUc3QzQ3bWs2X3c is not done.
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2Jvb2tTZWF0L21XQ3VnQVVKTk5j  
+ Sat Mar 11 2017 21:15:00 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2F1dG9nZW5UaWNrZXRJZC9ubUlMWF81bnNUSQ  
+ Sat Mar 11 2017 21:15:00 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZUNoZWNrb3V0Qm9udXMvZWVmc1Y2bk5Ldms  
+ Sat Mar 11 2017 21:15:00 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZUNvbW1lbnRCb251cy9fdDd0ejY2ZVBqaw  
+ Sat Mar 11 2017 21:15:00 GMT+0700 (SE Asia Standard Time)
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZVRpY2tldEV4cGlyZWQvZUc3QzQ3bWs2X3c  
+ Sat Mar 11 2017 21:15:00 GMT+0700 (SE Asia Standard Time)
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200
+[debug] [functions] operation poll: bookSeat: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2Jvb2tTZWF0L21XQ3VnQVVKTk5j is done.
+[debug] [functions] operation poll: autogenTicketId: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2F1dG9nZW5UaWNrZXRJZC9ubUlMWF81bnNUSQ is done.
+[debug] [functions] operation poll: handleCheckoutBonus: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZUNoZWNrb3V0Qm9udXMvZWVmc1Y2bk5Ldms is done.
+[debug] [functions] operation poll: handleCommentBonus: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZUNvbW1lbnRCb251cy9fdDd0ejY2ZVBqaw is done.
+[debug] [functions] operation poll: handleTicketExpired: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZVRpY2tldEV4cGlyZWQvZUc3QzQ3bWs2X3c is not done.
+[debug] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZVRpY2tldEV4cGlyZWQvZUc3QzQ3bWs2X3c  
+ Sat Mar 11 2017 21:15:07 GMT+0700 (SE Asia Standard Time)
+[debug] <<< HTTP RESPONSE 200
+[debug] [functions] operation poll: handleTicketExpired: update operations/cGFzc2VuZ2VyLWRjY2E5L3VzLWNlbnRyYWwxL2hhbmRsZVRpY2tldEV4cGlyZWQvZUc3QzQ3bWs2X3c is done.
+[info] +  functions[bookSeat]: Successful update operation. 
+[info] +  functions[autogenTicketId]: Successful update operation. 
+[info] +  functions[handleCheckoutBonus]: Successful update operation. 
+[info] +  functions[handleCommentBonus]: Successful update operation. 
+[info] +  functions[handleTicketExpired]: Successful update operation. 
+[info] +  functions: all functions deployed successfully!
+[debug] >>> HTTP REQUEST POST https://deploy.firebase.com/v1/projects/passenger-dcca9/releases  
+ Sat Mar 11 2017 21:15:08 GMT+0700 (SE Asia Standard Time)
+[debug] Error: getaddrinfo ENOTFOUND deploy.firebase.com deploy.firebase.com:443
+    at errnoException (dns.js:27:10)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:78:26)
+[error] 
+[error] Error: Server Error. getaddrinfo ENOTFOUND deploy.firebase.com deploy.firebase.com:443
+[debug] ----------------------------------------------------------------------
+[debug] Command:      C:\Program Files\nodejs\node.exe C:\Users\Bien-kun\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase deploy --only functions
+[debug] CLI Version:  3.5.0
+[debug] Platform:     win32
+[debug] Node Version: v4.5.0
+[debug] Time:         Sat Mar 11 2017 21:16:01 GMT+0700 (SE Asia Standard Time)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/passenger-dcca9  
+ Sat Mar 11 2017 21:16:01 GMT+0700 (SE Asia Standard Time)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/passenger-dcca9/tokens  
+ Sat Mar 11 2017 21:16:03 GMT+0700 (SE Asia Standard Time)
+[debug] <<< HTTP RESPONSE 500
+[debug] <<< HTTP RESPONSE BODY
+[error] 
+[error] Error: HTTP Error: 500, An unknown error occurred. Please contact support.
+[debug] Error Context: {
+  "body": {
+    "error": {
+      "code": "UNKNOWN_ERROR",
+      "message": "An unknown error occurred. Please contact support."
+    }
+  },
+  "response": {
+    "statusCode": 500,
+    "body": {
+      "error": {
+        "code": "UNKNOWN_ERROR",
+        "message": "An unknown error occurred. Please contact support."
+      }
+    },
+    "headers": {
+      "server": "nginx",
+      "date": "Sat, 11 Mar 2017 14:16:05 GMT",
+      "content-type": "application/json; charset=utf-8",
+      "content-length": "97",
+      "connection": "close",
+      "x-content-type-options": "nosniff"
+    },
+    "request": {
+      "uri": {
+        "protocol": "https:",
+        "slashes": true,
+        "auth": null,
+        "host": "admin.firebase.com",
+        "port": 443,
+        "hostname": "admin.firebase.com",
+        "hash": null,
+        "search": null,
+        "query": null,
+        "pathname": "/v1/database/passenger-dcca9/tokens",
+        "path": "/v1/database/passenger-dcca9/tokens",
+        "href": "https://admin.firebase.com/v1/database/passenger-dcca9/tokens"
+      },
+      "method": "GET"
+    }
+  }
+}

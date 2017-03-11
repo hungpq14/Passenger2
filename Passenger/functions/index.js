@@ -67,7 +67,7 @@ exports.handleCommentBonus = functions.database.ref('/comments/{id}').onWrite(ev
 	}
 	const userId = data.val().userUid;
     console.log('Add 2 point to ' + userId);
-	var userRef = admin.database().ref('/users/' + userId);
+	var userRef = admin.database().ref('/users/' + userId);b
 	userRef.once('value').then(function(snapshot){
 		var curPoint = snapshot.val().point;
 		curPoint += 3;
@@ -86,10 +86,11 @@ exports.handleTicketExpired = functions.database.ref('/ticket/{id}').onWrite(eve
 	const scheduleId = ticket.coach_schedule_id;
 	const userId = ticket.user_id;
 
-	admin.database().ref('/coach-schedule').once('value').then(function(snapshot){
-		const departureTime = snapshot.val().departureTime;
+	admin.database().ref('/coach-schedule/'+scheduleId).once('value').then(function(snapshot){
+		var departureTime = snapshot.val().departureTime;
+        console.log(departureTime);
 		var dateArray = departureTime.split('/');
-		var date = new Date(dateArray[0],dateArray[1] - 1,dateArray[2],dateArray[3],dateArray[4],0);
+		date = new Date(dateArray[0],dateArray[1] - 1,dateArray[2],dateArray[3],dateArray[4],0);
 		console.log('Job scheduled for ' + userId + ' after ' + date.getTime() - Date.now() + 'ms form now');
         // var userRef = admin.database().ref('/users');
 		// schedule.scheduleJob(date, function{
