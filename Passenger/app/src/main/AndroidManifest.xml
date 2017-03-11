@@ -57,8 +57,11 @@
             android:name=".Activity.activities.PaypalActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Activity.activities.CartActivity" />
-        <activity android:name=".Activity.activities.CoachRequestActivity" />
-        <activity android:name=".Activity.activities.TicketClientActivity"></activity>
+        <activity
+            android:name=".Activity.activities.CoachRequestActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".Activity.activities.TicketClientActivity" />
+        <activity android:name=".Activity.activities.SendRequestCoachActivity"></activity>
     </application>
 
 </manifest>

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.fit.uet.passengerapp.Activity.activities.CartActivity;
 import com.fit.uet.passengerapp.Activity.activities.CoachHostFavoriteActivity;
 import com.fit.uet.passengerapp.Activity.activities.CoachManagerActivity;
+import com.fit.uet.passengerapp.Activity.activities.CoachRequestActivity;
 import com.fit.uet.passengerapp.Activity.activities.ConversationActivity;
 import com.fit.uet.passengerapp.Activity.activities.ForceInputPhoneNumActivity;
 import com.fit.uet.passengerapp.Activity.activities.SignInActivity;
@@ -26,7 +27,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class NavigationFragment extends Fragment {
     private View view;
-    private RelativeLayout layoutSignOut, layoutCoachManager, layoutTickerMan, layoutCoachLove, layoutChangePhoneNum, layoutMessage;
+    private RelativeLayout layoutSignOut, layoutCoachManager, layoutTickerMan, layoutCoachLove,
+            layoutChangePhoneNum, layoutMessage, layoutCoachRequest;
     private TextView txtUserName;
     private TextView txtTrustPoint;
 
@@ -47,12 +49,15 @@ public class NavigationFragment extends Fragment {
         layoutCoachLove = (RelativeLayout) view.findViewById(R.id.layout_coach_love);
         layoutChangePhoneNum = (RelativeLayout) view.findViewById(R.id.layout_change_phone_num);
         layoutMessage = (RelativeLayout) view.findViewById(R.id.layout_message);
+        layoutCoachRequest = (RelativeLayout) view.findViewById(R.id.layout_coach_request_pending);
+
         layoutSignOut.setOnClickListener(navClickItem);
         layoutCoachManager.setOnClickListener(navClickItem);
         layoutTickerMan.setOnClickListener(navClickItem);
         layoutCoachLove.setOnClickListener(navClickItem);
         layoutChangePhoneNum.setOnClickListener(navClickItem);
         layoutMessage.setOnClickListener(navClickItem);
+        layoutCoachRequest.setOnClickListener(navClickItem);
 
         checkIfHasCoachMan();
         checkTrustPoint();
@@ -113,6 +118,8 @@ public class NavigationFragment extends Fragment {
                 getActivity().finish();
             } else if (v.equals(layoutMessage)) {
                 startActivity(new Intent(getContext(), ConversationActivity.class));
+            } else if (v.equals(layoutCoachRequest)) {
+                startActivity(new Intent(getContext(), CoachRequestActivity.class));
             }
         }
     };
