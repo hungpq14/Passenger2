@@ -85,7 +85,7 @@ class ScheduleArray implements ChildEventListener, ValueEventListener {
                 index++;
             }
         }
-        throw new IllegalArgumentException("Key not found");
+        return index;
     }
 
     @Override
