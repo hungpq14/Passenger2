@@ -29,11 +29,15 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
     public static final String TAG = "ScheduleAdapter";
     private ScheduleArray mSchedules;
     private OnItemClickListener mListener;
+    private TextView emptyView;
 
     public ScheduleAdapter(DatabaseReference ref, Query query, String from, String to, Boolean hasShuttle) {
         mSchedules = new ScheduleArray(ref, query,from,to,hasShuttle);
         mSchedules.setOnChangedListener(this);
 
+    }
+    public void setupWithEmptyView(TextView emptyView){
+        this.emptyView = emptyView;
     }
 
     public void setOnCLickListener(OnItemClickListener listener) {
@@ -97,11 +101,23 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
             default:
                 throw new IllegalStateException("Incomplete case statement");
         }
+        validate();
     }
 
     @Override
     public void onDataChanged() {
+        validate();
+    }
 
+    private void validate() {
+        if (emptyView == null){
+            return;
+        }
+        if (mSchedules.getCount() == 0){
+            emptyView.setVisibility(View.VISIBLE);
+        }else {
+            emptyView.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override

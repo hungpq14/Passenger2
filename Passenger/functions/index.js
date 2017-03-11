@@ -7,6 +7,7 @@ var functions = require('firebase-functions');
 //  response.send("Hello from Firebase!");
 // })
 var admin = require('firebase-admin');
+var schedule = require('node-schedule');
 admin.initializeApp(functions.config().firebase);
 
 
@@ -58,16 +59,48 @@ exports.handleCheckoutBonus = functions.database.ref('/ticket/{ticketId}').onWri
 	}
 });
 
-exports.handleCommentBonus = functions.database.ref('/comments/{id}').onWrite(event=>{
+exports.handleCommentBonus = functions.database.ref('/comments/{id}').onWrite(event => {
 	var data = event.data;
 	if(data.previous.exists()){
+		console.log('data exists');
 		return;
 	}
-	const userId = data.val().userUid();
+	const userId = data.val().userUid;
+    console.log('Add 2 point to ' + userId);
 	var userRef = admin.database().ref('/users/' + userId);
 	userRef.once('value').then(function(snapshot){
 		var curPoint = snapshot.val().point;
 		curPoint += 3;
 		return userRef.update({point: curPoint});
+	});
+});
+
+exports.handleTicketExpired = functions.database.ref('/ticket/{id}').onWrite(event=>{
+    var data = event.data;
+	// if(data.previous.exists()){
+    //     console.log('data exists');
+	// 	return;
+	// }
+
+	const ticket = data.val();
+	const scheduleId = ticket.coach_schedule_id;
+	const userId = ticket.user_id;
+
+	admin.database().ref('/coach-schedule').once('value').then(function(snapshot){
+		const departureTime = snapshot.val().departureTime;
+		var dateArray = departureTime.split('/');
+		var date = new Date(dateArray[0],dateArray[1] - 1,dateArray[2],dateArray[3],dateArray[4],0);
+		console.log('Job scheduled for ' + userId + ' after ' + date.getTime() - Date.now() + 'ms form now');
+        // var userRef = admin.database().ref('/users');
+		// schedule.scheduleJob(date, function{
+		// 	console.log('Ticket expired: ' + userId);
+		// 	userRef.once('value').then(function(snapshot){
+		// 		var curPoint = snapshot.val().point;
+		// 		curPoint -= 3;
+		// 		curPoint = curPoint < 0 ? 0 : curPoint;
+		// 		return userRef.update({point: curPoint});
+		// 	});
+		// });
+
 	});
 });

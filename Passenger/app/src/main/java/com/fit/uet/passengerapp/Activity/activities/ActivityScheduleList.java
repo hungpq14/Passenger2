@@ -11,6 +11,7 @@ import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.fit.uet.passengerapp.Activity.BaseActivity.BaseToolBarActivity;
 import com.fit.uet.passengerapp.Activity.fragments.FilterFragment;
@@ -44,12 +45,14 @@ public class ActivityScheduleList extends BaseToolBarActivity {
     private Boolean hasShuttle;
     private Bundle serviceBundle;
     private ImageView imgScanning;
+    private TextView emptyView;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mList = (RecyclerView) findViewById(R.id.recycler);
+        emptyView = (TextView)findViewById(R.id.empty_view);
         mRef = FirebaseDatabase.getInstance().getReference();
         mFrom = getIntent().getStringExtra(FilterFragment.LOCATION_FROM);
         mTo = getIntent().getStringExtra(FilterFragment.LOCATION_TO);
@@ -94,6 +97,7 @@ public class ActivityScheduleList extends BaseToolBarActivity {
 
     private void initViews() {
         mAdapter = new ScheduleAdapter(mRef, getQuery(new Date()), mFrom, mTo,hasShuttle );
+        mAdapter.setupWithEmptyView(emptyView);
         imgScanning = (ImageView) findViewById(R.id.img_scan);
         final RotateAnimation rotateAnimation = new RotateAnimation(0, 360f,
                 Animation.RELATIVE_TO_SELF, 0.5f,

@@ -1,9 +1,11 @@
 package com.fit.uet.passengerapp.Activity.activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -52,6 +54,9 @@ public class CoachHostActivity extends AppCompatActivity implements ValueEventLi
     Button mSaveView;
     @BindView(R.id.btn_website)
     Button mWebsite;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+
     public static final String KEY_HOST_ID = "host_id";
 
 
@@ -76,6 +81,7 @@ public class CoachHostActivity extends AppCompatActivity implements ValueEventLi
         mRef = FirebaseDatabase.getInstance().getReference();
         mRef.child(DB.COACH_HOST).child(coachHostUid).addValueEventListener(this);
         mSaveView.setOnClickListener(this);
+        fab.setOnClickListener(this);
     }
 
     private void updateUI(CoachHost coachHost) {
@@ -124,6 +130,11 @@ public class CoachHostActivity extends AppCompatActivity implements ValueEventLi
                 FirebaseDatabase.getInstance().getReference()
                         .child(DB.COACH_HOST_FAV).child(self).child(coachHostUid).setValue(true);
                 Snackbar.make(view,"Đã lưu vào danh sách ưa thích",Snackbar.LENGTH_SHORT).show();
+                break;
+            case R.id.fab:
+                Intent intent = new Intent(this, MessageListActivity.class);
+                intent.putExtra(MessageListActivity.KEY_DESTINATION,coachHostUid);
+                startActivity(intent);
                 break;
 
         }

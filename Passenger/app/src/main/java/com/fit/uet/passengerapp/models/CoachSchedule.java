@@ -1,5 +1,6 @@
 package com.fit.uet.passengerapp.models;
 
+import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 /**
@@ -20,5 +21,11 @@ public class CoachSchedule {
 
     public String arriveFrom, arriveTo, pickFrom, pickTo;
     public int costPerTicket;
+
+    @Exclude
+    public Coach coach;
+
+    @Exclude
+    public CoachHost coachHost;
 
 }

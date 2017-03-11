@@ -9,7 +9,6 @@ import com.fit.uet.passengerapp.Activity.BaseActivity.BaseToolBarActivity;
 import com.fit.uet.passengerapp.R;
 import com.fit.uet.passengerapp.adapter.FavoriteCoachHostAdapter;
 import com.fit.uet.passengerapp.database.DB;
-import com.fit.uet.passengerapp.models.CoachHost;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -34,8 +33,7 @@ public class CoachHostFavoriteActivity extends BaseToolBarActivity {
         ButterKnife.bind(this);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         String self = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        mAapter = new FavoriteCoachHostAdapter(CoachHost.class, R.layout.coach_host_list_item, FavoriteCoachHostAdapter.CoachHoastHolder.class,
-                ref.child(DB.COACH_HOST_FAV).child(self), ref.child(DB.COACH_HOST));
+        mAapter = new FavoriteCoachHostAdapter(ref, ref.child(DB.COACH_HOST_FAV).child(self));
         mList.setLayoutManager(new LinearLayoutManager(this));
         mList.setAdapter(mAapter);
 

@@ -1,7 +1,6 @@
 package com.fit.uet.passengerapp.Activity.activities;
 
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -58,7 +57,7 @@ public class MainUIActivity extends BaseFontActivity {
         if (toolbar != null) {
             toolbar.setTitle("");
             setSupportActionBar(toolbar);
-            toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_menu));
+            toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_menu));
         }
 
         //set action cho show up negative layout

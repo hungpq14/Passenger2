@@ -39,4 +39,5 @@
     <string name="format_arrrive_count">%d lượt đi</string>
     <string name="action_review">Đánh giá</string>
     <string name="fav_coach_host">Nhà xe ưa thích</string>
+    <string name="schedule_empty_label">Không có chuyến xe nào</string>
 </resources>
