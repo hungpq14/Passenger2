@@ -53,6 +53,7 @@
 
         <activity android:name=".Activity.activities.PayTicketActivity" />
         <activity android:name=".Activity.activities.PaypalActivity"></activity>
+        <activity android:name=".Activity.activities.CartActivity"></activity>
     </application>
 
 </manifest>
