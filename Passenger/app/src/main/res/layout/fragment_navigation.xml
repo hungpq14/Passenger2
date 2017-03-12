@@ -75,7 +75,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@+id/img_coach_love"
-            android:text="Danh sách nhà xe yêu thích"
+            android:text="Xe yêu thích"
             android:textSize="16sp" />
 
     </RelativeLayout>
@@ -150,7 +150,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@+id/img_coach_request"
-            android:text="Gửi yêu cầu xe"
+            android:text="Yêu cầu xe"
             android:textSize="16sp" />
 
     </RelativeLayout>
@@ -167,7 +167,7 @@
             android:layout_height="48dp"
             android:layout_centerVertical="true"
             android:padding="10dp"
-            android:src="@drawable/ic_vector_logout" />
+            android:src="@drawable/ic_archive" />
 
         <TextView
             android:layout_width="match_parent"
@@ -175,7 +175,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@+id/img_man_my_coach_request"
-            android:text="Quản lý yêu cầu xe của mình"
+            android:text="Quản lý yêu cầu xe"
             android:textSize="16sp" />
 
     </RelativeLayout>
