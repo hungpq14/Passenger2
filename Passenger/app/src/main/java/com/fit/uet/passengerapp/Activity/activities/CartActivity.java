@@ -126,9 +126,12 @@ public class CartActivity extends BaseToolBarActivity implements MaterialDialog.
                 mDialog.show();
 
             }
-        });
 
-        show();
+            @Override
+            public void onFinishGetData() {
+                show();
+            }
+        });
     }
 
     private void show() {

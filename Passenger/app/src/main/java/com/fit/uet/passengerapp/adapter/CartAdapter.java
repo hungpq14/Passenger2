@@ -43,6 +43,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         void onItemClick(int position);
 
         void onReviewClick(String coachHostUid);
+
+        void onFinishGetData();
     }
 
     // Define the method that allows the parent activity or fragment to define the listener
@@ -105,6 +107,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                                 holder.company_name.setText(coachHost.name);
                                 holder.company_name.setTag(coachHost.uid);
                                 holder.ratting.setRating(coachHost.star);
+
+                                if (listener != null) listener.onFinishGetData();
                             }
 
                             @Override
