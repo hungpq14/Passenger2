@@ -117,7 +117,7 @@ public class TicketClientActivity extends BaseToolBarActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 CoachSchedule schedule = dataSnapshot.getValue(CoachSchedule.class);
-                tv_price.setText(schedule.costPerTicket * ticket.seats.size() + "$");
+                tv_price.setText(schedule.costPerTicket * ticket.seats.size() + " đồng");
                 tv_pick_from.setText(schedule.pickFrom);
                 tv_pick_to.setText(schedule.pickTo);
                 tv_arrive_from.setText(schedule.arriveFrom);

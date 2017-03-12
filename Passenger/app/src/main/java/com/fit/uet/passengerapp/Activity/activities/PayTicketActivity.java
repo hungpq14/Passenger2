@@ -34,6 +34,7 @@ public class PayTicketActivity extends BaseToolBarActivity {
     private DatabaseReference databaseReference;
     private DatabaseReference scheduleDatabaseReference;
     private DatabaseReference ticketDatabaseReference;
+    TextView txtPayTotal, txtPayTemp;
 
 
     @Override
@@ -51,11 +52,17 @@ public class PayTicketActivity extends BaseToolBarActivity {
         radioPay2 = (RadioButton) findViewById(R.id.radio_pay_option_1);
         radioPay3 = (RadioButton) findViewById(R.id.radio_pay_option_2);
         radioGroup = (RadioGroup) findViewById(R.id.payGroup);
+        txtPayTotal = (TextView) findViewById(R.id.txt_currency_total);
+        txtPayTemp = (TextView) findViewById(R.id.txt_currency_temp);
         btnPay = (Button) findViewById(R.id.btn_pay);
         txtTrustPoint = (TextView) findViewById(R.id.txt_trust_point);
 
         seatState = getIntent().getStringExtra("seatState");
         ticket = (Ticket) getIntent().getSerializableExtra("ticket");
+
+        String price = getIntent().getIntExtra("price", 0) + " đồng";
+        txtPayTotal.setText(price);
+        txtPayTemp.setText(price);
 
         checkTrustPoint();
         btnPay.setOnClickListener(new View.OnClickListener() {

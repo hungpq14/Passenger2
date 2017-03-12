@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,7 +92,12 @@ public class NavigationFragment extends Fragment {
         reference.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("point").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                int point = dataSnapshot.getValue(Integer.class);
+                int point = 0;
+                try {
+                    point = dataSnapshot.getValue(Integer.class);
+                } catch (Exception ignored) {
+
+                }
                 txtTrustPoint.setText(point + "");
             }
 
@@ -125,7 +131,7 @@ public class NavigationFragment extends Fragment {
         public void onClick(View v) {
             if (v.equals(layoutSignOut)) {
                 FirebaseAuth.getInstance().signOut();
-                getActivity().getSharedPreferences("share", Context.MODE_PRIVATE).edit().remove("type_user");
+                getActivity().getSharedPreferences("share", Context.MODE_PRIVATE).edit().remove("type_user").commit();
                 startActivity(new Intent(getContext(), SignInActivity.class));
             } else if (v.equals(layoutCoachManager)) {
                 startActivity(new Intent(getContext(), CoachManagerActivity.class));

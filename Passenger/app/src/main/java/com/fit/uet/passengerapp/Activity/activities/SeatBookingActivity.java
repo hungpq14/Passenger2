@@ -129,6 +129,8 @@ public class SeatBookingActivity extends BaseToolBarActivity {
 
                     intent.putExtra("ticket", ticket);
                     intent.putExtra("seatState", schedule.seatState);
+                    intent.putExtra("price", count * schedule.costPerTicket);
+
                     intent.putExtra(Intent.EXTRA_TEXT, getIntent().getStringExtra(Intent.EXTRA_TEXT));
 
                     startActivity(intent);
