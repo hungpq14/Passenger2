@@ -156,6 +156,31 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/layout_man_my_coach_request"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground">
+
+        <ImageView
+            android:id="@+id/img_man_my_coach_request"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:src="@drawable/ic_vector_logout" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@+id/img_man_my_coach_request"
+            android:text="Quản lý yêu cầu xe của mình"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/layout_coach_request_pending"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

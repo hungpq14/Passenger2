@@ -16,6 +16,7 @@ import com.fit.uet.passengerapp.Activity.activities.CoachManagerActivity;
 import com.fit.uet.passengerapp.Activity.activities.CoachRequestActivity;
 import com.fit.uet.passengerapp.Activity.activities.ConversationActivity;
 import com.fit.uet.passengerapp.Activity.activities.ForceInputPhoneNumActivity;
+import com.fit.uet.passengerapp.Activity.activities.MyCoachRequestManagerActivity;
 import com.fit.uet.passengerapp.Activity.activities.SendRequestCoachActivity;
 import com.fit.uet.passengerapp.Activity.activities.SignInActivity;
 import com.fit.uet.passengerapp.R;
@@ -29,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 public class NavigationFragment extends Fragment {
     private View view;
     private RelativeLayout layoutSignOut, layoutCoachManager, layoutTickerMan, layoutCoachLove,
-            layoutChangePhoneNum, layoutMessage, layoutCoachRequest, layoutSendCoachRequest;
+            layoutChangePhoneNum, layoutMessage, layoutCoachRequest, layoutSendCoachRequest, layoutMyCoachRequest;
     private TextView txtUserName;
     private TextView txtTrustPoint;
 
@@ -52,6 +53,7 @@ public class NavigationFragment extends Fragment {
         layoutMessage = (RelativeLayout) view.findViewById(R.id.layout_message);
         layoutCoachRequest = (RelativeLayout) view.findViewById(R.id.layout_coach_request_pending);
         layoutSendCoachRequest = (RelativeLayout) view.findViewById(R.id.layout_coach_request);
+        layoutMyCoachRequest = (RelativeLayout) view.findViewById(R.id.layout_man_my_coach_request);
 
         layoutSignOut.setOnClickListener(navClickItem);
         layoutCoachManager.setOnClickListener(navClickItem);
@@ -61,6 +63,7 @@ public class NavigationFragment extends Fragment {
         layoutMessage.setOnClickListener(navClickItem);
         layoutCoachRequest.setOnClickListener(navClickItem);
         layoutSendCoachRequest.setOnClickListener(navClickItem);
+        layoutMyCoachRequest.setOnClickListener(navClickItem);
 
         checkIfHasCoachMan();
         checkTrustPoint();
@@ -125,6 +128,8 @@ public class NavigationFragment extends Fragment {
                 startActivity(new Intent(getContext(), CoachRequestActivity.class));
             } else if (v.equals(layoutSendCoachRequest)) {
                 startActivity(new Intent(getContext(), SendRequestCoachActivity.class));
+            } else if (v.equals(layoutMyCoachRequest)) {
+                startActivity(new Intent(getContext(), MyCoachRequestManagerActivity.class));
             }
         }
     };
