@@ -89,7 +89,9 @@
             android:name=".Activity.activities.CoachRequestActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Activity.activities.TicketClientActivity" />
-        <activity android:name=".Activity.activities.SendRequestCoachActivity"></activity>
+        <activity
+            android:name=".Activity.activities.SendRequestCoachActivity"
+            android:windowSoftInputMode="stateHidden"></activity>
     </application>
 
 </manifest>

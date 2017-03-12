@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:hint="Diem di"
+                android:hint="Điểm đi"
                 android:textSize="15sp" />
         </android.support.design.widget.TextInputLayout>
 
@@ -44,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:hint="Diem den"
+                android:hint="Điểm đến"
                 android:textSize="15sp" />
         </android.support.design.widget.TextInputLayout>
 
@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:hint="So luong ve"
+                android:hint="Số lượng vé"
                 android:textSize="15sp" />
         </android.support.design.widget.TextInputLayout>
 
@@ -76,7 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:hint="Thoi gian som nhat co the di"
+                android:hint="Thời gian sớm nhất có thể đi"
                 android:textSize="15sp" />
         </android.support.design.widget.TextInputLayout>
 
@@ -92,7 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:hint="Thoi gian muon nhat"
+                android:hint="Thời gian muộn nhất format: yyyy/mm/dd/hh/mm"
                 android:textSize="15sp" />
         </android.support.design.widget.TextInputLayout>
 
@@ -105,7 +105,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/selector_pay_bg"
-        android:text="đăng yêu cầu"
+        android:text="Đăng yêu cầu"
         android:textAllCaps="false"
         android:textColor="#FFF"
         android:textSize="17sp" />

@@ -16,6 +16,7 @@ import com.fit.uet.passengerapp.Activity.activities.CoachManagerActivity;
 import com.fit.uet.passengerapp.Activity.activities.CoachRequestActivity;
 import com.fit.uet.passengerapp.Activity.activities.ConversationActivity;
 import com.fit.uet.passengerapp.Activity.activities.ForceInputPhoneNumActivity;
+import com.fit.uet.passengerapp.Activity.activities.SendRequestCoachActivity;
 import com.fit.uet.passengerapp.Activity.activities.SignInActivity;
 import com.fit.uet.passengerapp.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 public class NavigationFragment extends Fragment {
     private View view;
     private RelativeLayout layoutSignOut, layoutCoachManager, layoutTickerMan, layoutCoachLove,
-            layoutChangePhoneNum, layoutMessage, layoutCoachRequest;
+            layoutChangePhoneNum, layoutMessage, layoutCoachRequest, layoutSendCoachRequest;
     private TextView txtUserName;
     private TextView txtTrustPoint;
 
@@ -50,6 +51,7 @@ public class NavigationFragment extends Fragment {
         layoutChangePhoneNum = (RelativeLayout) view.findViewById(R.id.layout_change_phone_num);
         layoutMessage = (RelativeLayout) view.findViewById(R.id.layout_message);
         layoutCoachRequest = (RelativeLayout) view.findViewById(R.id.layout_coach_request_pending);
+        layoutSendCoachRequest = (RelativeLayout) view.findViewById(R.id.layout_coach_request);
 
         layoutSignOut.setOnClickListener(navClickItem);
         layoutCoachManager.setOnClickListener(navClickItem);
@@ -58,6 +60,7 @@ public class NavigationFragment extends Fragment {
         layoutChangePhoneNum.setOnClickListener(navClickItem);
         layoutMessage.setOnClickListener(navClickItem);
         layoutCoachRequest.setOnClickListener(navClickItem);
+        layoutSendCoachRequest.setOnClickListener(navClickItem);
 
         checkIfHasCoachMan();
         checkTrustPoint();
@@ -120,6 +123,8 @@ public class NavigationFragment extends Fragment {
                 startActivity(new Intent(getContext(), ConversationActivity.class));
             } else if (v.equals(layoutCoachRequest)) {
                 startActivity(new Intent(getContext(), CoachRequestActivity.class));
+            } else if (v.equals(layoutSendCoachRequest)) {
+                startActivity(new Intent(getContext(), SendRequestCoachActivity.class));
             }
         }
     };

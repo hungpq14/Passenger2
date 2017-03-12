@@ -1,5 +1,7 @@
 package com.fit.uet.passengerapp.models;
 
+import com.google.maps.android.clustering.ClusterItem;
+
 /**
  * Created by phamh_000 on 12/03/2017.
  */

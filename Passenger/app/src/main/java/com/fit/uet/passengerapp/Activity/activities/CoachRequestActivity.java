@@ -13,16 +13,20 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.util.TimeUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fit.uet.passengerapp.Activity.BaseActivity.BaseFontActivity;
@@ -30,6 +34,9 @@ import com.fit.uet.passengerapp.R;
 import com.fit.uet.passengerapp.adapter.PlaceAutoCompleteAdapter;
 import com.fit.uet.passengerapp.models.City;
 import com.fit.uet.passengerapp.models.CoachRequest;
+import com.fit.uet.passengerapp.ui.DetailMarkerDialog;
+import com.fit.uet.passengerapp.utils.DateTimeUtils;
+import com.fit.uet.passengerapp.utils.Util;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -55,6 +62,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.maps.android.clustering.ClusterItem;
+import com.google.maps.android.clustering.ClusterManager;
+import com.google.maps.android.clustering.view.DefaultClusterRenderer;
+import com.google.maps.android.ui.IconGenerator;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -76,7 +87,7 @@ public class CoachRequestActivity extends BaseFontActivity implements GoogleApiC
     AutoCompleteTextView autoCompleteText;
     private static final LatLngBounds BOUNDS_HANOI = new LatLngBounds(new LatLng(21, 105),
             new LatLng(31, 100));
-
+    MarkerOptions marker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,6 +211,7 @@ public class CoachRequestActivity extends BaseFontActivity implements GoogleApiC
 //                return false;
 //            }
 //        });
+
         final ArrayList<CoachRequest> coachRequests = new ArrayList<>();
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
         reference.child("coach-request").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -210,8 +222,26 @@ public class CoachRequestActivity extends BaseFontActivity implements GoogleApiC
                 }
                 for (CoachRequest coachRequest : coachRequests) {
                     //todo remove time max here
-
+                    if (DateTimeUtils.getMillisFromString(coachRequest.timeMaxToStart) < System.currentTimeMillis()) {
+                        Log.d(TAG, coachRequest.timeMaxToStart + " "
+                                + DateTimeUtils.getMillisFromString(coachRequest.timeMaxToStart) + " "
+                                + System.currentTimeMillis());
+                        continue;
+                    }
                     new DataLongOperationAsynchTask().execute(coachRequest);
+
+                    map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                        @Override
+                        public boolean onMarkerClick(Marker marker) {
+                            CoachRequest coachRequest = (CoachRequest) marker.getTag();
+                            Log.d(TAG, coachRequest.uid + "");
+
+                            DetailMarkerDialog dialog = new DetailMarkerDialog(CoachRequestActivity.this, coachRequest);
+                            dialog.show();
+
+                            return false;
+                        }
+                    });
                 }
 
 
@@ -223,22 +253,25 @@ public class CoachRequestActivity extends BaseFontActivity implements GoogleApiC
         });
     }
 
+
     public BitmapDescriptor getTextMarker(String text) {
 
         Paint paint = new Paint();
-    /* Set text size, color etc. as needed */
-        paint.setTextSize(24);
+        /* Set text size, color etc. as needed */
+        paint.setTextSize(30);
 
         int width = (int) paint.measureText(text);
         int height = (int) paint.getTextSize();
 
+        paint.setTextSize(24);
+        paint.setColor(getApplicationContext().getResources().getColor(R.color.text_primary_default_light));
         paint.setTextAlign(Paint.Align.CENTER);
         // Create a transparent bitmap as big as you need
         Bitmap image = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(image);
         // During development the following helps to see the full
         // drawing area:
-        canvas.drawColor(0x50A0A0A0);
+        canvas.drawColor(getApplicationContext().getResources().getColor(R.color.colorPrimary));
         // Start drawing into the canvas
         canvas.translate(width / 2f, height);
         canvas.drawText(text, 0, 0, paint);
@@ -280,8 +313,8 @@ public class CoachRequestActivity extends BaseFontActivity implements GoogleApiC
                 LatLng locationLatLng = new LatLng(latitude, longitude);
 
 //                map.addMarker(new MarkerOptions().position(locationLatLng).title(coachRequest.arriveTo));
-                MarkerOptions marker = new MarkerOptions().position(locationLatLng).icon(getTextMarker(coachRequest.arriveTo));
-                map.addMarker(marker);
+                marker = new MarkerOptions().position(locationLatLng).icon(getTextMarker(coachRequest.arriveTo));
+                map.addMarker(marker).setTag(coachRequest);
 
                 Log.d("add latitude", "" + latitude);
                 Log.d("add longitude", "" + longitude);

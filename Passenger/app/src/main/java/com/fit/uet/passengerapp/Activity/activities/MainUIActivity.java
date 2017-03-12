@@ -40,7 +40,7 @@ public class MainUIActivity extends BaseFontActivity {
         if (mFilterFragment == null) {
             mFilterFragment = new FilterFragment();
             Log.d("Main", "add fragment main");
-            transaction.add(R.id.container, mFilterFragment);
+            transaction.replace(R.id.container, mFilterFragment);
         } else {
             transaction.show(mFilterFragment);
         }
