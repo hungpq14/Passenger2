@@ -16,5 +16,7 @@ public class CoachHost {
     public float star;
     public String website;
     public String logo;
+    public int totalRate;
+    public String hostUid;
 
 }

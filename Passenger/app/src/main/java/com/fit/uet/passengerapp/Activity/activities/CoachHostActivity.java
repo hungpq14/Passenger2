@@ -1,9 +1,6 @@
 package com.fit.uet.passengerapp.Activity.activities;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -64,6 +61,7 @@ public class CoachHostActivity extends AppCompatActivity implements ValueEventLi
     private StorageReference mStorage;
     private CommentAdapter mAdapter;
     private DatabaseReference mRef;
+    private CoachHost mCoachHost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,9 +73,6 @@ public class CoachHostActivity extends AppCompatActivity implements ValueEventLi
         coachHostUid = getIntent().getStringExtra(KEY_HOST_ID);
         mStorage = FirebaseStorage.getInstance().getReference();
 
-
-        LayerDrawable stars = (LayerDrawable) mRating.getProgressDrawable();
-        stars.getDrawable(2).setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
         mRef = FirebaseDatabase.getInstance().getReference();
         mRef.child(DB.COACH_HOST).child(coachHostUid).addValueEventListener(this);
         mSaveView.setOnClickListener(this);
@@ -98,14 +93,15 @@ public class CoachHostActivity extends AppCompatActivity implements ValueEventLi
                 .crossFade()
                 .into(mLogoView);
         mCommentList.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new CommentAdapter(Comment.class,R.layout.comment_list_item,
-                CommentAdapter.CommentHolder.class,mRef.child(DB.COMMENTS).orderByChild("coachHostUid").equalTo(coachHostUid));
+        mAdapter = new CommentAdapter(Comment.class, R.layout.comment_list_item,
+                CommentAdapter.CommentHolder.class, mRef.child(DB.COMMENTS).orderByChild("coachHostUid").equalTo(coachHostUid));
         mCommentList.setAdapter(mAdapter);
     }
 
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
         CoachHost coachHost = dataSnapshot.getValue(CoachHost.class);
+        mCoachHost = coachHost;
         if (coachHost != null) {
             updateUI(coachHost);
         }
@@ -124,17 +120,19 @@ public class CoachHostActivity extends AppCompatActivity implements ValueEventLi
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btn_save:
                 String self = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 FirebaseDatabase.getInstance().getReference()
                         .child(DB.COACH_HOST_FAV).child(self).child(coachHostUid).setValue(true);
-                Snackbar.make(view,"Đã lưu vào danh sách ưa thích",Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(view, "Đã lưu vào danh sách ưa thích", Snackbar.LENGTH_SHORT).show();
                 break;
             case R.id.fab:
-                Intent intent = new Intent(this, MessageListActivity.class);
-                intent.putExtra(MessageListActivity.KEY_DESTINATION,coachHostUid);
-                startActivity(intent);
+                if (mCoachHost != null) {
+                    Intent intent = new Intent(this, MessageListActivity.class);
+                    intent.putExtra(MessageListActivity.KEY_DESTINATION, mCoachHost.hostUid);
+                    startActivity(intent);
+                }
                 break;
 
         }

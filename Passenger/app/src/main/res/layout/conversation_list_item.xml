@@ -7,9 +7,8 @@
     android:clickable="true"
     android:padding="16dp">
 
-    <com.fit.uet.passengerapp.ui.CircleImageView
+    <ImageView
         android:id="@+id/iv_profile"
-        android:src="@color/colorPrimary"
         android:layout_width="@dimen/avatar_chat_icon_size"
         android:layout_height="@dimen/avatar_chat_icon_size"
         android:layout_marginRight="16dp" />

@@ -1,12 +1,15 @@
 package com.fit.uet.passengerapp.Activity.activities;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.fit.uet.passengerapp.Activity.BaseActivity.BaseFontActivity;
@@ -57,7 +60,7 @@ public class MainUIActivity extends BaseFontActivity {
         if (toolbar != null) {
             toolbar.setTitle("");
             setSupportActionBar(toolbar);
-            toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_menu));
+            toolbar.setNavigationIcon(ContextCompat.getDrawable(this,R.drawable.ic_menu));
         }
 
         //set action cho show up negative layout
@@ -82,5 +85,22 @@ public class MainUIActivity extends BaseFontActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main,menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_message:
+                Intent intent = new Intent(this,ConversationActivity.class);
+                startActivity(intent);
+                return true;
+
+            default:
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

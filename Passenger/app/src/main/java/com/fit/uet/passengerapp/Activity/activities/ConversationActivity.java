@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import com.fit.uet.passengerapp.Activity.BaseActivity.BaseToolBarActivity;
 import com.fit.uet.passengerapp.R;
@@ -25,6 +26,8 @@ import butterknife.ButterKnife;
 public class ConversationActivity extends BaseToolBarActivity implements ConversationsAdapter.OnItemClickListener {
     @BindView(R.id.recycler)
     RecyclerView mList;
+    @BindView(R.id.empty_view)
+    TextView mEmpty;
     private ConversationsAdapter mAdapter;
 
     @Override
@@ -35,6 +38,7 @@ public class ConversationActivity extends BaseToolBarActivity implements Convers
         DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
         mList.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new ConversationsAdapter(mRef, mRef.child(DB.CHAT).child(self), self);
+        mAdapter.setupWithEmptyView(mEmpty);
         mAdapter.setListener(this);
         mList.setAdapter(mAdapter);
     }

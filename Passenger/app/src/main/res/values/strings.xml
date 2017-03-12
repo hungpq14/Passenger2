@@ -43,4 +43,6 @@
     <string name="dialog_review_action_positive">Đăng</string>
     <string name="dialog_review_action_negative">Huỷ</string>
     <string name="dialog_review_title">Viết đánh giá</string>
+    <string name="action_message">Message</string>
+    <string name="conversation_empty_label">Không có dữ liệu</string>
 </resources>

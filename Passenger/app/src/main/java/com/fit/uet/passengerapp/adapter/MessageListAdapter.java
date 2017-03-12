@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.fit.uet.passengerapp.R;
 import com.fit.uet.passengerapp.models.Message;
 import com.fit.uet.passengerapp.models.User;
@@ -30,15 +32,20 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
     private User mDestination;
     FirebaseArray mData;
     private RecyclerView mHost;
+    private TextDrawable.IBuilder mBuilder;
 
     public MessageListAdapter(RecyclerView host, User destination, Query query) {
         this.mData = new FirebaseArray(query);
         mHost = host;
         mDestination = destination;
         mData.setOnChangedListener(this);
+        mBuilder = TextDrawable.builder()
+                .beginConfig()
+                .withBorder(2)
+                .endConfig()
+                .round();
 
     }
-
 
 
     public Message getItem(int postion) {
@@ -54,8 +61,28 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
     @Override
     public void onBindViewHolder(MessageHolder holder, int position) {
         Message message = getItem(position);
+        boolean visible = true;
+
+        int viewType = getItemViewType(position);
+
+        holder.dateView.setVisibility(View.VISIBLE);
         holder.messageView.setText(message.getMessage());
-        holder.dateView.setText(DateTimeUtils.getLocalTime(message.getTimestamp()));
+        if (position < mData.getCount() - 1 && position > 0) {
+            if (viewType == getItemViewType(position + 1)) {
+                visible = false;
+                holder.dateView.setVisibility(View.GONE);
+            }
+        }
+
+        if (viewType == INCOMING_MSG) {
+            String sender = mDestination.getName();
+            int color = ColorGenerator.MATERIAL.getColor(sender);
+            holder.ivAvatar.setImageDrawable(mBuilder.build(sender.substring(0, 1), color));
+        }
+
+        if (visible) {
+            holder.dateView.setText(DateTimeUtils.getLocalTime(message.getTimestamp()));
+        }
 
     }
 
@@ -76,6 +103,9 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         switch (type) {
             case ADDED:
                 notifyItemInserted(index);
+                if (index > 0) {
+                    notifyItemChanged(index - 1);
+                }
                 mHost.scrollToPosition(index);
                 break;
             case CHANGED:

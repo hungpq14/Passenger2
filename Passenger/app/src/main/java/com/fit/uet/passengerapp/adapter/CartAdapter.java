@@ -8,9 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.fit.uet.passengerapp.Activity.activities.ActivityScheduleList;
 import com.fit.uet.passengerapp.Activity.activities.CoachHostActivity;
 import com.fit.uet.passengerapp.R;
 import com.fit.uet.passengerapp.database.DB;
@@ -104,6 +104,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
                                 holder.company_name.setText(coachHost.name);
                                 holder.company_name.setTag(coachHost.uid);
+                                holder.ratting.setRating(coachHost.star);
                             }
 
                             @Override
@@ -149,6 +150,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         public TextView company_name;
         public Button preview;
         public View coach_host_container;
+        public RatingBar ratting;
 
         public ViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
@@ -160,6 +162,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             company_name = (TextView) itemView.findViewById(R.id.company_name);
             preview = (Button) itemView.findViewById(R.id.review);
             coach_host_container = itemView.findViewById(R.id.coach_host_container);
+            ratting = (RatingBar) itemView.findViewById(R.id.rating);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -5,13 +5,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.fit.uet.passengerapp.R;
 import com.fit.uet.passengerapp.models.Conversation;
 import com.fit.uet.passengerapp.models.Message;
 import com.fit.uet.passengerapp.models.User;
-import com.fit.uet.passengerapp.ui.CircleImageView;
 import com.fit.uet.passengerapp.utils.DateTimeUtils;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +30,7 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
     public static final String TAG = "ConversationsAdapter";
     private ConversationsArray mConversations;
     private OnItemClickListener mListener;
+    private TextView mEmpty;
 
     public ConversationsAdapter(DatabaseReference ref, Query query, String self) {
         mConversations = new ConversationsArray(ref, query, self);
@@ -35,7 +38,9 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
 
     }
 
-
+    public void setupWithEmptyView(TextView emptyView){
+        mEmpty = emptyView;
+    }
 
 
     @Override
@@ -51,7 +56,7 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
 
     @Override
     public void onBindViewHolder(ConversationHolder holder, int position) {
-        holder.bind(mConversations.getItem(position),mListener);
+        holder.bind(mConversations.getItem(position), mListener);
     }
 
     public int getItemCount() {
@@ -86,11 +91,23 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
             default:
                 throw new IllegalStateException("Incomplete case statement");
         }
+        validate();
     }
 
     @Override
     public void onDataChanged() {
+        validate();
+    }
 
+    private void validate() {
+        if (mEmpty == null){
+            return;
+        }
+        if (mConversations.getCount() == 0){
+            mEmpty.setVisibility(View.VISIBLE);
+        }else {
+            mEmpty.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -101,25 +118,33 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
 
     public static class ConversationHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.iv_profile)
-        CircleImageView profileImageView;
+        ImageView profileImageView;
         @BindView(R.id.tv_name)
         TextView nameTextView;
         @BindView(R.id.tv_message)
         TextView messageTextView;
         @BindView(R.id.tv_time)
         TextView timeTextView;
+        private TextDrawable.IBuilder mBuilder;
 
         public ConversationHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-
+            mBuilder = TextDrawable.builder()
+                    .beginConfig()
+                    .withBorder(2)
+                    .endConfig()
+                    .round();
         }
 
         public void bind(final Conversation conversation, final OnItemClickListener listener) {
             User user = conversation.getUser();
             Message message = conversation.getMessage();
+
             if (user != null) {
                 nameTextView.setText(user.getName());
+                int color = ColorGenerator.MATERIAL.getColor(user.getName());
+                profileImageView.setImageDrawable(mBuilder.build(user.getName().substring(0, 1), color));
             }
             if (message != null) {
                 messageTextView.setText(message.getMessage());
@@ -128,7 +153,7 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (listener != null){
+                    if (listener != null) {
                         listener.onItemClick(conversation);
                     }
                 }
@@ -137,7 +162,7 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
         }
     }
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         void onItemClick(Conversation conversation);
     }
 }

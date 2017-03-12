@@ -7,8 +7,9 @@ var functions = require('firebase-functions');
 //  response.send("Hello from Firebase!");
 // })
 var admin = require('firebase-admin');
-var schedule = require('node-schedule');
 admin.initializeApp(functions.config().firebase);
+
+
 
 
 
@@ -38,6 +39,20 @@ exports.autogenTicketId = functions.database.ref('/ticket/{ticketId}').onWrite(e
 	}
 	const key = event.data.key;
 	return event.data.ref.update({uid: key});
+
+});
+
+exports.autogenTicketId = functions.database.ref('/coach-request/{requestId}').onWrite(event=>{
+	if (event.data.previous.exists()) {
+        return;
+      }
+
+	if(!event.data.exists()){
+		return;
+	}
+	const key = event.data.key;
+	return event.data.ref.update({uid: key});
+
 });
 
 exports.handleCheckoutBonus = functions.database.ref('/ticket/{ticketId}').onWrite(event=>{
@@ -67,7 +82,7 @@ exports.handleCommentBonus = functions.database.ref('/comments/{id}').onWrite(ev
 	}
 	const userId = data.val().userUid;
     console.log('Add 2 point to ' + userId);
-	var userRef = admin.database().ref('/users/' + userId);b
+	var userRef = admin.database().ref('/users/' + userId);
 	userRef.once('value').then(function(snapshot){
 		var curPoint = snapshot.val().point;
 		curPoint += 3;
@@ -75,32 +90,24 @@ exports.handleCommentBonus = functions.database.ref('/comments/{id}').onWrite(ev
 	});
 });
 
-exports.handleTicketExpired = functions.database.ref('/ticket/{id}').onWrite(event=>{
-    var data = event.data;
-	// if(data.previous.exists()){
-    //     console.log('data exists');
-	// 	return;
-	// }
-	const ticket = data.val();
-	const scheduleId = ticket.coach_schedule_id;
-	const userId = ticket.user_id;
+exports.handleUserRating = functions.database.ref('/comments/{id}').onWrite(event => {
+	var data = event.data;
+	if(data.previous.exists()){
+		console.log('data exists');
+		return;
+	}
+	const comment = data.val();
+	console.log('New comment ' +comment.coachHostUid + " with rate " + comment.star);
+	var coachHostRef = admin.database().ref('/coach-host/' + comment.coachHostUid)
+		.once('value').then(function(snapshot){
+			var host = snapshot.val();
+			var averageRate = (host.star * host.totalRate +  comment.star) / (host.totalRate + 1);
+			console.log('Total rate: ' +host.totalRate + ", Average: " + averageRate);
 
-	admin.database().ref('/coach-schedule/'+scheduleId).once('value').then(function(snapshot){
-		var departureTime = snapshot.val().departureTime;
-        console.log(departureTime);
-		var dateArray = departureTime.split('/');
-		date = new Date(dateArray[0],dateArray[1] - 1,dateArray[2],dateArray[3],dateArray[4],0);
-		console.log('Job scheduled for ' + userId + ' after ' + date.getTime() + 'now');
-        var userRef = admin.database().ref('/users').child(userId);
-		schedule.scheduleJob(date, function(){
-			console.log('Ticket expired: ' + userId);
-			userRef.once('value').then(function(snapshot){
-				var curPoint = snapshot.val().point;
-				curPoint -= 3;
-				curPoint = curPoint < 0 ? 0 : curPoint;
-				return userRef.update({point: curPoint});
+			averageRate = Math.round(averageRate * 10) / 10;
+			return data.ref.update({
+				star : averageRate,
+				totalRate: host.totalRate + 1
 			});
 		});
-
-	});
 });
