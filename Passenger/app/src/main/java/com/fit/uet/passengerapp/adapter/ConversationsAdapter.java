@@ -75,22 +75,23 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
 
     @Override
     public void onChildChanged(ChangeEventListener.EventType type, int index, int oldIndex) {
-        switch (type) {
-            case ADDED:
-                notifyItemInserted(index);
-                break;
-            case CHANGED:
-                notifyItemChanged(index);
-                break;
-            case REMOVED:
-                notifyItemRemoved(index);
-                break;
-            case MOVED:
-                notifyItemMoved(oldIndex, index);
-                break;
-            default:
-                throw new IllegalStateException("Incomplete case statement");
-        }
+        notifyDataSetChanged();
+//        switch (type) {
+//            case ADDED:
+//                notifyItemInserted(index);
+//                break;
+//            case CHANGED:
+//                notifyItemChanged(index);
+//                break;
+//            case REMOVED:
+//                notifyItemRemoved(index);
+//                break;
+//            case MOVED:
+//                notifyItemMoved(oldIndex, index);
+//                break;
+//            default:
+//                throw new IllegalStateException("Incomplete case statement");
+//        }
         validate();
     }
 

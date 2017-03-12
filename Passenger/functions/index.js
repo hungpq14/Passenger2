@@ -37,19 +37,7 @@ exports.autogenTicketId = functions.database.ref('/ticket/{ticketId}').onWrite(e
 	if(!event.data.exists()){
 		return;
 	}
-	const key = event.data.key;
-	return event.data.ref.update({uid: key});
-
-});
-
-exports.autogenTicketId = functions.database.ref('/coach-request/{requestId}').onWrite(event=>{
-	if (event.data.previous.exists()) {
-        return;
-      }
-
-	if(!event.data.exists()){
-		return;
-	}
+	
 	const key = event.data.key;
 	return event.data.ref.update({uid: key});
 
@@ -92,22 +80,22 @@ exports.handleCommentBonus = functions.database.ref('/comments/{id}').onWrite(ev
 
 exports.handleUserRating = functions.database.ref('/comments/{id}').onWrite(event => {
 	var data = event.data;
-	if(data.previous.exists()){
-		console.log('data exists');
-		return;
-	}
+	// if(data.previous.exists()){
+	// 	console.log('data exists');
+	// 	return;
+	// }
 	const comment = data.val();
 	console.log('New comment ' +comment.coachHostUid + " with rate " + comment.star);
-	var coachHostRef = admin.database().ref('/coach-host/' + comment.coachHostUid)
-		.once('value').then(function(snapshot){
-			var host = snapshot.val();
-			var averageRate = (host.star * host.totalRate +  comment.star) / (host.totalRate + 1);
-			console.log('Total rate: ' +host.totalRate + ", Average: " + averageRate);
+	var coachHostRef = admin.database().ref('/coach-host/' + comment.coachHostUid);
+	coachHostRef.once('value').then(function(snapshot){
+		var host = snapshot.val();
+		var averageRate = (host.star * host.totalRate +  comment.star) / (host.totalRate + 1);
+		console.log('Total rate: ' +host.totalRate + ", Average: " + averageRate);
 
-			averageRate = Math.round(averageRate * 10) / 10;
-			return data.ref.update({
-				star : averageRate,
-				totalRate: host.totalRate + 1
-			});
+		averageRate = Math.round(averageRate * 10) / 10;
+		return coachHostRef.update({
+			star : averageRate,
+			totalRate: host.totalRate + 1
 		});
+	});
 });

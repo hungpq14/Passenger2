@@ -74,7 +74,7 @@ public class CoachHostActivity extends AppCompatActivity implements ValueEventLi
         mStorage = FirebaseStorage.getInstance().getReference();
 
         mRef = FirebaseDatabase.getInstance().getReference();
-        mRef.child(DB.COACH_HOST).child(coachHostUid).addValueEventListener(this);
+        mRef.child(DB.COACH_HOST).child(coachHostUid).addListenerForSingleValueEvent(this);
         mSaveView.setOnClickListener(this);
         fab.setOnClickListener(this);
     }

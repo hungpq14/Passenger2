@@ -45,6 +45,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
                 .endConfig()
                 .round();
 
+
     }
 
 

@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.fit.uet.passengerapp.R;
 import com.fit.uet.passengerapp.database.DB;
@@ -28,6 +29,7 @@ public class FavoriteCoachHostAdapter extends RecyclerView.Adapter<ScheduleAdapt
     private List<CoachSchedule> mSchedules;
     private Query mKeyQuery;
     private DatabaseReference mRef;
+    private TextView mEmpty;
 
     public FavoriteCoachHostAdapter(DatabaseReference ref, Query keyQuery) {
         mSchedules = new ArrayList<>();
@@ -44,7 +46,7 @@ public class FavoriteCoachHostAdapter extends RecyclerView.Adapter<ScheduleAdapt
     @Override
     public void onBindViewHolder(ScheduleAdapter.ScheduleHolder holder, int position) {
         CoachSchedule schedule = mSchedules.get(position);
-        holder.bind(schedule,schedule.coach,schedule.coachHost,null);
+        holder.bind(schedule, schedule.coach, schedule.coachHost, null);
     }
 
     @Override
@@ -60,7 +62,18 @@ public class FavoriteCoachHostAdapter extends RecyclerView.Adapter<ScheduleAdapt
 
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
+        validate();
+    }
 
+    private void validate() {
+        if (mEmpty == null) {
+            return;
+        }
+        if (mSchedules.size() == 0) {
+            mEmpty.setVisibility(View.VISIBLE);
+        } else {
+            mEmpty.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -87,6 +100,7 @@ public class FavoriteCoachHostAdapter extends RecyclerView.Adapter<ScheduleAdapt
                                                 schedule.coachHost = coachHost;
                                                 schedule.coach = coach;
                                                 addItem(schedule);
+                                                validate();
                                             }
                                         }
                                     }
@@ -139,5 +153,9 @@ public class FavoriteCoachHostAdapter extends RecyclerView.Adapter<ScheduleAdapt
     @Override
     public void onCancelled(DatabaseError databaseError) {
 
+    }
+
+    public void setupWithEmptyView(TextView textView) {
+        this.mEmpty = textView;
     }
 }

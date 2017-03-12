@@ -151,6 +151,7 @@ public class CartActivity extends BaseToolBarActivity implements MaterialDialog.
         comment.star = mRating.getRating();
         comment.timestamp = DateTimeUtils.getCurrentTimestamp();
         comment.coachHostUid = mHostUid;
+        comment.name =  currentUser.getDisplayName();
         comment.userUid = currentUser.getUid();
 
         databaseReference.child(DB.COMMENTS).push().setValue(comment);

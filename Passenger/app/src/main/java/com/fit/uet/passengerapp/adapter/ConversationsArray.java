@@ -84,6 +84,7 @@ public class ConversationsArray implements ChildEventListener {
         Query msgQuery = DB.getLastMessageForUserRef(mRef, mSelf, destination);
 
         mLastMessageMap.put(msgQuery, msgQuery.addValueEventListener(new LastMessageEventListener(destination)));
+        notifyChangedListeners(ChangeEventListener.EventType.ADDED, index);
 
     }
 
@@ -161,18 +162,8 @@ public class ConversationsArray implements ChildEventListener {
             User user = snapshot.getValue(User.class);
             Conversation conversation = mConversations.get(index);
             if (snapshot.getValue() != null) {
-                if (conversation.getUser() == null) {
-                    conversation.setUser(user);
-                    if (conversation.getMessage() != null) {
-                        notifyChangedListeners(ChangeEventListener.EventType.ADDED, index);
-                    }
-
-                } else {
-                    conversation.setUser(user);
-                    if (conversation.getMessage() != null) {
-                        notifyChangedListeners(ChangeEventListener.EventType.CHANGED, index);
-                    }
-                }
+                conversation.setUser(user);
+                notifyChangedListeners(ChangeEventListener.EventType.CHANGED, index);
 
             } else {
                 if (isKeyAtIndex(key, index)) {
@@ -209,15 +200,8 @@ public class ConversationsArray implements ChildEventListener {
                 Message message = child.getValue(Message.class);
                 if (conversation.getMessage() == null) {
                     conversation.setMessage(message);
-                    if (conversation.getUser() != null) {
-                        notifyChangedListeners(ChangeEventListener.EventType.ADDED, index);
-                    }
+                    notifyChangedListeners(ChangeEventListener.EventType.ADDED, index);
 
-                } else {
-                    conversation.setMessage(message);
-                    if (conversation.getUser() != null) {
-                        notifyChangedListeners(ChangeEventListener.EventType.CHANGED, index);
-                    }
                 }
 
             } else {

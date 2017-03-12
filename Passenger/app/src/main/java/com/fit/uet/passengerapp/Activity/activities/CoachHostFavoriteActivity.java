@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import com.fit.uet.passengerapp.Activity.BaseActivity.BaseToolBarActivity;
 import com.fit.uet.passengerapp.R;
@@ -23,6 +24,8 @@ import butterknife.ButterKnife;
 public class CoachHostFavoriteActivity extends BaseToolBarActivity {
     @BindView(R.id.recycler)
     RecyclerView mList;
+    @BindView(R.id.empty_view)
+    TextView mEmpty;
     FavoriteCoachHostAdapter mAapter;
 
 
@@ -34,6 +37,7 @@ public class CoachHostFavoriteActivity extends BaseToolBarActivity {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         String self = FirebaseAuth.getInstance().getCurrentUser().getUid();
         mAapter = new FavoriteCoachHostAdapter(ref, ref.child(DB.COACH_HOST_FAV).child(self));
+        mAapter.setupWithEmptyView(mEmpty);
         mList.setLayoutManager(new LinearLayoutManager(this));
         mList.setAdapter(mAapter);
 

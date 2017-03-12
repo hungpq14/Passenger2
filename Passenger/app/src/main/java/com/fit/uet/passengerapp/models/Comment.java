@@ -12,6 +12,7 @@ public class Comment {
     public float star;
     public String timestamp;
     public String coachHostUid;
+    public String name;
 
 
 }
