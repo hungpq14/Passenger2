@@ -45,4 +45,11 @@
     <string name="dialog_review_title">Viết đánh giá</string>
     <string name="action_message">Message</string>
     <string name="conversation_empty_label">Không có dữ liệu</string>
+    <string name="activity_report_title">Báo cáo</string>
+    <string name="action_report">Report</string>
+    <string-array name="report_level">
+        <item>Binh thường</item>
+        <item>Quan trọng</item>
+        <item>Khẩn cấp</item>
+    </string-array>
 </resources>

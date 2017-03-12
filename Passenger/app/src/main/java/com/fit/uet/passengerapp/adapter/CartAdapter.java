@@ -76,8 +76,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
         if (ticket.checkout) {
             holder.tv_seats.setText("Đã xác nhận");
+            holder.preview.setEnabled(true);
         } else {
             holder.tv_seats.setText("Chưa xác nhận");
+            holder.preview.setEnabled(false);
         }
 
         databaseReference.child(DB.SCHEDULE).child(ticket.coach_schedule_id).addListenerForSingleValueEvent(new ValueEventListener() {

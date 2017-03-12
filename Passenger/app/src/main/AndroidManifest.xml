@@ -98,6 +98,9 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".Activity.activities.MyCoachRequestManagerActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".Activity.activities.ReportActivity">
+
+        </activity>
     </application>
 
 </manifest>
