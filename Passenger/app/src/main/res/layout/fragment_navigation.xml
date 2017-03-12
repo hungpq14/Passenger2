@@ -67,7 +67,7 @@
             android:layout_height="48dp"
             android:layout_centerVertical="true"
             android:padding="10dp"
-            android:src="@drawable/ic_vector_logout" />
+            android:src="@drawable/ic_favorite" />
 
         <TextView
             android:layout_width="match_parent"
@@ -92,7 +92,7 @@
             android:layout_height="48dp"
             android:layout_centerVertical="true"
             android:padding="10dp"
-            android:src="@drawable/ic_vector_logout" />
+            android:src="@drawable/ic_message_gray" />
 
         <TextView
             android:layout_width="match_parent"
@@ -117,7 +117,7 @@
             android:layout_height="48dp"
             android:layout_centerVertical="true"
             android:padding="10dp"
-            android:src="@drawable/ic_vector_logout" />
+            android:src="@drawable/ic_ticket" />
 
         <TextView
             android:layout_width="match_parent"
@@ -142,7 +142,7 @@
             android:layout_height="48dp"
             android:layout_centerVertical="true"
             android:padding="10dp"
-            android:src="@drawable/ic_vector_logout" />
+            android:src="@drawable/ic_send" />
 
         <TextView
             android:layout_width="match_parent"
@@ -167,7 +167,7 @@
             android:layout_height="48dp"
             android:layout_centerVertical="true"
             android:padding="10dp"
-            android:src="@drawable/ic_vector_logout" />
+            android:src="@drawable/ic_assignment" />
 
         <TextView
             android:layout_width="match_parent"
@@ -192,7 +192,7 @@
             android:layout_height="48dp"
             android:layout_centerVertical="true"
             android:padding="10dp"
-            android:src="@drawable/ic_vector_logout" />
+            android:src="@drawable/ic_car" />
 
         <TextView
             android:layout_width="match_parent"
@@ -217,7 +217,7 @@
             android:layout_height="48dp"
             android:layout_centerVertical="true"
             android:padding="10dp"
-            android:src="@drawable/ic_vector_logout" />
+            android:src="@drawable/ic_contact" />
 
         <TextView
             android:layout_width="match_parent"
@@ -242,7 +242,7 @@
             android:layout_height="48dp"
             android:layout_centerVertical="true"
             android:padding="10dp"
-            android:src="@drawable/ic_vector_logout" />
+            android:src="@drawable/ic_logout" />
 
         <TextView
             android:layout_width="match_parent"
@@ -250,7 +250,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@+id/img_sign_out"
-            android:text="Đăng suất"
+            android:text="Đăng xuất"
             android:textSize="16sp" />
 
     </RelativeLayout>
