@@ -1,6 +1,7 @@
 package com.fit.uet.passengerapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.fit.uet.passengerapp.Activity.activities.ActivityScheduleList;
+import com.fit.uet.passengerapp.Activity.activities.CoachHostActivity;
 import com.fit.uet.passengerapp.R;
 import com.fit.uet.passengerapp.database.DB;
 import com.fit.uet.passengerapp.models.Coach;
@@ -92,7 +95,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                 databaseReference.child(DB.COACH).child(schedule.coachUid).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        Coach coach = dataSnapshot.getValue(Coach.class);
+                        final Coach coach = dataSnapshot.getValue(Coach.class);
 
                         databaseReference.child(DB.COACH_HOST).child(coach.coachHostUid).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -106,6 +109,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
                                 Log.e("Cancel", databaseError.getMessage());
+                            }
+                        });
+
+                        holder.coach_host_container.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(context, CoachHostActivity.class);
+                                intent.putExtra(CoachHostActivity.KEY_HOST_ID, coach.coachHostUid);
+                                context.startActivity(intent);
                             }
                         });
                     }
@@ -136,6 +148,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         public TextView tv_seats;
         public TextView company_name;
         public Button preview;
+        public View coach_host_container;
 
         public ViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
@@ -146,6 +159,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             tv_seats = (TextView) itemView.findViewById(R.id.tv_seats);
             company_name = (TextView) itemView.findViewById(R.id.company_name);
             preview = (Button) itemView.findViewById(R.id.review);
+            coach_host_container = itemView.findViewById(R.id.coach_host_container);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

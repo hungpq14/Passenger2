@@ -92,9 +92,12 @@
             android:background="@drawable/divider" />
 
         <RelativeLayout
+            android:id="@+id/coach_host_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp">
+            android:clickable="true"
+            android:foreground="?selectableItemBackground"
+            android:padding="16dp">
 
             <TextView
                 android:id="@+id/company_name"

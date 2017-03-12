@@ -71,10 +71,10 @@
                 android:src="@drawable/ic_car_black_24dp" />
 
             <TextView
+                android:id="@+id/coach"
                 style="@style/PrimaryText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/coach"
                 tools:text="Optimus Prime" />
         </LinearLayout>
 
@@ -117,10 +117,10 @@
             android:background="@drawable/divider" />
 
         <RelativeLayout
+            android:id="@+id/coach_host_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:id="@+id/coach_host_container"
             android:foreground="?selectableItemBackground"
             android:padding="16dp">
 
@@ -130,8 +130,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                tools:text="Nha xe Yen Nghia"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                tools:text="Nha xe Yen Nghia" />
 
             <RatingBar
                 android:id="@+id/rating"
