@@ -1,6 +1,8 @@
 package com.fit.uet.passengerapp.Activity.fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -33,6 +35,7 @@ public class NavigationFragment extends Fragment {
             layoutChangePhoneNum, layoutMessage, layoutCoachRequest, layoutSendCoachRequest, layoutMyCoachRequest;
     private TextView txtUserName;
     private TextView txtTrustPoint;
+    SharedPreferences sharedPreferences;
 
     @Nullable
     @Override
@@ -65,7 +68,16 @@ public class NavigationFragment extends Fragment {
         layoutSendCoachRequest.setOnClickListener(navClickItem);
         layoutMyCoachRequest.setOnClickListener(navClickItem);
 
-        checkIfHasCoachMan();
+        // type_user = true -> coach_host
+        sharedPreferences = getActivity().getSharedPreferences("share", Context.MODE_PRIVATE);
+        if (!sharedPreferences.contains("type_user")) {
+            checkIfHasCoachMan();
+        } else {
+            if (!sharedPreferences.getBoolean("type_user", true)) {
+                layoutCoachManager.setVisibility(View.GONE);
+                layoutCoachRequest.setVisibility(View.GONE);
+            }
+        }
         checkTrustPoint();
 
         txtUserName = (TextView) view.findViewById(R.id.txt_user_name);
@@ -95,7 +107,10 @@ public class NavigationFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.exists()) {
+                    sharedPreferences.edit().putBoolean("type_user", false).commit();
                     layoutCoachManager.setVisibility(View.GONE);
+                } else {
+                    sharedPreferences.edit().putBoolean("type_user", true).commit();
                 }
             }
 
@@ -110,6 +125,7 @@ public class NavigationFragment extends Fragment {
         public void onClick(View v) {
             if (v.equals(layoutSignOut)) {
                 FirebaseAuth.getInstance().signOut();
+                getActivity().getSharedPreferences("share", Context.MODE_PRIVATE).edit().remove("type_user");
                 startActivity(new Intent(getContext(), SignInActivity.class));
             } else if (v.equals(layoutCoachManager)) {
                 startActivity(new Intent(getContext(), CoachManagerActivity.class));
