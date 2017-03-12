@@ -71,6 +71,7 @@ public class CoachHostActivity extends AppCompatActivity implements ValueEventLi
         setContentView(R.layout.activity_coach_host);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         ButterKnife.bind(this);
         coachHostUid = getIntent().getStringExtra(KEY_HOST_ID);
         mStorage = FirebaseStorage.getInstance().getReference();
