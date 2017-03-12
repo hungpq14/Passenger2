@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, MainUIActivity.class));
         }
 
+        finish();
+
         findViewById(R.id.btn_ticket).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
